@@ -1,5 +1,6 @@
 node_modules
-public/bower_components
+public/bower_components/
+public/app/
 config
 .idea/
 public/.idea/
@@ -8,5 +9,3 @@ public/.idea/
 .idea/tasks.xml
 .idea/dictionaries
 .idea/shelf
-public/app/
-public/bower_components
