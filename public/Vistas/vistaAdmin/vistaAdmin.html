@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="page-header">
+    <h1>Usuarios</h1>
+</div>
 
-</body>
-</html>
+<div>
+    <table ng-table="tableParams">
+        <tr ng-repeat="usuario in $data">
+            <td data-title="'Nombre'">{{usuario.nombre}}</td>
+            <td data-title="'Apellidos'">{{usuario.apellidos}}</td>
+            <td data-title="'Email'">{{usuario.email}}</td>
+            <td data-title="'Telefono'">{{usuario.telefono}}</td>
+            <td data-title="'Login'">{{usuario.login}}</td>
+            <td data-title="'Password'">{{usuario.password}}</td>
+            <td data-title="'Saldo'">{{usuario.saldo}}</td>
+
+            <td>
+                <div class="table-actions">
+            <td>
+                <div class="table-actions">
+                    <a class="btn btn-default" title="Vista" href="/#!/usuarios/{{usuario._id}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                    <a class="btn btn-default" title="Editar" href="/#!/usuarios/{{usuario._id}}/edit">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <button type="button" class="btn btn-danger" title="Eliminar" data-ng-click="remove(usuario._id)">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="alert alert-warning text-center" data-ng-hide="!usuarios.$resolved || usuarios.length">
+    No Customers yet, why don't you <a href="/#!/customers/create">create one</a>?
+</div>
