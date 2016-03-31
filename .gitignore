@@ -8,3 +8,5 @@ public/.idea/
 .idea/tasks.xml
 .idea/dictionaries
 .idea/shelf
+public/app/
+public/bower_components
