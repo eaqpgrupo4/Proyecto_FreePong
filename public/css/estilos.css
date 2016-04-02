@@ -8,6 +8,11 @@
     padding: 50px;
     border-radius: 3%;
  }
+  #add{
+    background-color: rgba(64, 159, 204, 0.15);
+    padding: 50px;
+    border-radius: 3%;
+ }
 
 .pull-right {
 	position: relative;
@@ -19,5 +24,17 @@
 
 .color:hover{
 	color: #2C78BD;
-	
+}
+
+#salir{
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    float: right;
+    margin-top: 20px;
+}
+
+#cabecera{
+    position: relative;
+    display: inline-block;
 }

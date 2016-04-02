@@ -1,7 +1,18 @@
 
+
 'use strict';
 var box = {};
+
 freepongApp.controller('addCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
+    
+    $scope.demo = function(){
+        swal({
+           title: "Raul Lorenzo",
+           text: "Administrador de FreePong ®",
+           imageUrl: "images/perfil_user.png" });
+
+    };
+
     $scope.usuario = {};
     box = $scope.usuario;
     $scope.registro= function () {
