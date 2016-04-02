@@ -1,13 +1,17 @@
+/**
+ * Created by raul on 1/4/16.
+ */
+
 'use strict';
 freepongApp.factory("Usuarios", function ($resource) {
     return $resource('usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
 });
-freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usuarios', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, ngTableParams ) {
-    
+freepongApp.controller('editarCtrl', ['$state', '$http', '$scope', '$location', 'Usuarios', 'ngTableParams', function( $state, $http , $scope, $location, Usuarios, ngTableParams ) {
+
     $scope.sort = function(keyname){
         $scope.sortKey = keyname;
         $scope.reverse = !$scope.reverse;
-    }
+    };
 
     var params =
     {
@@ -17,7 +21,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
     var settings =
     {
         total: 0,
-        counts: [5, 10, 25, 50, 100],
+        counts: [5, 10, 15, 25, 50, 100],
         getData: function($defer, params) {
             Usuarios.get(params.url(), function(response) {
                 params.total(response.total);
@@ -42,6 +46,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
         usuario.$save(function(response) {
             $location.path('customers/' + response._id);
 
+            
             $scope.nombre       = '';
             $scope.apellidos    = '';
             $scope.email        = '';
@@ -55,36 +60,37 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
         });
     };
 
-    // Remove existing Customer
-    $scope.delete = function(id){
-        swal({   
-           title: "¿Estás Seguro/a?",
-           text: "¡Vas a borrar a este usuario de la base de datos!",
+    // Funcion que borra un objeto usuario conocido su id con un modal
+    $scope.delete = function(id) {
+        swal({
+           title: "¿Estás Seguro?",
+           text: "Vas a borrar a este usuario de la base de datos!",
            type: "warning",
            showCancelButton: true,
-           confirmButtonColor: "#DD6B55",confirmButtonText: "Sí, borrar!",
+           confirmButtonColor: "#DD6B55",confirmButtonText: "Sí, borrar usuario!",
            cancelButtonText: "No, cancelar!",
            closeOnConfirm: false,
            closeOnCancel: false }, 
-        function(isConfirm){
-            if (isConfirm) {
-                $http.delete('usuario/EliminarUsuarioPorID/' + id)
-                    .success(function (data) {
-                    $scope.newUsuario = {};
-                    swal("Eliminado", "Usuario eliminado de FreePong", "success");
-                    $state.go("admin", {}, { reload: true });
-                })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });
-            } else {
-                swal("Cancelado", "Has decidido no borrar al usuario", "error");
-            }
-        });
+        function(isConfirm){ 
+                if (isConfirm) {
+                    $http.delete('usuario/EliminarUsuarioPorID/' + id)
+                        .success(function (data) {
+                            $scope.newUsuario = {};
+                            swal("Eliminado", "Usuario Eliminado de FreePong.", "success");
+                            $state.go("admin", {}, { reload: true });
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                } else {
+                    swal("Cancelado!", "Has decidido no borrar el usuario", "error");
+                }
+            });
 
     };
 
-    // Update existing Customer
+
+    // Update usuario existente
     $scope.update = function()
     {
         var usuario = $scope.usuario ;

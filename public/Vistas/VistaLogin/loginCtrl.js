@@ -9,7 +9,7 @@ freepongApp.controller('loginCtrl', [ '$state', '$http', '$scope', 'FlashService
         {
 
             if (data.loginSuccessful == true) {
-                if(data.usuario[0].login=='admin'||data.usuario[0].password=='admin'){
+                if(data.usuario[0].login == 'admin' || data.usuario[0].password == 'admin'){
                     FlashService.Success('Login correcto', true);
                     $state.go('admin');
                 }
@@ -19,7 +19,7 @@ freepongApp.controller('loginCtrl', [ '$state', '$http', '$scope', 'FlashService
                 }
             }
             else {console.log("LOGIN error");}
-        }).error(function(error){FlashService.Success('Login incorrecto', true);
+        }).error(function(error){FlashService.Error('Login incorrecto', true);
             $state.go('login');})
     };
 }]);

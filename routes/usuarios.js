@@ -1,6 +1,4 @@
-/**
- * Created by carlos on 31/03/2016.
- */
+
 module.exports = function (app) {
 
     var mongoose = require('mongoose');
@@ -26,13 +24,13 @@ module.exports = function (app) {
             if(usuario == ""){
                 console.log('usuario no encontrado');
                 var usuario = new Usuario({
-                    nombre: req.body.nombre,
-                    apellidos: req.body.apellidos,
-                    email:req.body.email,
-                    telefono:req.body.telefono,
-                    login:req.body.login,
-                    password:req.body.password,
-                    saldo:req.body.saldo
+                    nombre:     req.body.nombre,
+                    apellidos:  req.body.apellidos,
+                    email:      req.body.email,
+                    telefono:   req.body.telefono,
+                    login:      req.body.login,
+                    password:   req.body.password,
+                    saldo:      req.body.saldo
                 })
                 usuario.save(function (err, usuario) {
                     if (err) return resultado.send(500, err.message);
@@ -62,13 +60,13 @@ module.exports = function (app) {
         Usuario.findById(req.params.id, function (err, usuario) {
             console.log('PUT');
             console.log(req.body);
-            usuario.nombre =       req.body.nombre,
-                usuario.apellidos =    req.body.apellidos,
-                usuario.email =        req.body.email,
-                usuario.telefono =     req.body.telefono,
-                usuario.login =        req.body.login,
-                usuario.password =     req.body.password,
-                usuario.saldo =        req.body.saldo
+            usuario.nombre         =  req.body.nombre,
+                usuario.apellidos  =  req.body.apellidos,
+                usuario.email      =  req.body.email,
+                usuario.telefono   =  req.body.telefono,
+                usuario.login      =  req.body.login,
+                usuario.password   =  req.body.password,
+                usuario.saldo      =  req.body.saldo
 
             usuario.save(function (err) {
                 if (err) return res.send(500, err.message);
@@ -127,8 +125,8 @@ module.exports = function (app) {
     //GET Obtener todos los usuarios de la colecccion usuarios paginado
     ObtenerUsuariosP = function (req, res){
         console.log('post /obtenerusuariosP');
-        var count = req.query.count || 5;
-        var page = req.query.page || 1;
+        var count  = req.query.count || 5;
+        var page   = req.query.page || 1;
 
         var filter = {
             filters:
@@ -165,7 +163,7 @@ module.exports = function (app) {
                 } else {
                     res.jsonp(usuarios);
                 }
-            });
+        });
 
     };
 

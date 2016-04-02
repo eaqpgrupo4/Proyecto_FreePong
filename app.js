@@ -15,7 +15,7 @@ require('mongoose-middleware').initialize(mongoose);
 
 
 // Conexión a la base de datos de MongoDB que tenemos en local
-mongoose.connect('mongodb://localhost/freepong', function(err, res) {if(err) throw err;console.log('Conectado con éxito a la Base de Datos');});
+mongoose.connect('mongodb://localhost/freepong', function(err, res) {if(err) throw err;console.log('Conectado correctamente a la Base de Datos');});
 
 // Iniciamos la aplicación Express
 var app = express();
@@ -50,5 +50,5 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 routes = require('./routes/usuarios')(app);
 
 server.listen(3000, function() {
-  console.log("Servidor node escuchando en :http://localhost:3000");
+  console.log("Servidor escuchando en, http://localhost:3000");
 });

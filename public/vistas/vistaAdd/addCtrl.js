@@ -1,6 +1,7 @@
+
 'use strict';
 var box = {};
-freepongApp.controller('registroCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
+freepongApp.controller('addCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
     $scope.usuario = {};
     box = $scope.usuario;
     $scope.registro= function () {
@@ -8,7 +9,7 @@ freepongApp.controller('registroCtrl', [ '$state', '$http', '$scope', 'FlashServ
         $http.post('/usuario/CrearUsuario', box).success(function (data)
         {
             FlashService.Success('Registro correcto', true);
-            $state.go('login');
+            $state.go('admin');
 
         }).error(function(error){
             FlashService.Error('Username ya existente, introduzca otro', true);

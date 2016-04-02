@@ -17,6 +17,16 @@ var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResour
             url: '/admin',
             templateUrl: 'vistas/vistaAdmin/vistaAdmin.html',
             controller: 'adminCtrl'
+          })
+          .state('editar', {
+            url: '/editar',
+            templateUrl: 'vistas/vistaEditar/vistaEditar.html',
+            controller: 'editarCtrl'
+          })
+          .state('add', {
+            url: '/add',
+            templateUrl: 'vistas/vistaAdd/vistaAdd.html',
+            controller: 'addCtrl'
           });
       $urlRouterProvider.otherwise('login');
     })

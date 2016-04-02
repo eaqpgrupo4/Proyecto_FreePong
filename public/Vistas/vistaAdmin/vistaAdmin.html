@@ -1,37 +1,67 @@
 <div class="page-header">
-    <h1>Usuarios Administrador cambio nuevo</h1>
+    <h1>Administrador</h1>
+    <hr>
+    <h2>Lista de usuarios</h2>
+    <div class="jumbotron text-center">
+        <h1>Total Registros: <span class="label label-warning">{{Usuarios.total}}</span></h1>
+    </div>
 </div>
-
+<button class="btn btn-success" ui-sref="add">Crear Usauario</button>
+<br><br>
 <div>
-    <table ng-table="tableParams">
-        <tr ng-repeat="usuario in $data">
-            <td data-title="'Nombre'">{{usuario.nombre}}</td>
-            <td data-title="'Apellidos'">{{usuario.apellidos}}</td>
-            <td data-title="'Email'">{{usuario.email}}</td>
-            <td data-title="'Telefono'">{{usuario.telefono}}</td>
-            <td data-title="'Login'">{{usuario.login}}</td>
-            <td data-title="'Password'">{{usuario.password}}</td>
-            <td data-title="'Saldo'">{{usuario.saldo}}</td>
-
+    <table id="ded" class="table table-hover" ng-table="tableParams">
+        <th style="width: 3%">ID</th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('nombre')" style="cursor: pointer;">NOMBRE&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='nombre'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-arrow-up':reverse,'glyphicon glyphicon-arrow-down':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('apellidos')" style="cursor: pointer;">APELLIDOS&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='apellidos'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('email')" style="cursor: pointer;">E-MAIL&nbsp;&nbsp;&nbsp;
+           <span ng-show="sortKey=='email'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('telefono')" style="cursor: pointer;">TELEFONO&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='telefono'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('login')" style="cursor: pointer;">USERNAME&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='login'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('password')" style="cursor: pointer;">PASSWORD&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='password'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('saldo')" style="cursor: pointer;">SALDO&nbsp;&nbsp;&nbsp;
+           <span ng-show="sortKey=='saldo'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-sort-by-attributes-alt':reverse,'glyphicon glyphicon-sort-by-attributes':!reverse}"></span>
+        </th>
+        <th style="width: 7%">EDITAR</th>
+        <th style="width: 7%">ELIMINAR</th>
+        <th style="width: 7%">PERFIL</th>
+        <tr ng-repeat="usuario in $data | orderBy:sortKey:reverse | filter:{ nombre: studentName } | filter:searchText">
+            <td style="color: red">{{ $index + 1 }}</td>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellidos }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.telefono }}</td>
+            <td>{{ usuario.login }}</td>
+            <td>{{ usuario.password }}</td>
+            <td>{{ usuario.saldo }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;€</td>
             <td>
-                <div class="table-actions">
+                <button class="btn btn-warning">
+                    <span class="glyphicon glyphicon-edit" title="Editar" href="/#!/usuarios/{{usuario._id}}/edit" aria-hidden="true"></span>
+                </button>
+            </td>
             <td>
-                <div class="table-actions">
-                    <a class="btn btn-default" title="Vista" href="/#!/usuarios/{{usuario._id}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                    </a>
-                    <a class="btn btn-default" title="Editar" href="/#!/usuarios/{{usuario._id}}/edit">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                    <button type="button" class="btn btn-danger" title="Eliminar" data-ng-click="remove(usuario._id)">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash" data-ng-click="delete(usuario._id)" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td>
+                <button title="Perfil" href="/#!/usuarios/{{usuario._id}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-user" ng-click="procesaObjeto(usuario)" aria-hidden="true"></span>
+                </button>
             </td>
         </tr>
     </table>
 </div>
-
 <div class="alert alert-warning text-center" data-ng-hide="!usuarios.$resolved || usuarios.length">
-    No Customers yet, why don't you <a href="/#!/customers/create">create one</a>?
+    No existen usuarios ahora. Por qué no <a href="/#!/customers/create">creas uno</a>?
 </div>

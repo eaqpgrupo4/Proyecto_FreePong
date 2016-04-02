@@ -7,13 +7,13 @@
                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
                 <input id="login-username" type="text" class="form-control" name="login" value="" placeholder="username or email" ng-model="userInfo.login">
             </div>
-            <div class="flash-message" ng-if="flash">
-                <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
-            </div>
             <div style="margin-bottom: 25px" class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></i></span>
+                <span class="input-group-addon"><i style="font-size: 20px" class="fa fa-lock"></i></i></span>
                 <input id="login-password" type="password" class="form-control" name="password"
                        placeholder="password" ng-model="userInfo.password">
+            </div>
+            <div class="flash-message" ng-if="flash">
+                <div id="error1" class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
             </div>
             <div class="input-group">
                 <div class="checkbox">

@@ -1,0 +1,23 @@
+
+ body{
+     margin: 50px;
+ }
+ 
+ #reg{
+    background-color: rgba(64, 204, 107, 0.15);
+    padding: 50px;
+    border-radius: 3%;
+ }
+
+.pull-right {
+	position: relative;
+    float: left;
+    bottom: -20px;
+    display: block;
+    color: 
+}
+
+.color:hover{
+	color: #2C78BD;
+	
+}
