@@ -27,6 +27,16 @@ var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResour
             url: '/add',
             templateUrl: 'vistas/vistaAdd/vistaAdd.html',
             controller: 'addCtrl'
+          })
+          .state('partidas', {
+              url: '/partidas',
+              templateUrl: 'vistas/vistaPartidas/vistaPartidas.html',
+              controller: 'partidasCtrl'
+          })
+          .state('crearPartida', {
+              url: '/partidasCreadas',
+              templateUrl: 'vistas/vistaCrearPartida/vistaCrearPartida.html',
+              controller: 'crearPartidaCtrl'
           });
       $urlRouterProvider.otherwise('login');
     })

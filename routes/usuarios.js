@@ -70,7 +70,7 @@ module.exports = function (app) {
     // };
 
     //GET - Obtner usuario a partir de el ID
-    ObtenerusuarioporID = function (req, res) {
+    ObtenerUsuarioporID = function (req, res) {
         Usuario.findById(req.params.id, function (err, usuario) {
             if (err) return res.send(500, err.message);
 
@@ -84,7 +84,7 @@ module.exports = function (app) {
         Usuario.findById(req.params.id, function (err, usuario) {
             console.log('PUT');
             console.log(req.body);
-            usuario.nombre         =  req.body.nombre,
+                usuario.nombre     =  req.body.nombre,
                 usuario.apellidos  =  req.body.apellidos,
                 usuario.email      =  req.body.email,
                 usuario.telefono   =  req.body.telefono,
@@ -207,7 +207,7 @@ module.exports = function (app) {
     app.post(   '/usuario/CrearUsuario', CrearUsuario);
     app.get(    '/usuario/ObtenerUsuarios', ObtenerUsuarios);
     app.get(    '/usuario/ObtenerUsuariosPaginados', ObtenerUsuariosP);
-    app.get(    '/usuario/ObtenerUsuarioPorID/:id', ObtenerusuarioporID);
+    app.get(    '/usuario/ObtenerUsuarioPorID/:id', ObtenerUsuarioporID);
     app.put(    '/usuario/ModificarUsuarioPorID/:id', ModificarUsuario);
     app.delete( '/usuario/EliminarUsuarioPorID/:id', EliminarUsuarioporID);
     app.post(   '/usuario/Login', loginIN);

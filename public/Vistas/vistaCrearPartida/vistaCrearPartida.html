@@ -1,0 +1,31 @@
+<div id="add" class="col-md-6 col-md-offset-3">
+    <h2>Añadir partida</h2>
+    <form name="form" ng-submit="crearPartida()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.creador.$dirty && form.creador.$error.required }">
+            <label for="creador">Usuario Creador</label>
+            <input type="text" name="creador" id="creador" class="form-control" ng-model="partida.creador" required />
+            <span ng-show="form.creador.$dirty && form.creador.$error.required" class="help-block">Campo necesario</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.invitado.$dirty && form.invitado.$error.required }">
+            <label for="invitado">Usuario Invitado</label>
+            <input type="text" name="invitado" id="invitado" class="form-control" ng-model="partida.invitado" required />
+            <span ng-show="form.invitado.$dirty && form.invitado.$error.required" class="help-block">Campo necesario</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.mesa.$dirty && form.mesa.$error.required }">
+            <label for="mesa">Mesa</label>
+            <input type="mesa" name="mesa" id="mesa" class="form-control" ng-model="partida.mesa" required />
+            <span ng-show="form.mesa.$dirty && form.mesa.$error.required" class="help-block">Campo necesario</span>
+        </div>
+
+
+        <div class="flash-message" ng-if="flash">
+            <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+        </div>
+        <div class="form-actions">
+            <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Registro</button> -->
+            <button type="submit" class="btn btn-success">Añadir</button>
+            <a href="" class="btn btn-primary" ng-click="demo();">Raul Lorenzo</a>
+            <a ui-sref="partidas" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+</div>
