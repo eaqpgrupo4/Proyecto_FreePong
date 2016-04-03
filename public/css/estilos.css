@@ -1,46 +1,48 @@
 
  body{
-     margin: 50px;
+      margin: 50px;
  }
 
  #reg{
-    background-color: rgba(64, 204, 107, 0.15);
-    padding: 50px;
-    border-radius: 3%;
+      background-color: rgba(64, 204, 107, 0.15);
+      padding: 50px;
+      border: 1px solid #369;
+      border-radius: 8px;
+
  }
   #add{
-    background-color: rgba(64, 159, 204, 0.15);
-    padding: 50px;
-    border-radius: 3%;
+      background-color: rgba(64, 159, 204, 0.15);
+      padding: 50px;
+      border: 1px solid #369;
+      border-radius: 8px;
  }
 
 .pull-right {
-	position: relative;
-    float: left;
-    bottom: -20px;
-    display: block;
-    color:
+      position: relative;
+      float: left;
+      bottom: -20px;
+      display: block;
 }
 
 .color:hover{
-	color: #2C78BD;
+	 color: #2C78BD;
 }
 
 #salir{
-    position: relative;
-    display: inline-block;
-    width: 100px;
-    float: right;
-    margin-top: 20px;
+     position: relative;
+     display: inline-block;
+     width: 100px;
+     float: right;
+     margin-top: 20px;
 }
 
 #cabecera{
-    position: relative;
-    display: inline-block;
+     position: relative;
+     display: inline-block;
 }
 
 .panel-body{
-    border: 1px solid #369;
-    border-radius: 8px;
-    background-color: aliceblue;
+     border: 1px solid #369;
+     border-radius: 8px;
+     background-color: aliceblue;
 }
