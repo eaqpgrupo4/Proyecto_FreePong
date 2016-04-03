@@ -14,36 +14,60 @@ module.exports = function (app) {
         });
     };
 
-    //POST - Añadir usuario en coleccion usuarios
-    CrearUsuario = function (req, res) {
-        resultado = res;
-        var login = req.body.login;
-        //Comprueba si exite el login en la BD
-        Usuario.find({login:login},function(err,usuario){
-            //Si no exite
-            if(usuario == ""){
-                console.log('usuario no encontrado');
-                var usuario = new Usuario({
-                    nombre:     req.body.nombre,
-                    apellidos:  req.body.apellidos,
-                    email:      req.body.email,
-                    telefono:   req.body.telefono,
-                    login:      req.body.login,
-                    password:   req.body.password,
-                    saldo:      req.body.saldo
-                })
-                usuario.save(function (err, usuario) {
-                    if (err) return resultado.send(500, err.message);
-                    resultado.status(200).jsonp(usuario);
-                });
-            }
-            //Si existe
-            else{
-                console.log('usuario  encontrado');
-                return resultado.status(409).jsonp("usuario " + login + " ya existe");
-            }
-        });
+
+    //POST - Agregar usuario al estilo raul comprobando login
+    CrearUsuario = function(req, res){
+      resultado = res;
+      var login = req.body.login;
+      //Comprueba si exite el login en la BD
+      Usuario.find({login:login},function(err,usuario){
+        //Si no exite
+        if(usuario == "") {
+          console.log('usuario no existente, OK');
+          var usuario = new Usuario(req.body);
+          usuario.save(function(err, usuario){
+            if (err) return resultado.send(500, err.message);
+            console.log('POST /user/' + req.body.nombre);
+            resultado.status(200).jsonp(usuario);
+          });
+        } else {
+          console.log('usuario ya existente');
+          return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
+        }
+      });
     };
+
+    //POST - Añadir usuario en coleccion usuarios
+    // CrearUsuario = function (req, res) {
+    //     resultado = res;
+    //     var login = req.body.login;
+    //     //Comprueba si exite el login en la BD
+    //     Usuario.find({login:login},function(err,usuario){
+    //         //Si no exite
+    //         if(usuario == ""){
+    //             console.log('usuario no existente, OK');
+    //             var usuario = new Usuario({
+    //                 nombre:     req.body.nombre,
+    //                 apellidos:  req.body.apellidos,
+    //                 email:      req.body.email,
+    //                 telefono:   req.body.telefono,
+    //                 login:      req.body.login,
+    //                 password:   req.body.password,
+    //                 saldo:      req.body.saldo
+    //             })
+    //             usuario.save(function (err, usuario) {
+    //                 if (err) return resultado.send(500, err.message);
+    //                 resultado.status(200).jsonp(usuario);
+    //                 console.log('POST /user/' + req.body.nombre);
+    //             });
+    //         }
+    //         //Si existe
+    //         else{
+    //             console.log('usuario ya existente');
+    //             return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
+    //         }
+    //     });
+    // };
 
     //GET - Obtner usuario a partir de el ID
     ObtenerusuarioporID = function (req, res) {
