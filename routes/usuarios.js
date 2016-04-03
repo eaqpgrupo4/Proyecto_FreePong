@@ -15,7 +15,7 @@ module.exports = function (app) {
     };
 
 
-    //POST - Agregar usuario al estilo raul comprobando login
+    //POST - Agregar usuario login v2
     CrearUsuario = function(req, res){
       resultado = res;
       var login = req.body.login;
@@ -99,23 +99,34 @@ module.exports = function (app) {
         });
     };
 
-    //DELETE Eliminar usuario por ID
-    EliminarUsuarioporID = function (req, res) {
-        console.log('DELETE usuario');
-        console.log(req.params.id);
-
-        Usuario.findById(req.params.id, function (err, usuario) {
-            usuario.remove(function (err) {
-                if (!err)
-                    console.log('Removed');
-                else {
-                    console.log('ERROR' + err);
-                }
-            })
-        });
-
-        res.send('Usuario borrado');
+    //DELETE - Eliminar usuario v2
+    EliminarUsuarioporID = function(req, res){
+      console.log('DELETE usuario');
+      console.log(req.params.id);
+      Usuario.findByIdAndRemove(req.params.id, function(err){
+        if(err){res.send(err)}
+        res.json({message: 'Usuario eliminado correctamente'});
+      })
     };
+
+
+    //DELETE Eliminar usuario por ID
+    // EliminarUsuarioporID = function (req, res) {
+    //     console.log('DELETE usuario');
+    //     console.log(req.params.id);
+    //
+    //     Usuario.findById(req.params.id, function (err, usuario) {
+    //         usuario.remove(function (err) {
+    //             if (!err)
+    //                 console.log('Removed');
+    //             else {
+    //                 console.log('ERROR' + err);
+    //             }
+    //         })
+    //     });
+    //
+    //     res.send('Usuario borrado');
+    // };
 
     //POST loginIN Hacer login usuario
     loginIN = function (req, res) {
