@@ -21,7 +21,7 @@ freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'Flash
         console.log(box);
         $http.post('/partida/CrearPartida', box).success(function (data)
         {
-            FlashService.Success('Registro correcto', true);
+            FlashService.Success('Partida creada correctamente', true);
             $state.go('partidas');
 
         }).error(function(error){
