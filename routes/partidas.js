@@ -18,7 +18,7 @@ module.exports = function (app) {
     };
 
 
-    //POST - Agregar partida login v2
+    //POST - Agregar partida con comprobación v2
     //CrearPartida = function(req, res){
     //    resultado = res;
     //    var mesa = req.body.mesa;
