@@ -1,0 +1,36 @@
+<div id="add" class="col-md-6 col-md-offset-3">
+    <h2>Crear mesa</h2>
+    <form name="form" ng-submit="crearMesa()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.horas.$dirty && form.horas.$error.required }">
+            <label for="horas">Horas</label>
+            <input type="text" name="horas" id="horas" class="form-control" ng-model="mesa.horas" required />
+            <span ng-show="form.horas.$dirty && form.horas.$error.required" class="help-block">Campo necesario</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.local.$dirty && form.local.$error.required }">
+            <label for="local">Usuario Local</label>
+            <input type="text" name="local" id="local" class="form-control" ng-model="mesa.local" required />
+            <span ng-show="form.local.$dirty && form.local.$error.required" class="help-block">Campo necesario</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.visitante.$dirty && form.visitante.$error.required }">
+            <label for="visitante">Usuario Visitante</label>
+            <input type="visitante" name="visitante" id="visitante" class="form-control" ng-model="mesa.visitante" required />
+            <span ng-show="form.visitante.$dirty && form.visitante.$error.required" class="help-block">Campo necesario</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.partidas.$dirty && form.partidas.$error.required }">
+            <label for="partidas">Partidas</label>
+            <input type="partidas" name="partidas" id="partidas" class="form-control" ng-model="mesa.partidas" required />
+            <span ng-show="form.partidas.$dirty && form.partidas.$error.required" class="help-block">Campo necesario</span>
+        </div>
+
+
+        <div class="flash-message" ng-if="flash">
+            <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+        </div>
+        <div class="form-actions">
+            <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Registro</button> -->
+            <button type="submit" class="btn btn-success">Añadir</button>
+            <a href="" class="btn btn-primary" ng-click="demo();">Raul Lorenzo</a>
+            <a ui-sref="mesas" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+</div>

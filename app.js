@@ -5,12 +5,12 @@ var express         = require("express"),// Express: Framework HTTP para Node.js
     methodOverride  = require("method-override"),
     mongoose        = require('mongoose');  // Mongoose: Libreria para conectar con MongoDB
 
-logger        = require('morgan');
-path          = require('path');
-favicon       = require('serve-favicon');
-crypto        = require('crypto');
-cookieParser  = require('cookie-parser');
-passport      = require('passport'); // Passport: Middleware de Node que facilita la autenticación de usuarios
+	logger        	= require('morgan');
+	path          	= require('path');
+	favicon       	= require('serve-favicon');
+	crypto        	= require('crypto');
+	cookieParser  	= require('cookie-parser');
+	passport      	= require('passport'); // Passport: Middleware de Node que facilita la autenticación de usuarios
 
 
 require('mongoose-middleware').initialize(mongoose);
@@ -52,6 +52,7 @@ app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 //API rutas
 routes = require('./routes/usuarios')(app);
 routes = require('./routes/partidas')(app);
+routes = require('./routes/mesas')(app);
 
 server.listen(3000, function() {
   console.log("Servidor escuchando en, http://localhost:3000");

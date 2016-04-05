@@ -3,10 +3,10 @@
  */
 
 'use strict';
-freepongApp.factory("Partidas", function ($resource) {
-    return $resource('partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
+freepongApp.factory("Mesas", function ($resource) {
+    return $resource('mesa/ObtenerMesasPaginadas'); //la url donde queremos consumir
 });
-freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, ngTableParams ) {
+freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, ngTableParams ) {
 
     $scope.sort = function(keyname){
         $scope.sortKey = keyname;
@@ -23,7 +23,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
         total: 0,
         counts: [5, 10, 25, 50, 100],
         getData: function($defer, params) {
-            Partidas.get(params.url(), function(response) {
+            Mesas.get(params.url(), function(response) {
                 params.total(response.total);
                 $defer.resolve(response.results);
             });
@@ -33,18 +33,20 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
 
     $scope.create = function()
     {
-        var partida = new Partidas ({
-            creador:    this.creador,
-            invitado:   this.invitado,
-            mesa:       this.mesa
+        var Mesa = new Mesas ({
+            horas:      this.creador,
+            local:      this.invitado,
+            visitante:  this.mesa,
+            partidas:   this.mesa
         });
 
-        partida.$save(function(response) {
+        mesa.$save(function(response) {
             $location.path('customers/' + response._id);
 
-            $scope.creador     = '';
-            $scope.invitado    = '';
-            $scope.mesa        = '';
+            $scope.horas     = '';
+            $scope.local     = '';
+            $scope.visitante = '';
+            $scope.partidas  = '';
 
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;
@@ -55,7 +57,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
     $scope.delete = function(id){
         swal({
                 title: "¿Estás Seguro/a?",
-                text: "¡Vas a borrar esta partida de la base de datos!",
+                text: "¡Vas a borrar esta mesa de la base de datos!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",confirmButtonText: "Sí, borrar!",
@@ -64,17 +66,17 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
                 closeOnCancel: false },
             function(isConfirm){
                 if (isConfirm) {
-                    $http.delete('partida/EliminarPartidaPorID/' + id)
+                    $http.delete('mesa/EliminarMesaPorID/' + id)
                         .success(function (data) {
-                            $scope.newPartida = {};
-                            swal("Eliminada", "Partida eliminada de FreePong", "success");
-                            $state.go("partidas", {}, { reload: true });
+                            $scope.newMesa = {};
+                            swal("Eliminada", "Mesa eliminada de FreePong", "success");
+                            $state.go("mesas", {}, { reload: true });
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
                         });
                 } else {
-                    swal("Cancelado", "Has decidido no borrar la partida", "error");
+                    swal("Cancelado", "Has decidido no borrar la mesa", "error");
                 }
             });
 
@@ -83,10 +85,10 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
     // Update existing Customer
     $scope.update = function()
     {
-        var partida = $scope.partida ;
+        var mesa = $scope.mesa ;
 
-        partida.$update(function() {
-            $location.path('partidas/' + partida._id);
+        mesa.$update(function() {
+            $location.path('mesas/' + mesa._id);
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;
         });
@@ -95,9 +97,9 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
     // Find a list of Customers
     $scope.find = function()
     {
-        var partidas = Partidas.get();
-        console.log(partidas);
-        $scope.partidas = partidas.results;
+        var mesas = Mesas.get();
+        console.log(mesas);
+        $scope.mesas = mesas.results;
 
         //$scope.customers = Customers.query();
     };
@@ -105,7 +107,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
     // Find existing Customer
     $scope.findOne = function()
     {
-        $scope.customer = Partidas.get({
+        $scope.customer = Mesas.get({
             customerId: $stateParams.customerId
         });
     };
