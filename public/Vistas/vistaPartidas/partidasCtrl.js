@@ -13,12 +13,15 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
         $scope.reverse = !$scope.reverse;
     }
 
-    var params =
+    var params;
+    var settings;
+
+    params =
     {
         page: 1,
         count: 10
     };
-    var settings =
+    settings =
     {
         total: 0,
         counts: [5, 10, 25, 50, 100],

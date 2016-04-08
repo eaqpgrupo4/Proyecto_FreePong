@@ -14,12 +14,15 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
         $scope.reverse = !$scope.reverse;
     }
 
-    var params =
+    var params;
+    var settings;
+
+    params =
     {
         page: 1,
         count: 10
     };
-    var settings =
+    settings =
     {
         total: 0,
         counts: [5, 10, 25, 50, 100],
@@ -30,6 +33,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
             });
         }
     };
+
     $scope.tableParams = new ngTableParams(params, settings);
 
     // $scope.create = function()
