@@ -19,7 +19,10 @@ freepongApp.controller('loginCtrl', [ '$state', '$http', '$scope', 'FlashService
                 }
             }
             else {console.log("LOGIN error");}
-        }).error(function(error){FlashService.Error('Login incorrecto', true);
-            $state.go('login');})
+        }).error(function(error)
+        {
+            FlashService.Error('Login incorrecto', true);
+            $state.go('login');
+        })
     };
 }]);

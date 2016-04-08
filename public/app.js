@@ -19,7 +19,7 @@ var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResour
             controller: 'adminCtrl'
           })
           .state('editar', {
-            url: '/editar',
+            url: '/editar/:id',
             templateUrl: 'vistas/vistaEditar/vistaEditar.html',
             controller: 'editarCtrl'
           })

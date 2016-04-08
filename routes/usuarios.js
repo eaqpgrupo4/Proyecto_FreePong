@@ -14,7 +14,6 @@ module.exports = function (app) {
         });
     };
 
-
     //POST - Agregar usuario login v2
     CrearUsuario = function(req, res){
       resultado = res;
@@ -37,38 +36,6 @@ module.exports = function (app) {
       });
     };
 
-    //POST - Añadir usuario en coleccion usuarios
-    // CrearUsuario = function (req, res) {
-    //     resultado = res;
-    //     var login = req.body.login;
-    //     //Comprueba si exite el login en la BD
-    //     Usuario.find({login:login},function(err,usuario){
-    //         //Si no exite
-    //         if(usuario == ""){
-    //             console.log('usuario no existente, OK');
-    //             var usuario = new Usuario({
-    //                 nombre:     req.body.nombre,
-    //                 apellidos:  req.body.apellidos,
-    //                 email:      req.body.email,
-    //                 telefono:   req.body.telefono,
-    //                 login:      req.body.login,
-    //                 password:   req.body.password,
-    //                 saldo:      req.body.saldo
-    //             })
-    //             usuario.save(function (err, usuario) {
-    //                 if (err) return resultado.send(500, err.message);
-    //                 resultado.status(200).jsonp(usuario);
-    //                 console.log('POST /user/' + req.body.nombre);
-    //             });
-    //         }
-    //         //Si existe
-    //         else{
-    //             console.log('usuario ya existente');
-    //             return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
-    //         }
-    //     });
-    // };
-
     //GET - Obtner usuario a partir de el ID
     ObtenerUsuarioporID = function (req, res) {
         Usuario.findById(req.params.id, function (err, usuario) {
@@ -81,9 +48,9 @@ module.exports = function (app) {
 
     //PUT Modificar datos de un usuario existente por ID
     ModificarUsuario = function (req, res) {
+        console.log('PUT/ LOGIN = '+req.body.login );
         Usuario.findById(req.params.id, function (err, usuario) {
-            console.log('PUT');
-            console.log(req.body);
+
                 usuario.nombre     =  req.body.nombre,
                 usuario.apellidos  =  req.body.apellidos,
                 usuario.email      =  req.body.email,
@@ -109,48 +76,26 @@ module.exports = function (app) {
       })
     };
 
-
-    //DELETE Eliminar usuario por ID
-    // EliminarUsuarioporID = function (req, res) {
-    //     console.log('DELETE usuario');
-    //     console.log(req.params.id);
-    //
-    //     Usuario.findById(req.params.id, function (err, usuario) {
-    //         usuario.remove(function (err) {
-    //             if (!err)
-    //                 console.log('Removed');
-    //             else {
-    //                 console.log('ERROR' + err);
-    //             }
-    //         })
-    //     });
-    //
-    //     res.send('Usuario borrado');
-    // };
-
     //POST loginIN Hacer login usuario
     loginIN = function (req, res) {
         console.log('post /login');
         console.log(req.body);
         resultado = res;
         var login = req.body.login;
-        var p1;
-        var p2;
-        var key = [];
         Usuario.find({login:login},function(err,user){
             if(user.length == 0){
                 return resultado.status(404).jsonp({"loginSuccessful": false, "login": login});
             }
             else {
-                var usuario = JSON.stringify(user);
-                var res = usuario.split(",");
-                key = res[6].split(":");
-                p1 = key[1];
-                p2 = '"' + req.body.password + '"';
-                if(p1==p2){
+                console.log(user);
+                //console.log("login",user.login);
+                if (user[0].password==req.body.password) {
+                    console.log("OK",req.body.password);
                     return resultado.status(200).jsonp({"loginSuccessful": true, "usuario": user});
                 }
-                else{
+                else {
+                    console.log("KO", req.body.password);
+                    console.log("KO", user[0].password)
                     return resultado.status(404).jsonp({"loginSuccessful": false, "login": login});
                 }
             }
@@ -201,7 +146,6 @@ module.exports = function (app) {
         });
 
     };
-
 
     //ENDPOINTS
     app.post(   '/usuario/CrearUsuario', CrearUsuario);
