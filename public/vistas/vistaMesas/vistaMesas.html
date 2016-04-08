@@ -1,0 +1,58 @@
+<div class="page-header">
+    <h1 id="cabecera">Administrador</h1>
+    <button id="salir" class="btn btn-danger" ui-sref="login">Salir</button>
+    <hr>
+    <h2>Lista de Partidas</h2>
+    <div class="jumbotron text-center">
+        <h1>Total Registros: <span class="label label-warning">{{mesas.total}}</span></h1>
+    </div>
+</div>
+<button class="btn btn-success" ui-sref="crearMesa">Crear Mesa</button>
+<button class="btn btn-primary" ui-sref="admin">Volver</button>
+<br><br>
+<div>
+    <table id="ded" class="table table-hover" ng-table="tableParams">
+        <th style="width: 3%">ID</th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('horas')" style="cursor: pointer;">HORAS&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='horas'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('local')" style="cursor: pointer;">USUARIO LOCAL&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='local'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('visitante')" style="cursor: pointer;">USUARIO VISITANTE&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='visitante'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('partidas')" style="cursor: pointer;">PARTIDAS&nbsp;&nbsp;&nbsp;
+            <span ng-show="sortKey=='partidas'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
+
+        <th style="width: 7%">EDITAR</th>
+        <th style="width: 7%">ELIMINAR</th>
+        <th style="width: 7%">DETALLES</th>
+        <tr ng-repeat="mesa in $data | orderBy:sortKey:reverse | filter:{ nombre: studentName } | filter:searchText">
+            <td style="color: red">{{ $index + 1 }}</td>
+            <td>{{ mesa.horas }}</td>
+            <td>{{ mesa.local }}</td>
+            <td>{{ mesa.visitante }}</td>
+            <td>{{ mesa.partidas }}</td>
+            <td>
+                <button class="btn btn-warning">
+                    <span class="glyphicon glyphicon-edit" title="Editar" href="/#!/usuarios/{{mesa._id}}/edit" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td>
+                <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-trash" data-ng-click="delete(mesa._id)" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td>
+                <button title="Perfil" href="/#!/mesas/{{mesa._id}}" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-eye-open" ng-click="procesaObjeto(mesa)" aria-hidden="true"></span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="alert alert-warning text-center" data-ng-hide="!mesas.$resolved || mesas.length">
+    No existen mesas creadas. Por qué no <a ui-sref="crearMesa">creas una</a>?
+</div>

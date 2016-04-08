@@ -4,7 +4,7 @@
     <hr>
     <h2>Lista de Partidas</h2>
     <div class="jumbotron text-center">
-        <h1>Total Registros: <span class="label label-warning">{{Partidas.total}}</span></h1>
+        <h1>Total Registros: <span class="label label-warning">{{partidas.total}}</span></h1>
     </div>
 </div>
 <button class="btn btn-success" ui-sref="crearPartida">Crear Partida</button>
@@ -50,5 +50,5 @@
     </table>
 </div>
 <div class="alert alert-warning text-center" data-ng-hide="!partidas.$resolved || partidas.length">
-    No existen partidas creadas. Por qué no <a href="/#!/customers/create">creas una</a>?
+    No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
 </div>

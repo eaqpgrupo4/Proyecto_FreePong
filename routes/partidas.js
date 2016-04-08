@@ -18,7 +18,7 @@ module.exports = function (app) {
     };
 
 
-    //POST - Agregar partida login v2
+    //POST - Agregar partida con comprobación v2
     //CrearPartida = function(req, res){
     //    resultado = res;
     //    var mesa = req.body.mesa;
@@ -47,6 +47,7 @@ module.exports = function (app) {
         partida.save(function(err, partida){
             if(err){return next(err)}
             res.json(partida);
+            console.log('POST /creador/' + req.body.creador);
         })
     };
 
@@ -93,7 +94,7 @@ module.exports = function (app) {
     };
 
     //PUT Modificar datos de una partida existente por ID
-    ModificarPartida = function (req, res) {
+    ModificarPartidaPorID = function (req, res) {
         Partida.findById(req.params.id, function (err, partida) {
 
             console.log(req.body);
@@ -218,7 +219,7 @@ module.exports = function (app) {
     app.get(    '/partida/ObtenerPartidas', ObtenerPartidas);
     app.get(    '/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
     app.get(    '/partida/ObtenerPartidaPorID/:id', ObtenerPartidaporID);
-    app.put(    '/partida/ModificarPartidaPorID/:id', ModificarPartida);
+    app.put(    '/partida/ModificarPartidaPorID/:id', ModificarPartidaPorID);
     app.delete( '/partida/EliminarPartidaPorID/:id', EliminarPartidaporID);
     //app.post(   '/usuario/Login', loginIN);
 }
