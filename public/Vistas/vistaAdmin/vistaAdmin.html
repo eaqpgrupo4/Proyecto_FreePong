@@ -1,11 +1,15 @@
 <div class="page-header">
-    <h1 id="cabecera">Administrador</h1>
+
     <button id="salir" class="btn btn-danger" ui-sref="login">Salir</button>
     <hr>
     <h2>Lista de usuarios</h2>
+
     <div class="jumbotron text-center">
         <h1>Total Registros: <span class="label label-warning">{{$data.total}}</span></h1>
     </div>
+
+
+
 </div>
 <button class="btn btn-success" ui-sref="add">Crear Usauario</button>
 <button class="btn btn-primary" ui-sref="partidas">Ver Partidas Creadas</button>
@@ -49,12 +53,12 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ usuario.saldo }}€</td>
             <td>
                 <button class="btn btn-warning">
-                    <span class="glyphicon glyphicon-edit" title="Editar" ng-click="procesaObjeto(usuario)" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(usuario)" aria-hidden="true"></span>
                 </button>
             </td>
             <td>
                 <button type="submit" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-trash" data-ng-click="delete(usuario._id)" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-trash"  ng-click="delete(usuario)" aria-hidden="true"></span>
                 </button>
             </td>
             <td>
@@ -68,3 +72,4 @@
 <div class="alert alert-warning text-center" data-ng-hide="!usuarios.$resolved || usuarios.length">
     No existen usuarios ahora. Por qué no <a ui-sref="add">creas uno</a>?
 </div>
+

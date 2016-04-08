@@ -96,7 +96,7 @@ module.exports = function (app) {
     //PUT Modificar datos de una partida existente por ID
     ModificarPartidaPorID = function (req, res) {
         Partida.findById(req.params.id, function (err, partida) {
-            console.log('PUT');
+
             console.log(req.body);
                 partida.creador   =  req.body.creador,
                 partida.invitado  =  req.body.invitado,
