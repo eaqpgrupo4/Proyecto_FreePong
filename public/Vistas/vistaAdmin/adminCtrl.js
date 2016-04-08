@@ -17,7 +17,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
     var params =
     {
         page: 1,
-        count: 10
+        count: 4
     };
     var settings =
     {
