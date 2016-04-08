@@ -20,7 +20,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
     params =
     {
         page: 1,
-        count: 4
+        count: 10
     };
     settings =
     {
@@ -46,7 +46,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
         swal(
                 {
                    title: "¿Estás Seguro/a?",
-                   text: "¡Vas a borrar a este usuario de la base de datos!",
+                   text: "¡Vas a borrar a " + usuario.nombre + " " + usuario.apellidos + " de la base de datos!",
                    type: "warning",
                    showCancelButton: true,
                    confirmButtonColor: "#DD6B55",confirmButtonText: "Sí, borrar!",
@@ -64,8 +64,9 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
                         .success(function (data)
                         {
 
-                            swal("Eliminado", "Usuario eliminado de FreePong", "success");
-                            $state.go('admin',{},{reload: true });
+                            swal("Eliminado", usuario.nombre + " " + usuario.apellidos + " ha sido eliminado de FreePong", "success");
+                            // $state.go('admin',{},{reload: true });
+                            $scope.tableParams.reload();
                         })
                         .error(function (data)
                         {
@@ -75,7 +76,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
             }
             else
             {
-                swal("Cancelado", "Has decidido no borrar al usuario", "error");
+                swal("Cancelado", "Has decidido no borrar al usuario " + usuario.nombre + " " + usuario.apellidos + " ", "error");
             }
         });
 

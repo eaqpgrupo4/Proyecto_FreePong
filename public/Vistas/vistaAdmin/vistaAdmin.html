@@ -1,6 +1,8 @@
 <div class="page-header">
 
-    <button id="salir" class="btn btn-danger" ui-sref="login">Salir</button>
+    <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
+        <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
+    </a>
     <hr>
     <h2>Lista de usuarios</h2>
 
@@ -11,9 +13,35 @@
 
 
 </div>
-<button class="btn btn-success" ui-sref="add">Crear Usauario</button>
+<div>
+    <div style="position: relative; display: inline-block; float: left;">
+        <a type="button" class="btn btn-success" ui-sref="add">
+            <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Usuario
+        </a>
+        <a type="button" class="btn btn-success" ui-sref="crearPartida">
+            <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Partida
+        </a>
+        <a type="button" class="btn btn-success" ui-sref="crearMesa">
+            <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Mesa
+        </a>
+    </div>
+    <div style="position: relative; display: inline-block; float: right;">
+        <a type="button" class="btn btn-primary" ui-sref="partidas">
+            <i class="glyphicon glyphicon-eye-open"></i>&nbsp;&nbsp;Ver Partidas
+        </a>
+        <a type="button" class="btn btn-primary" ui-sref="mesas">
+            <i class="glyphicon glyphicon-eye-open"></i>&nbsp;&nbsp;Ver Mesas
+        </a>
+    </div>
+</div>
+<br>
+
+<!-- <button class="btn btn-success" ui-sref="add">Crear Usauario</button>
+<button class="btn btn-success" ui-sref="crearPartida">Crear Partida</button>
+<button class="btn btn-success" ui-sref="crearMesa">Crear Meas</button>
 <button class="btn btn-primary" ui-sref="partidas">Ver Partidas Creadas</button>
-<button class="btn btn-primary" ui-sref="mesas">Ver Mesas Creadas</button>
+<button class="btn btn-primary" ui-sref="mesas">Ver Mesas Creadas</button> -->
+
 <br><br>
 <div>
     <table id="ded" class="table table-hover" ng-table="tableParams">
@@ -39,9 +67,9 @@
         <th title="Haz click para ordenar" class="color" ng-click="sort('saldo')" style="cursor: pointer;">SALDO&nbsp;&nbsp;&nbsp;
            <span ng-show="sortKey=='saldo'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-sort-by-attributes-alt':reverse,'glyphicon glyphicon-sort-by-attributes':!reverse}"></span>
         </th>
-        <th style="width: 7%">EDITAR</th>
-        <th style="width: 7%">ELIMINAR</th>
-        <th style="width: 7%">PERFIL</th>
+        <th style="width: 7%; text-align: center;">EDITAR</th>
+        <th style="width: 7%; text-align: center;">ELIMINAR</th>
+        <th style="width: 7%; text-align: center;">PERFIL</th>
         <tr ng-repeat="usuario in $data | orderBy:sortKey:reverse | filter:{ nombre: studentName } | filter:searchText">
             <td style="color: red">{{ $index + 1 }}</td>
             <td>{{ usuario.nombre }}</td>
@@ -51,17 +79,17 @@
             <td>{{ usuario.login }}</td>
             <td>{{ usuario.password }}</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ usuario.saldo }}€</td>
-            <td>
+            <td style="text-align: center;">
                 <button class="btn btn-warning">
                     <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(usuario)" aria-hidden="true"></span>
                 </button>
             </td>
-            <td>
+            <td style="text-align: center;">
                 <button type="submit" class="btn btn-danger">
                     <span class="glyphicon glyphicon-trash"  ng-click="delete(usuario)" aria-hidden="true"></span>
                 </button>
             </td>
-            <td>
+            <td style="text-align: center;">
                 <button title="Perfil" href="/#!/usuarios/{{usuario._id}}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-user" ng-click="procesaObjeto(usuario)" aria-hidden="true"></span>
                 </button>

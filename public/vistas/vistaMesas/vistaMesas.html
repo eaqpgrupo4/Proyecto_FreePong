@@ -1,14 +1,20 @@
 <div class="page-header">
     <h1 id="cabecera">Administrador</h1>
-    <button id="salir" class="btn btn-danger" ui-sref="login">Salir</button>
+    <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
+        <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
+    </a>
     <hr>
     <h2>Lista de Partidas</h2>
     <div class="jumbotron text-center">
         <h1>Total Registros: <span class="label label-warning">{{mesas.total}}</span></h1>
     </div>
 </div>
-<button class="btn btn-success" ui-sref="crearMesa">Crear Mesa</button>
-<button class="btn btn-primary" ui-sref="admin">Volver</button>
+<a type="button" class="btn btn-success" ui-sref="crearMesa">
+    <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Mesa
+</a>
+<a type="button" class="btn btn-primary" ui-sref="admin">
+    <i class="glyphicon glyphicon-triangle-left"></i>&nbsp;&nbsp;Volver
+</a>
 <br><br>
 <div>
     <table id="ded" class="table table-hover" ng-table="tableParams">
@@ -26,26 +32,26 @@
             <span ng-show="sortKey=='partidas'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
         </th>
 
-        <th style="width: 7%">EDITAR</th>
-        <th style="width: 7%">ELIMINAR</th>
-        <th style="width: 7%">DETALLES</th>
+        <th style="width: 7%; text-align: center;">EDITAR</th>
+        <th style="width: 7%; text-align: center;">ELIMINAR</th>
+        <th style="width: 7%; text-align: center;">PERFIL</th>
         <tr ng-repeat="mesa in $data | orderBy:sortKey:reverse | filter:{ nombre: studentName } | filter:searchText">
             <td style="color: red">{{ $index + 1 }}</td>
             <td>{{ mesa.horas }}</td>
             <td>{{ mesa.local }}</td>
             <td>{{ mesa.visitante }}</td>
             <td>{{ mesa.partidas }}</td>
-            <td>
+            <td style="text-align: center;">
                 <button class="btn btn-warning">
                     <span class="glyphicon glyphicon-edit" title="Editar" href="/#!/usuarios/{{mesa._id}}/edit" aria-hidden="true"></span>
                 </button>
             </td>
-            <td>
+            <td style="text-align: center;">
                 <button type="submit" class="btn btn-danger">
                     <span class="glyphicon glyphicon-trash" data-ng-click="delete(mesa._id)" aria-hidden="true"></span>
                 </button>
             </td>
-            <td>
+            <td style="text-align: center;">
                 <button title="Perfil" href="/#!/mesas/{{mesa._id}}" class="btn btn-primary">
                     <span class="glyphicon glyphicon-eye-open" ng-click="procesaObjeto(mesa)" aria-hidden="true"></span>
                 </button>

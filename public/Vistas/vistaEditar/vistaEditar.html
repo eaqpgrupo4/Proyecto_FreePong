@@ -1,4 +1,7 @@
 <div id="reg" class="col-md-6 col-md-offset-3">
+<a id="salir" type="button" class="btn btn-danger" ui-sref="login">
+    <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
+</a>
     <h2>Editar usuario</h2>
     <form name="form"  role="form">
         <div class="form-group" ng-class="{ 'has-error': form.nombre.$dirty && form.nombre.$error.required }">
@@ -14,7 +17,7 @@
         <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" class="form-control" ng-model="email" value="{{usuario.email}}" required />
-            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">El e-mail es necesario</span>
+            <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">El E-mail es necesario</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.telefono.$dirty && form.email.$error.required }">
             <label for="telefono">Telefono</label>
@@ -42,7 +45,7 @@
         <div class="form-actions">
             <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Registro</button> -->
             <button type="submit" class="btn btn-primary" ng-click="update(nombre,apellidos,email,telefono,login,password,saldo)">Actualizar</button>
-            <a href="#/admin" class="btn btn-link">Volver</a>
+            <a ui-sref="admin" class="btn btn-link">Volver</a>
         </div>
 
     </form>

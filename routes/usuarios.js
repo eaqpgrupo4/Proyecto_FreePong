@@ -48,7 +48,7 @@ module.exports = function (app) {
 
     //PUT Modificar datos de un usuario existente por ID
     ModificarUsuario = function (req, res) {
-        console.log('PUT/ LOGIN = '+req.body.login );
+        console.log('PUT/  = '+req.body.login );
         Usuario.findById(req.params.id, function (err, usuario) {
 
                 usuario.nombre     =  req.body.nombre,

@@ -1,4 +1,7 @@
 <div id="add" class="col-md-6 col-md-offset-3">
+<a id="salir" type="button" class="btn btn-danger" ui-sref="login">
+    <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
+</a>
     <h2>Crear partida</h2>
     <form name="form" ng-submit="crearPartida()" role="form">
         <div class="form-group" ng-class="{ 'has-error': form.creador.$dirty && form.creador.$error.required }">
@@ -25,7 +28,7 @@
             <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Registro</button> -->
             <button type="submit" class="btn btn-success">Añadir</button>
             <a href="" class="btn btn-primary" ng-click="demo();">Raul Lorenzo</a>
-            <a ui-sref="partidas" class="btn btn-link">Cancel</a>
+            <a ui-sref="admin" class="btn btn-link">Cancelar</a>
         </div>
     </form>
 </div>
