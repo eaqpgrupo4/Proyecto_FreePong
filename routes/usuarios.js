@@ -105,6 +105,9 @@ module.exports = function (app) {
     //GET Obtener todos los usuarios de la colecccion usuarios paginado
     ObtenerUsuariosP = function (req, res){
         console.log('post /obtenerusuariosP');
+
+        var sort;
+        var sortObject = {};
         var count  = req.query.count || 5;
         var page   = req.query.page || 1;
 
@@ -123,16 +126,21 @@ module.exports = function (app) {
             count: count
         };
 
-        var sort =
-        {
-            sort:
-            {
-                desc: '_id'
-            }
+        if (req.query.sorting) {
+            var sortKey = Object.keys(req.query.sorting)[0];
+            var sortValue = req.query.sorting[sortKey];
+            sortObject[sortValue] = sortKey;
+        }
+        else {
+            sortObject.desc = '_id';
+        }
+
+        sort = {
+            sort: sortObject
         };
 
         Usuario
-            .find({gender: req.params.gender})
+            .find()
             .filter(filter)
             .order(sort)
             .page(pagination, function(err, usuarios) {

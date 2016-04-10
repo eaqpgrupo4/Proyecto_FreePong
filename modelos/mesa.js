@@ -9,7 +9,11 @@ var mesaEsquema = new Schema({
     horas:      { type: String },
     local:      { type: String },
     visitante:  { type: String },
-    partidas:   { type: String }
+    partidas:   { type: String },
+    created: {
+		type: Date,
+		default: Date.now
+	},
 });
 
 module.exports = mongoose.model('Mesa', mesaEsquema);

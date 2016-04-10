@@ -68,7 +68,7 @@
            <span ng-show="sortKey=='saldo'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-sort-by-attributes-alt':reverse,'glyphicon glyphicon-sort-by-attributes':!reverse}"></span>
         </th>
         <th title="Haz click para ordenar" class="color" ng-click="sort('created')" style="cursor: pointer;">CREADO&nbsp;&nbsp;&nbsp;
-           <span ng-show="sortKey=='created'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-sort-by-attributes-alt':reverse,'glyphicon glyphicon-sort-by-attributes':!reverse}"></span>
+           <span ng-show="sortKey=='created'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
         </th>
         <th style="width: 7%; text-align: center;">EDITAR</th>
         <th style="width: 7%; text-align: center;">ELIMINAR</th>
@@ -82,7 +82,9 @@
             <td>{{ usuario.login }}</td>
             <td>{{ usuario.password }}</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ usuario.saldo }}€</td>
-            <td><span ng-bind="usuario.created | date:'mediumDate'"></span></td>
+            <td>
+                <span ng-bind="usuario.created | date:'mediumDate'"></span>
+            </td>
             <td style="text-align: center;">
                 <button class="btn btn-warning">
                     <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(usuario)" aria-hidden="true"></span>

@@ -28,6 +28,9 @@
         <th title="Haz click para ordenar" class="color" ng-click="sort('mesa')" style="cursor: pointer;">MESA&nbsp;&nbsp;&nbsp;
             <span ng-show="sortKey=='mesa'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
         </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('created')" style="cursor: pointer;">CREADO&nbsp;&nbsp;&nbsp;
+           <span ng-show="sortKey=='created'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
+        </th>
 
         <th style="width: 7%; text-align: center;">EDITAR</th>
         <th style="width: 7%; text-align: center;">ELIMINAR</th>
@@ -37,6 +40,9 @@
             <td>{{ partida.creador }}</td>
             <td>{{ partida.invitado }}</td>
             <td>{{ partida.mesa }}</td>
+            <td>
+                <span ng-bind="partida.created | date:'mediumDate'"></span>
+            </td>
             <td style="text-align: center;">
                 <button class="btn btn-warning">
                     <span class="glyphicon glyphicon-edit" title="Editar" href="/#!/usuarios/{{partida._id}}/edit" aria-hidden="true"></span>

@@ -8,7 +8,11 @@ Schema   = mongoose.Schema;
 var partidaEsquema = new Schema({
     creador:    { type: String },
     invitado:   { type: String },
-    mesa:  	    { type: String }
+    mesa:  	    { type: String },
+    created: {
+		type: Date,
+		default: Date.now
+	},
 });
 
 module.exports = mongoose.model('Partida', partidaEsquema);
