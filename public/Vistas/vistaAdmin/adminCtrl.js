@@ -3,16 +3,10 @@
 
 freepongApp.factory("Usuarios", function ($resource)
 {
-
     return $resource('usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
-
 });
 
 freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usuarios', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, ngTableParams ) {
-        // $scope.sort = function(keyname){
-        //     $scope.sortKey = keyname;
-        //     $scope.reverse = !$scope.reverse;
-        // }
 
     var params;
     var settings;

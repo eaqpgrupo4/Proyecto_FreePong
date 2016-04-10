@@ -17,7 +17,7 @@
 </a>
 <br><br>
 <div>
-    <table id="ded" class="table table-hover" ng-table="tableParams">
+    <!-- <table id="ded" class="table table-hover" ng-table="tableParams">
         <th style="width: 3%">ID</th>
         <th title="Haz click para ordenar" class="color" ng-click="sort('creador')" style="cursor: pointer;">USUARIO CREADOR&nbsp;&nbsp;&nbsp;
             <span ng-show="sortKey=='creador'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-triangle-top':reverse,'glyphicon glyphicon-triangle-bottom':!reverse}"></span>
@@ -58,6 +58,35 @@
                     <span class="glyphicon glyphicon-eye-open" ng-click="procesaObjeto(partida)" aria-hidden="true"></span>
                 </button>
             </td>
+        </tr>
+    </table> -->
+    <table class="table table-hover" ng-table="tableParams" show-filter="true">
+        <tr ng-repeat="partida in $data">
+                <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Creador'" sortable="'creador'" filter="{ 'creador': 'text' }">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(partida)">{{partida.creador}}</a><br>
+                </td>
+                <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Invitado'" sortable="'invitado'" filter="{ 'invitado': 'text' }">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(partida)">{{partida.invitado}}</a><br>
+                </td>
+                <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Mesa'" sortable="'mesa'" filter="{ 'mesa': 'text' }">
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(partida)">{{partida.mesa}}</a><br>
+                </td>
+                <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Fecha'" sortable="'created'" filter="{ 'created': 'text' }">
+                    <a class="nocolor" ng-click="editar(partida)"><span ng-bind="partida.created | date:'mediumDate'"></span></a>
+                </td>
+                <td>
+                   <div style="margin-left: 7%" class="table-actions">
+                        <button class="btn btn-warning">
+                            <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(partida)" aria-hidden="true"></span>
+                        </button>
+                        <button type="submit" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-trash"  ng-click="delete(partida._id)" aria-hidden="true"></span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-user" ng-click="editar(partida)" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </td>
         </tr>
     </table>
 </div>

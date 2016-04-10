@@ -8,11 +8,6 @@ freepongApp.factory("Mesas", function ($resource) {
 });
 freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, ngTableParams ) {
 
-    $scope.sort = function(keyname){
-        $scope.sortKey = keyname;
-        $scope.reverse = !$scope.reverse;
-    }
-
     var params;
     var settings;
 
@@ -73,7 +68,7 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
                         .success(function (data) {
                             $scope.newMesa = {};
                             swal("Eliminada", "Mesa eliminada de FreePong", "success");
-                            $state.go("mesas", {}, { reload: true });
+                            $scope.tableParams.reload();
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);

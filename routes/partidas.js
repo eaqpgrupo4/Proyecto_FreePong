@@ -171,34 +171,38 @@ module.exports = function (app) {
     //GET Obtener todos las partidas de la colecccion partidas paginado
     ObtenerPartidasP = function (req, res){
         console.log('post /obtenerpartidasP');
+        var sort;
+        var sortObject = {};
         var count  = req.query.count || 5;
         var page   = req.query.page || 1;
 
         var filter = {
-            filters:
-            {
-                mandatory:
-                {
+            filters : {
+                mandatory : {
                     contains: req.query.filter
                 }
             }
         };
-        var pagination =
-        {
+        var pagination = {
             start: (page - 1) * count,
             count: count
         };
 
-        var sort =
-        {
-            sort:
-            {
-                desc: '_id'
-            }
+        if (req.query.sorting) {
+            var sortKey = Object.keys(req.query.sorting)[0];
+            var sortValue = req.query.sorting[sortKey];
+            sortObject[sortValue] = sortKey;
+        }
+        else {
+            sortObject.desc = '_id';
+        }
+
+        sort = {
+            sort: sortObject
         };
 
         Partida
-            .find({gender: req.params.gender})
+            .find()
             .filter(filter)
             .order(sort)
             .page(pagination, function(err, partidas) {

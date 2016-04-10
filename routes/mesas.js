@@ -143,34 +143,38 @@ module.exports = function (app) {
     //GET Obtener todas las mesas de la colecccion mesas paginado
     ObtenerMesasP = function (req, res){
         console.log('post /obtenermesasP');
+        var sort;
+        var sortObject = {};
         var count  = req.query.count || 5;
         var page   = req.query.page || 1;
 
         var filter = {
-            filters:
-            {
-                mandatory:
-                {
+            filters : {
+                mandatory : {
                     contains: req.query.filter
                 }
             }
         };
-        var pagination =
-        {
+        var pagination = {
             start: (page - 1) * count,
             count: count
         };
 
-        var sort =
-        {
-            sort:
-            {
-                desc: '_id'
-            }
+        if (req.query.sorting) {
+            var sortKey = Object.keys(req.query.sorting)[0];
+            var sortValue = req.query.sorting[sortKey];
+            sortObject[sortValue] = sortKey;
+        }
+        else {
+            sortObject.desc = '_id';
+        }
+
+        sort = {
+            sort: sortObject
         };
 
         Mesa
-            .find({gender: req.params.gender})
+            .find()
             .filter(filter)
             .order(sort)
             .page(pagination, function(err, mesas) {

@@ -38,28 +38,28 @@
 <br>
 <br>
 <div>
-    <table id="ded" class="table table-hover" ng-table="tableParams" show-filter="true">
+    <table class="table table-hover" ng-table="tableParams" show-filter="true">
         <tr ng-repeat="usuario in $data">
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Nombre'" sortable="'nombre'" filter="{ 'nombre': 'text' }">
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{usuario.nombre}}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.nombre}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Apellidos'" sortable="'apellidos'" filter="{ 'apellidos': 'text' }">
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{usuario.apellidos}}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.apellidos}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;E-mail'" sortable="'email'" filter="{ 'email': 'text' }">
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{usuario.email}}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.email}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Username'" sortable="'login'" filter="{ 'login': 'text' }">
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{usuario.login}}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.login}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Password'" sortable="'password'" filter="{ 'password': 'text' }">
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{usuario.password}}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.password}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Saldo'" sortable="'saldo'" filter="{ 'saldo': 'text' }">
-                    &nbsp;&nbsp;&nbsp;&nbsp;{{usuario.saldo}}&nbsp;€<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.saldo | currency:'€ '}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Fecha'" sortable="'created'" filter="{ 'created': 'text' }">
-                    <span ng-bind="usuario.created | date:'mediumDate'"></span>
+                    <a class="nocolor" ng-click="editar(usuario)"><span ng-bind="usuario.created | date:'mediumDate'"></span></a>
                 </td>
                 <td>
                    <div style="margin-left: 7%" class="table-actions">

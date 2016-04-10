@@ -71,7 +71,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
                         .success(function (data) {
                             $scope.newPartida = {};
                             swal("Eliminada", "Partida eliminada de FreePong", "success");
-                            $state.go("partidas", {}, { reload: true });
+                            $scope.tableParams.reload();
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
