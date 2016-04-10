@@ -7,7 +7,7 @@
     <h2>Lista de usuarios</h2>
 
     <div class="jumbotron text-center">
-        <h1>Total Registros: <span class="label label-warning">{{$data.total}}</span></h1>
+        <h1>Total Registros: <span class="label label-warning">{{usuarios.total}}</span></h1>
     </div>
 
 
@@ -67,6 +67,9 @@
         <th title="Haz click para ordenar" class="color" ng-click="sort('saldo')" style="cursor: pointer;">SALDO&nbsp;&nbsp;&nbsp;
            <span ng-show="sortKey=='saldo'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-sort-by-attributes-alt':reverse,'glyphicon glyphicon-sort-by-attributes':!reverse}"></span>
         </th>
+        <th title="Haz click para ordenar" class="color" ng-click="sort('created')" style="cursor: pointer;">CREADO&nbsp;&nbsp;&nbsp;
+           <span ng-show="sortKey=='created'" class="glyphicon sort-icon" ng-class="{'glyphicon glyphicon-sort-by-attributes-alt':reverse,'glyphicon glyphicon-sort-by-attributes':!reverse}"></span>
+        </th>
         <th style="width: 7%; text-align: center;">EDITAR</th>
         <th style="width: 7%; text-align: center;">ELIMINAR</th>
         <th style="width: 7%; text-align: center;">PERFIL</th>
@@ -79,6 +82,7 @@
             <td>{{ usuario.login }}</td>
             <td>{{ usuario.password }}</td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ usuario.saldo }}€</td>
+            <td><span ng-bind="usuario.created | date:'mediumDate'"></span></td>
             <td style="text-align: center;">
                 <button class="btn btn-warning">
                     <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(usuario)" aria-hidden="true"></span>
@@ -90,8 +94,8 @@
                 </button>
             </td>
             <td style="text-align: center;">
-                <button title="Perfil" href="/#!/usuarios/{{usuario._id}}" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-user" ng-click="procesaObjeto(usuario)" aria-hidden="true"></span>
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-user" ng-click="editar(usuario)" aria-hidden="true"></span>
                 </button>
             </td>
         </tr>

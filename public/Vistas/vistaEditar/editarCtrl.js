@@ -11,10 +11,11 @@ freepongApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','
         $scope.telefono  = data.telefono;
         $scope.login     = data.login;
         $scope.password  = data.password;
+        $scope.saldo     = data.saldo;
 
 
     });
-    $scope.update= function(nombre,apellidos,email,telefono,login,password,saldo){
+    $scope.update= function(nombre, apellidos, email, telefono, login, password, saldo){
 
         
 
