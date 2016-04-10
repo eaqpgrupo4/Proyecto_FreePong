@@ -23,9 +23,19 @@ freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'Flash
         {
             FlashService.Success('Partida creada correctamente', true);
             $state.go('partidas');
+            swal({
+                  title: "Partida Creada",
+                  text: "La partida se ha creado correctamente",
+                  imageUrl: 'images/ok.png'
+            });
 
         }).error(function(error){
             FlashService.Error('Error al crear la partida', true);
+            swal({
+                  title: "Error",
+                  text: "Error al crear la partida",
+                  imageUrl: 'images/error.png'
+            });
         })
     };
 
