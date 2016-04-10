@@ -9,10 +9,10 @@ freepongApp.factory("Usuarios", function ($resource)
 });
 
 freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usuarios', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, ngTableParams ) {
-       $scope.sort = function(keyname){
-        $scope.sortKey = keyname;
-        $scope.reverse = !$scope.reverse;
-    }
+        // $scope.sort = function(keyname){
+        //     $scope.sortKey = keyname;
+        //     $scope.reverse = !$scope.reverse;
+        // }
 
     var params;
     var settings;
@@ -58,7 +58,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
         {
             if (isConfirm)
             {
-                if ( usuario )
+                if (usuario)
                 {
                     $http.delete('usuario/EliminarUsuarioPorID/' + usuario._id)
                         .success(function (data)

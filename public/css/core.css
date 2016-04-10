@@ -35,7 +35,7 @@
 }
 
 .ng-table-filters .filter {
-    vertical-align: top;
+    vertical-align: inherit;
 }
 
 .ng-table > thead > tr > th {

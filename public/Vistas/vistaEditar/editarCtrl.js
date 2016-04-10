@@ -43,7 +43,7 @@ freepongApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','
                 // }
                 swal({
                   title: "Actualización de Usuario",
-                  text: "Usuario " + usuario.nombre +" "+ usuario.apellidos + " actualizado correctamente",
+                  text: "Usuario " + usuario.nombre + " " + usuario.apellidos + " actualizado correctamente",
                   imageUrl: 'images/ok.png'
                 });
 
@@ -54,8 +54,8 @@ freepongApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','
                 FlashService.Error('Ha ocurrido un error en la actualización', true);
                 swal({
                   title: "Actualización de Usuario",
-                  text: "Error al actualizar el usuario" + usuario.nombre +" "+ usuario.apellidos +" ",
-                  imageUrl: 'images/ok.png'
+                  text: "Error al actualizar el usuario" + usuario.nombre + " " + usuario.apellidos + " ",
+                  imageUrl: 'images/error.png'
                 });
 
             })

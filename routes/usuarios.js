@@ -112,16 +112,13 @@ module.exports = function (app) {
         var page   = req.query.page || 1;
 
         var filter = {
-            filters:
-            {
-                mandatory:
-                {
+            filters : {
+                mandatory : {
                     contains: req.query.filter
                 }
             }
         };
-        var pagination =
-        {
+        var pagination = {
             start: (page - 1) * count,
             count: count
         };
