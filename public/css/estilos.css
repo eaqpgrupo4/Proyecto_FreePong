@@ -1,7 +1,15 @@
 
- body{
+body{
       margin: 50px;
- }
+}
+
+#fondo {
+  background: url("../images/depositphotos_3655580-Ping-pong-poster-background-2.jpg") no-repeat center center fixed;
+      background-size: cover;
+      -moz-background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+}
 
  #reg{
       background-color: rgba(64, 204, 107, 0.15);
@@ -10,6 +18,7 @@
       border-radius: 8px;
 
  }
+
   #add{
       background-color: rgba(64, 159, 204, 0.15);
       padding: 50px;
@@ -48,7 +57,7 @@
 }
 
 .ng-table th.sortable.sort-desc, .ng-table th.sortable.sort-asc {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     text-shadow: 0 1px 1px rgba(255,255,255,.75);
 }
 

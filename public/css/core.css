@@ -49,4 +49,6 @@
 
 .table-actions {
     width: 130px;
+    position: relative;
+    float: right;
 }
