@@ -47,6 +47,9 @@
         </tr>
     </table>
 </div>
-<div class="alert alert-warning text-center" data-ng-hide="!partidas.$resolved || partidas.length">
+<!-- <div class="alert alert-warning text-center" data-ng-hide="!partidas.$resolved || partidas.length">
+    No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
+</div> -->
+<div class="alert alert-warning text-center" data-ng-hide="partidas.length">
     No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
 </div>

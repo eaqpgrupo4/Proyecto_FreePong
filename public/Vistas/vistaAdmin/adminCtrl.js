@@ -91,19 +91,28 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
     };
 
     // Find a list of Customers
+    // $scope.find = function(){
+    //     var usuarios = {}
+    //     return $http.get('/usuario/ObtenerUsuarios')
+    //         .success(function(data){
+    //             $scope.usuarios = data;
+    //         return usuarios
+    //     })
+        
+
+    //     console.log(usuarios);
+
+
+    //     //$scope.customers = Customers.query();
+    // };
+
     $scope.find = function(){
         var usuarios = {}
         return $http.get('/usuario/ObtenerUsuarios')
             .success(function(data){
                 $scope.usuarios = data;
-            return usuarios
+                console.log(usuarios);
         })
-        
-
-        console.log(usuarios);
-
-
-        //$scope.customers = Customers.query();
     };
 
 

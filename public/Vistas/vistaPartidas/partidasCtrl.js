@@ -90,20 +90,28 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
         });
     };
 
-    // Find a list of Customers
+    // // Find a list of Customers
+    // $scope.find = function(){
+    //     var partidas = {}
+    //     return $http.get('/partida/ObtenerPartidas')
+    //         .success(function(data){
+    //             $scope.partidas = data;
+    //         return partidas
+    //     })
+        
+
+    //     console.log(partidas);
+
+
+    //     //$scope.customers = Customers.query();
+    // };
     $scope.find = function(){
         var partidas = {}
         return $http.get('/partida/ObtenerPartidas')
             .success(function(data){
                 $scope.partidas = data;
-            return partidas
+                console.log(partidas);
         })
-        
-
-        console.log(partidas);
-
-
-        //$scope.customers = Customers.query();
     };
 
     // Find a list of Customers

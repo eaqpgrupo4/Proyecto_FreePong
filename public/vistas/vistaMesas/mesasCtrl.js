@@ -10,7 +10,7 @@ freepongApp.factory("Mesas", function ($resource, $stateParams) {
 
 freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, $stateParams, ngTableParams ) {
     
-  
+
     var params;
     var settings;
 
@@ -91,14 +91,8 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
         return $http.get('/mesa/ObtenerMesas')
             .success(function(data){
                 $scope.mesas = data;
-            return mesas
+                console.log(mesas);
         })
-        
-
-        console.log(usuarios);
-
-
-        //$scope.customers = Customers.query();
     };
 
 

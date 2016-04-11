@@ -50,6 +50,9 @@
         </tr>
     </table>
 </div>
-<div class="alert alert-warning text-center" data-ng-hide="!mesas.$resolved || mesas.length">
+<!-- <div class="alert alert-warning text-center" data-ng-hide="!mesas.$resolved || mesas.length">
+    No existen mesas creadas. Por qué no <a ui-sref="crearMesa">creas una</a>?
+</div> -->
+<div class="alert alert-warning text-center" data-ng-hide="mesas.length">
     No existen mesas creadas. Por qué no <a ui-sref="crearMesa">creas una</a>?
 </div>
