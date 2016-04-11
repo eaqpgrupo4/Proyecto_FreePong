@@ -6,7 +6,6 @@
 var box = {};
 
 freepongApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
-
     $scope.demo = function(){
         swal({
             title: "Raul Lorenzo",
@@ -14,7 +13,6 @@ freepongApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope', 'FlashSer
             imageUrl: "images/perfil_user.png" });
 
     };
-
     $scope.mesa = {};
     box = $scope.mesa;
     $scope.crearMesa= function () {
@@ -28,7 +26,6 @@ freepongApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope', 'FlashSer
                   text: "La mesa se ha creado correctamente",
                   imageUrl: 'images/ok.png'
             });
-
         }).error(function(error){
             FlashService.Error('Error al crear la mesa', true);
             swal({

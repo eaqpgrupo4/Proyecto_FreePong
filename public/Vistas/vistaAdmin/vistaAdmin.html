@@ -1,5 +1,5 @@
-<div class="page-header">
-
+<div class="page-header" ng-init="find()">
+    <h1 id="cabecera">Administrador</h1>
     <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
         <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
     </a>
@@ -7,7 +7,7 @@
     <h2>Lista de usuarios</h2>
 
     <div class="jumbotron text-center">
-        <h1>Total Registros: <span class="label label-warning">{{mesas.length}}</span></h1>
+        <h1>Total Registros: <span class="label label-warning">{{usuarios.length}}</span></h1>
     </div>
 </div>
     <div style="position: relative; display: inline-block; float: left;">

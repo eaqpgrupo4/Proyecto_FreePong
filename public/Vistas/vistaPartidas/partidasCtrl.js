@@ -3,15 +3,10 @@
  */
 
 'use strict';
-freepongApp.factory("Partidas", function ($resource) {
+freepongApp.factory("Partidas", function ($resource, $stateParams) {
     return $resource('partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
 });
-freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, ngTableParams ) {
-
-    $scope.sort = function(keyname){
-        $scope.sortKey = keyname;
-        $scope.reverse = !$scope.reverse;
-    }
+freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, $stateParams, ngTableParams ) {
 
     var params;
     var settings;
@@ -96,14 +91,30 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
     };
 
     // Find a list of Customers
-    $scope.find = function()
-    {
-        var partidas = Partidas.get();
+    $scope.find = function(){
+        var partidas = {}
+        return $http.get('/partida/ObtenerPartidas')
+            .success(function(data){
+                $scope.partidas = data;
+            return partidas
+        })
+        
+
         console.log(partidas);
-        $scope.partidas = partidas.results;
+
 
         //$scope.customers = Customers.query();
     };
+
+    // Find a list of Customers
+    // $scope.find = function()
+    // {
+    //     var partidas = Partidas.get();
+    //     console.log(partidas);
+    //     $scope.partidas = partidas.results;
+
+    //     //$scope.customers = Customers.query();
+    // };
 
     // Find existing Customer
     $scope.findOne = function()
