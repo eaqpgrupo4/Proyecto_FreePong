@@ -59,9 +59,9 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)">{{usuario.saldo | currency:'€ '}}</a><br>
                 </td>
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Fecha'" sortable="'created'" filter="{ 'created': 'text' }">
-                    <a class="nocolor" ng-click="editar(usuario)"><span ng-bind="usuario.created | date:'mediumDate'"></span></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)" ng-bind="usuario.created | date:'mediumDate'"></a>
                 </td>
-                <td>
+                <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;OPCIONES'">
                    <div style="margin-left: 7%" class="table-actions">
                         <button class="btn btn-warning">
                             <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(usuario)" aria-hidden="true"></span>
