@@ -39,8 +39,9 @@ var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResour
               controller: 'crearPartidaCtrl'
           })
           .state('usuario', {
-              url: '/usuario',
+              url: '/usuario/:login/:id',
               templateUrl: 'vistas/vistaUsuario/vistaUsuario.html',
+              controller: 'usuarioCtrl'
 
           })
           .state('mesas', {

@@ -225,5 +225,5 @@ module.exports = function (app) {
     app.get(    '/partida/ObtenerPartidaPorID/:id', ObtenerPartidaporID);
     app.put(    '/partida/ModificarPartidaPorID/:id', ModificarPartidaPorID);
     app.delete( '/partida/EliminarPartidaPorID/:id', EliminarPartidaporID);
-    //app.post(   '/usuario/Login', loginIN);
+
 }
