@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" ng-init="find()">
     <h1 id="cabecera">Administrador</h1>
     <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
         <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
@@ -47,6 +47,9 @@
         </tr>
     </table>
 </div>
-<div class="alert alert-warning text-center" data-ng-hide="!partidas.$resolved || partidas.length">
+<!-- <div class="alert alert-warning text-center" data-ng-hide="!partidas.$resolved || partidas.length">
+    No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
+</div> -->
+<div class="alert alert-warning text-center" data-ng-hide="partidas.length">
     No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
 </div>

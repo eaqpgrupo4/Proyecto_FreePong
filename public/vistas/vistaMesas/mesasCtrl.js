@@ -3,10 +3,13 @@
  */
 
 'use strict';
-freepongApp.factory("Mesas", function ($resource) {
+
+freepongApp.factory("Mesas", function ($resource, $stateParams) {
     return $resource('mesa/ObtenerMesasPaginadas'); //la url donde queremos consumir
 });
-freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, ngTableParams ) {
+
+freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, $stateParams, ngTableParams ) {
+    
 
     var params;
     var settings;
@@ -28,6 +31,8 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
         }
     };
     $scope.tableParams = new ngTableParams(params, settings);
+    $scope.demotableParams = new ngTableParams(params, settings);
+    console.log( $scope.tableParams );
 
     $scope.create = function()
     {
@@ -80,6 +85,17 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
 
     };
 
+    // Find a list of Customers
+    $scope.find = function(){
+        var mesas = {}
+        return $http.get('/mesa/ObtenerMesas')
+            .success(function(data){
+                $scope.mesas = data;
+                console.log(mesas);
+        })
+    };
+
+
     // Update existing Customer
     $scope.update = function()
     {
@@ -93,14 +109,16 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
     };
 
     // Find a list of Customers
-    $scope.find = function()
-    {
-        var mesas = Mesas.get();
-        console.log(mesas);
-        $scope.mesas = mesas.results;
+    // $scope.find = function()
+    // {
+    //     var mesas = Mesas.get();
+    //     console.log(mesas);
+    //     $scope.mesas = mesas.results;
 
-        //$scope.customers = Customers.query();
-    };
+    //     //$scope.customers = Customers.query();
+    // };
+
+
 
     // Find existing Customer
     $scope.findOne = function()

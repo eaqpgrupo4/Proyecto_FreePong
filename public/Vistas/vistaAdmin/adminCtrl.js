@@ -1,15 +1,17 @@
 
 'use strict';
 
-freepongApp.factory("Usuarios", function ($resource)
-{
+freepongApp.factory("Usuarios", function ($resource, $stateParams){
     return $resource('usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
 });
 
-freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usuarios', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, ngTableParams ) {
+freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usuarios', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, $stateParams, ngTableParams ) {
 
+    // var user = $stateParams.usuario;
     var params;
     var settings;
+
+    // console.log(user);
 
     params =
     {
@@ -89,14 +91,30 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
     };
 
     // Find a list of Customers
-    $scope.find = function()
-    {
-        var usuarios = Usuarios.get();
-        console.log(usuarios);
-        $scope.usuarios = usuarios.results;
+    // $scope.find = function(){
+    //     var usuarios = {}
+    //     return $http.get('/usuario/ObtenerUsuarios')
+    //         .success(function(data){
+    //             $scope.usuarios = data;
+    //         return usuarios
+    //     })
+        
 
-        //$scope.customers = Customers.query();
+    //     console.log(usuarios);
+
+
+    //     //$scope.customers = Customers.query();
+    // };
+
+    $scope.find = function(){
+        var usuarios = {}
+        return $http.get('/usuario/ObtenerUsuarios')
+            .success(function(data){
+                $scope.usuarios = data;
+                console.log(usuarios);
+        })
     };
+
 
     // Find existing Customer
     $scope.findOne = function()

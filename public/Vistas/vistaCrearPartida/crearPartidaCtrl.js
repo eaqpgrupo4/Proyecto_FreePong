@@ -6,7 +6,6 @@
 var box = {};
 
 freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
-
     $scope.demo = function(){
         swal({
             title: "Raul Lorenzo",
@@ -14,7 +13,6 @@ freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'Flash
             imageUrl: "images/perfil_user.png" });
 
     };
-
     $scope.partida = {};
     box = $scope.partida;
     $scope.crearPartida= function () {
@@ -28,7 +26,6 @@ freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'Flash
                   text: "La partida se ha creado correctamente",
                   imageUrl: 'images/ok.png'
             });
-
         }).error(function(error){
             FlashService.Error('Error al crear la partida', true);
             swal({

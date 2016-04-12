@@ -1,5 +1,5 @@
-<div class="page-header">
-
+<div class="page-header" ng-init="find()">
+    <h1 id="cabecera">Administrador</h1>
     <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
         <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
     </a>
@@ -7,7 +7,7 @@
     <h2>Lista de usuarios</h2>
 
     <div class="jumbotron text-center">
-        <h1>Total Registros: <span class="label label-warning">{{mesas.length}}</span></h1>
+        <h1>Total Registros: <span class="label label-warning">{{usuarios.length}}</span></h1>
     </div>
 </div>
     <div style="position: relative; display: inline-block; float: left;">
@@ -57,7 +57,7 @@
                 <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;Fecha'" sortable="'created'" filter="{ 'created': 'text' }">
                     &nbsp;&nbsp;&nbsp;&nbsp;<a class="nocolor" ng-click="editar(usuario)" ng-bind="usuario.created | date:'mediumDate'"></a>
                 </td>
-                <td data-title="'&nbsp;&nbsp;&nbsp;&nbsp;OPCIONES'">
+                <td>
                    <div style="margin-left: 7%" class="table-actions">
                         <button class="btn btn-warning">
                             <span class="glyphicon glyphicon-edit" title="Editar" ng-click="editar(usuario)" aria-hidden="true"></span>
@@ -73,7 +73,10 @@
         </tr>
     </table>
 </div>
-<div class="alert alert-warning text-center" data-ng-hide="!usuarios.$resolved || usuarios.length">
+<!-- <div class="alert alert-warning text-center" data-ng-hide="!usuarios.$resolved || usuarios.length">
+    No existen usuarios ahora. Por qué no <a ui-sref="add">creas uno</a>?
+</div> -->
+<div class="alert alert-warning text-center" data-ng-hide="usuarios.length">
     No existen usuarios ahora. Por qué no <a ui-sref="add">creas uno</a>?
 </div>
 
