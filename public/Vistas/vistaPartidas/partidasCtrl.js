@@ -20,6 +20,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
     {
         total: 0,
         counts: [5, 10, 25, 50, 100],
+        filterDelay: 100,
         getData: function($defer, params) {
             Partidas.get(params.url(), function(response) {
                 params.total(response.total);

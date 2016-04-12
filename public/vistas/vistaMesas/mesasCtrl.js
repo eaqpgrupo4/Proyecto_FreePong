@@ -23,6 +23,7 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
     {
         total: 0,
         counts: [5, 10, 25, 50, 100],
+        filterDelay: 100,
         getData: function($defer, params) {
             Mesas.get(params.url(), function(response) {
                 params.total(response.total);
