@@ -7,6 +7,7 @@ freepongApp.controller('usuarioCtrl', ['$stateParams','$state','$http','$scope',
     var login = $stateParams.login;
     console.log(login);
     $scope.login = login;
+  
 
 
 }]);
