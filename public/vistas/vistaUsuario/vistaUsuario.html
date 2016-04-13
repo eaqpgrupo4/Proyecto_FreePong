@@ -7,19 +7,62 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span ng-model="login" class="navbar-brand" >FreePONG@{{login}}</span>
+            <span ng-model="login" class="navbar-brand"><strong>FreePong</strong>&nbsp;&nbsp;&nbsp;&nbsp;<span id="log">{{login}}</span></span>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <a id="btn-verpartidas" class="btn btn-success"   ng-click="login()">Ver partidas </a>
-                <a id="btn-crearpartida"class="btn btn-success"   ng-click="login()">Crear partida </a>
-                <a id="btn-editarperfil" class="btn btn-success"   ng-click="editar()">Editar perfil </a>
-                <a id="btn-logout" class="btn btn-success"   ng-click="login()">Login </a>
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li class="page-scroll">
+                    <a ui-sref="partidas">Partidas</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="#editarperfil">Editar Perfil</a>
+                </li>
+                <li class="page-scroll">
+                    <a href="" id="baja">Eliminar Perfil</a>
+                </li>
+                <li>
+                    <a id="salir2" type="button" class="btn btn-danger" ui-sref="login">
+                        <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
-
-<div>
-    <ui-view></ui-view>
+<br><br>
+<div class="row">
+    <div class="col-sm-4 col-md-4">
+        <div class="thumbnail">
+            <img src="images/perfil_user.png" alt="...">
+            <div class="caption">
+                <h2>{{login}}</h2>
+                <hr>
+                <p>hjshdkashkjdhskjsa jhsahas hsakjsHAKJs hskalhSLKAs ashlshla SHAKLshalSH SHAKLSJLAS jdskldjhlas djskladhlas</p>
+                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8 col-md-8">
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                Cras justo odio
+            </a>
+            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
+        </div>
+        <div class="list-group">
+            <a href="#" class="list-group-item active">
+                Cras justo odio
+            </a>
+            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="#" class="list-group-item">Morbi leo risus</a>
+            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="#" class="list-group-item">Vestibulum at eros</a>
+        </div>
+    </div>
 </div>

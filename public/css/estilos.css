@@ -37,6 +37,7 @@ body{
 	 color: #2C78BD;
 }
 
+/*Botones*/
 #salir{
      position: relative;
      display: inline-block;
@@ -45,10 +46,19 @@ body{
      margin-top: 20px;
 }
 
+#salir2 {
+  padding: 10px;
+  margin-top: 4px;
+  position: relative;
+  float: right;
+  margin-left: 50px;
+}
+
 #cabecera{
      position: relative;
      display: inline-block;
 }
+/*Botones*/
 
 .panel-body{
      border: 1px solid #369;
@@ -56,6 +66,7 @@ body{
      background-color: aliceblue;
 }
 
+/*Tabla*/
 .ng-table th.sortable.sort-desc, .ng-table th.sortable.sort-asc {
     background-color: rgba(255, 255, 255, 0);
     text-shadow: 0 1px 1px rgba(255,255,255,.75);
@@ -74,7 +85,34 @@ body{
 .nocolor {
   color: black;
 }
+/*Tabla*/
 
+/*Navbar*/
+.navbar-default {
+    background-color: rgb(10, 0, 0);
+    border-color: #e7e7e7;
+}
 
+.navbar-default .navbar-nav > li > a {
+    color: rgb(255, 255, 255);
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+    color: #4E9AFF;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFF;
+    font-size: 25px;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #4E9AFF;
+}
+
+#log {
+  color: red;
+}
+/*Navbar*/
 
  

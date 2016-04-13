@@ -22,6 +22,7 @@ freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usua
     {
         total: 0,
         counts: [5, 10, 25, 50, 100],
+        filterDelay: 100,
         getData: function($defer, params) {
             Usuarios.get(params.url(), function(response) {
                 params.total(response.total);
