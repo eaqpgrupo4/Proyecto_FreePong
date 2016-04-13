@@ -11,23 +11,15 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#/registro">Partidas</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#editarperfil">Editar Perfil</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="" id="baja">Eliminar Perfil</a>
-                </li>
-
-                <li>
-                    <button type="submit" class="btn btn-success btn-lg" id="log_out">Logout</button>
-                </li>
+                <a id="btn-verpartidas" class="btn btn-success"   ng-click="login()">Ver partidas </a>
+                <a id="btn-crearpartida"class="btn btn-success"   ng-click="login()">Crear partida </a>
+                <a id="btn-editarperfil" class="btn btn-success"   ng-click="editar()">Editar perfil </a>
+                <a id="btn-logout" class="btn btn-success"   ng-click="login()">Login </a>
             </ul>
         </div>
     </div>
 </nav>
+
+<div>
+    <ui-view></ui-view>
+</div>
