@@ -9,6 +9,14 @@ freepongApp.controller('usuarioCtrl', ['$stateParams','$state','$http','$scope',
     //Cargamos la variable login en la vista Usuario
     $scope.login = login;
 
+    $scope.partidas = function()
+    {
+        console.log(id);
+        $state.go('partidas',
+            {
+                id:id
+            });
+    };
     $scope.editar = function()
     {
         console.log(id);
@@ -16,10 +24,6 @@ freepongApp.controller('usuarioCtrl', ['$stateParams','$state','$http','$scope',
             {
                 id:id
             });
-
-
     };
-
-
 }]);
 

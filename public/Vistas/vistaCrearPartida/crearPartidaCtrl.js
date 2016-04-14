@@ -6,6 +6,9 @@
 var box = {};
 
 freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
+    var id = $stateParams.id;
+    console.log('crearpartida'+id);
+
     $scope.demo = function(){
         swal({
             title: "Raul Lorenzo",

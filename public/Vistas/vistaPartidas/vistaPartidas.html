@@ -1,15 +1,5 @@
-<div class="page-header" ng-init="find()">
-    <h1 id="cabecera">Administrador</h1>
-    <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
-        <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
-    </a>
-    <hr>
-    <h2>Lista de Partidas</h2>
-    <div class="jumbotron text-center">
-        <h1>Total Registros: <span class="label label-warning">{{partidas.length}}</span></h1>
-    </div>
-</div>
-<a type="button" class="btn btn-success" ui-sref="crearPartida">
+
+<a type="button" class="btn btn-success" ng-click="crearPartida()">
     <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Partida
 </a>
 <a style="position: relative; display: inline-block; float: right;" type="button" class="btn btn-primary" ui-sref="admin">
@@ -47,9 +37,4 @@
         </tr>
     </table>
 </div>
-<!-- <div class="alert alert-warning text-center" data-ng-hide="!partidas.$resolved || partidas.length">
-    No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
-</div> -->
-<div class="alert alert-warning text-center" data-ng-hide="partidas.length">
-    No existen partidas creadas. Por qué no <a ui-sref="crearPartida">creas una</a>?
-</div>
+

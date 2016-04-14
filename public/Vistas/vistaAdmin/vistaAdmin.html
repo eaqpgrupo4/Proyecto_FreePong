@@ -1,5 +1,10 @@
 <div class="page-header" ng-init="find()">
-    <h1 id="cabecera">Administrador</h1>
+    <h1 id="cabecera">Administrador **{{test}}** {{role}}</h1>
+
+    <div ng-if="role=='admin'">
+    sasas
+    </div>
+
     <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
         <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
     </a>
@@ -14,9 +19,7 @@
         <a type="button" class="btn btn-success" ui-sref="add">
             <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Usuario
         </a>
-        <a type="button" class="btn btn-success" ui-sref="crearPartida">
-            <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Partida
-        </a>
+
         <a type="button" class="btn btn-success" ui-sref="crearMesa">
             <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Mesa
         </a>
