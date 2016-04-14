@@ -38,19 +38,17 @@ freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesa
     $scope.create = function()
     {
         var Mesa = new Mesas ({
-            horas:      this.creador,
-            local:      this.invitado,
-            visitante:  this.mesa,
-            partidas:   this.mesa
+            nombre:      this.nombre,
+            localizacion: this.localizacion
+
         });
 
         mesa.$save(function(response) {
             $location.path('customers/' + response._id);
 
-            $scope.horas     = '';
-            $scope.local     = '';
-            $scope.visitante = '';
-            $scope.partidas  = '';
+            $scope.nombre     = '';
+            $scope.localizacion     = '';
+
 
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;

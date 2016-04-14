@@ -10,7 +10,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
 
     var params;
     var settings;
-
+    var id = $stateParams.id;
     params =
     {
         page: 1,
@@ -91,21 +91,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
         });
     };
 
-    // // Find a list of Customers
-    // $scope.find = function(){
-    //     var partidas = {}
-    //     return $http.get('/partida/ObtenerPartidas')
-    //         .success(function(data){
-    //             $scope.partidas = data;
-    //         return partidas
-    //     })
-        
 
-    //     console.log(partidas);
-
-
-    //     //$scope.customers = Customers.query();
-    // };
     $scope.find = function(){
         var partidas = {}
         return $http.get('/partida/ObtenerPartidas')
@@ -115,22 +101,20 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
         })
     };
 
-    // Find a list of Customers
-    // $scope.find = function()
-    // {
-    //     var partidas = Partidas.get();
-    //     console.log(partidas);
-    //     $scope.partidas = partidas.results;
 
-    //     //$scope.customers = Customers.query();
-    // };
-
-    // Find existing Customer
     $scope.findOne = function()
     {
         $scope.customer = Partidas.get({
             customerId: $stateParams.customerId
         });
+    };
+    $scope.crearPartida = function()
+    {
+        console.log(id);
+        $state.go('crearPartida',
+            {
+                id:id
+            });
     };
 
 

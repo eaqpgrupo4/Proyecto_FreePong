@@ -29,12 +29,12 @@ var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResour
             controller: 'addCtrl'
           })
           .state('partidas', {
-              url: '/partidas',
+              url: '/partidas/:id',
               templateUrl: 'vistas/vistaPartidas/vistaPartidas.html',
               controller: 'partidasCtrl'
           })
           .state('crearPartida', {
-              url: '/crearPartida',
+              url: '/crearPartida/:id',
               templateUrl: 'vistas/vistaCrearPartida/vistaCrearPartida.html',
               controller: 'crearPartidaCtrl'
           })

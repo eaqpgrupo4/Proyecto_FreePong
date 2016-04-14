@@ -4,7 +4,6 @@ var express         = require("express"),// Express: Framework HTTP para Node.js
     bodyParser      = require("body-parser"),
     methodOverride  = require("method-override"),
     mongoose        = require('mongoose');  // Mongoose: Libreria para conectar con MongoDB
-
 	logger        	= require('morgan');
 	path          	= require('path');
 	favicon       	= require('serve-favicon');

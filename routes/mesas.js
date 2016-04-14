@@ -1,6 +1,3 @@
-/**
- * Created by raul on 5/4/16.
- */
 
 module.exports = function (app) {
 
@@ -28,60 +25,6 @@ module.exports = function (app) {
         })
     };
 
-    //POST - Agregar mesa login v2
-    //CrearMesa = function(req, res){
-    //    resultado = res;
-    //    var login = req.body.login;
-    //    //Comprueba si exite el login en la BD
-    //    Usuario.find({login:login},function(err,usuario){
-    //        //Si no exite
-    //        if(usuario == "") {
-    //            console.log('usuario no existente, OK');
-    //            var usuario = new Usuario(req.body);
-    //            usuario.save(function(err, usuario){
-    //                if (err) return resultado.send(500, err.message);
-    //                console.log('POST /user/' + req.body.nombre);
-    //                resultado.status(200).jsonp(usuario);
-    //            });
-    //        } else {
-    //            console.log('usuario ya existente');
-    //            return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
-    //        }
-    //    });
-    //};
-
-    //POST - Añadir usuario en coleccion usuarios
-    // CrearUsuario = function (req, res) {
-    //     resultado = res;
-    //     var login = req.body.login;
-    //     //Comprueba si exite el login en la BD
-    //     Usuario.find({login:login},function(err,usuario){
-    //         //Si no exite
-    //         if(usuario == ""){
-    //             console.log('usuario no existente, OK');
-    //             var usuario = new Usuario({
-    //                 nombre:     req.body.nombre,
-    //                 apellidos:  req.body.apellidos,
-    //                 email:      req.body.email,
-    //                 telefono:   req.body.telefono,
-    //                 login:      req.body.login,
-    //                 password:   req.body.password,
-    //                 saldo:      req.body.saldo
-    //             })
-    //             usuario.save(function (err, usuario) {
-    //                 if (err) return resultado.send(500, err.message);
-    //                 resultado.status(200).jsonp(usuario);
-    //                 console.log('POST /user/' + req.body.nombre);
-    //             });
-    //         }
-    //         //Si existe
-    //         else{
-    //             console.log('usuario ya existente');
-    //             return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
-    //         }
-    //     });
-    // };
-
     //GET - Obtner mesa a partir de el ID
     ObtenerMesaporID = function (req, res) {
         Mesa.findById(req.params.id, function (err, mesa) {
@@ -97,10 +40,8 @@ module.exports = function (app) {
         Mesa.findById(req.params.id, function (err, mesa) {
             console.log('PUT');
             console.log(req.body);
-                mesa.horas     =  req.body.horas,
-                mesa.local     =  req.body.local,
-                mesa.visitante =  req.body.visitante,
-                mesa.partidas  =  req.body.partidas
+                mesa.localizacion    =  req.body.localizacion,
+                mesa.nombre   =  req.body.nombre,
 
             mesa.save(function (err) {
                 if (err) return res.send(500, err.message);
@@ -118,27 +59,6 @@ module.exports = function (app) {
             res.json({message: 'Mesa eliminada correctamente'});
         })
     };
-
-
-    //DELETE Eliminar usuario por ID
-    // EliminarUsuarioporID = function (req, res) {
-    //     console.log('DELETE usuario');
-    //     console.log(req.params.id);
-    //
-    //     Usuario.findById(req.params.id, function (err, usuario) {
-    //         usuario.remove(function (err) {
-    //             if (!err)
-    //                 console.log('Removed');
-    //             else {
-    //                 console.log('ERROR' + err);
-    //             }
-    //         })
-    //     });
-    //
-    //     res.send('Usuario borrado');
-    // };
-
-
 
     //GET Obtener todas las mesas de la colecccion mesas paginado
     ObtenerMesasP = function (req, res){
@@ -188,7 +108,6 @@ module.exports = function (app) {
             });
 
     };
-
 
     //ENDPOINTS
     app.post(   '/mesa/CrearMesa', CrearMesa);
