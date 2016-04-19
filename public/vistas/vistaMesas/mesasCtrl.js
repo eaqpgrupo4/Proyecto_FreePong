@@ -4,11 +4,11 @@
 
 'use strict';
 
-freepongApp.factory("Mesas", function ($resource, $stateParams) {
+administradorApp.factory("Mesas", function ($resource, $stateParams) {
     return $resource('mesa/ObtenerMesasPaginadas'); //la url donde queremos consumir
 });
 
-freepongApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, $stateParams, ngTableParams ) {
+administradorApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, $stateParams, ngTableParams ) {
     
 
     var params;

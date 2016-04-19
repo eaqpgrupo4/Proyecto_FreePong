@@ -1,15 +1,14 @@
 'use strict';
 var box = {};
-freepongApp.controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService', function ($state, $http, $scope, FlashService ) {
+freepongApp.controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService','$window','$cookies',function ($state, $http, $scope, FlashService,$window,$cookies) {
     $scope.userInfo = {};
-    $scope.test=true;
-    console.log("LOGINCTLR test=",$scope.test);
+
+
 
     box = $scope.userInfo;
     $scope.login = function () {
         console.log("box", box);
-        $scope.test=true;
-        console.log("22222 LOGINCTLR test=",$scope.test);
+
         $http.post('usuario/Login', box).success(function (data)
         {
             console.log(data);
@@ -17,17 +16,14 @@ freepongApp.controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService'
             if (data.loginSuccessful == true) {
                 if(data.usuario[0].login == 'admin' || data.usuario[0].password == 'admin'){
                     FlashService.Success('Login correcto', true);
-                    $state.go('admin')
+                    $window.location.href = 'administrador.html'
                 }
                 else{
-
+                    $cookies.put('login', data.usuario[0].login);
+                    $cookies.put('id', data.usuario[0]._id);
                     FlashService.Success('Login correcto', true);
 
-                    $state.go('usuario',
-                        {
-                            login: data.usuario[0].login,
-                            id: data.usuario[0]._id
-                        });
+                    $window.location.href = 'usuarioregistrado.html'
                 }
             }
             else {console.log("LOGIN error");}

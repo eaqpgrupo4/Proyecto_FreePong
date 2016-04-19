@@ -25,15 +25,8 @@
 
 </head>
 <body>
-<p>**{{test}}**</p>
-<div  ng-if="test==true">
-<span>test</span>
-</div>
-  <div>
-    <ui-view>
 
-    </ui-view>
-  </div>
+<section ui-view> </section>
 
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 
@@ -47,16 +40,12 @@
 
   <script src="app.js"></script>
 
-  <script src="vistas/vistaAdmin/adminCtrl.js"></script>
+
   <script src="vistas/vistaLogin/loginCtrl.js"></script>
   <script src="vistas/vistaRegistro/registroCtrl.js"></script>
-  <script src="vistas/vistaAdd/addCtrl.js"></script>
-  <script src="vistas/vistaPartidas/partidasCtrl.js"></script>
-  <script src="vistas/vistaCrearPartida/crearPartidaCtrl.js"></script>
-  <script src="vistas/vistaEditar/editarCtrl.js"></script>
-  <script src="vistas/vistaMesas/mesasCtrl.js"></script>
-  <script src="vistas/vistaCrearMesa/crearMesaCtrl.js"></script>
-  <script src="vistas/vistaUsuario/usuarioCtrl.js"></script>
+
+
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 
   <script src="components/version/version.js"></script>
   <script src="servicios/flash.service.js"></script>

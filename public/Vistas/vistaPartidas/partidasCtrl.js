@@ -3,10 +3,10 @@
  */
 
 'use strict';
-freepongApp.factory("Partidas", function ($resource, $stateParams) {
+administradorApp.factory("Partidas", function ($resource, $stateParams) {
     return $resource('partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
 });
-freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, $stateParams, ngTableParams ) {
+administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, $stateParams, ngTableParams ) {
 
     var params;
     var settings;
@@ -108,14 +108,7 @@ freepongApp.controller('partidasCtrl', ['$state','$http','$scope','$location','P
             customerId: $stateParams.customerId
         });
     };
-    $scope.crearPartida = function()
-    {
-        console.log(id);
-        $state.go('crearPartida',
-            {
-                id:id
-            });
-    };
+
 
 
 }]);

@@ -1,21 +1,4 @@
-<div class="page-header" ng-init="find()">
-    <h1 id="cabecera">Administrador</h1>
-    <a id="salir" type="button" class="btn btn-danger" ui-sref="login">
-        <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
-    </a>
-    <hr>
-    <h2>Lista de Mesas</h2>
-    <div class="jumbotron text-center">
-        <h1>Total Registros: <span class="label label-warning">{{mesas.length}}</span></h1>
-    </div>
-</div>
-<a type="button" class="btn btn-success" ui-sref="crearMesa">
-    <i class="glyphicon glyphicon-open"></i>&nbsp;&nbsp;Crear Mesa
-</a>
-<a style="position: relative; display: inline-block; float: right;" type="button" class="btn btn-primary" ui-sref="admin">
-    <i class="glyphicon glyphicon-triangle-left"></i>&nbsp;&nbsp;Volver
-</a>
-<br><br>
+
 <div>
     <table class="table table-hover" ng-table="tableParams" show-filter="true">
         <tr ng-repeat="mesa in $data">

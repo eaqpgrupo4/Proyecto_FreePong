@@ -1,4 +1,4 @@
-freepongApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','$location','ngTableParams','FlashService',function($stateParams,$state, $http ,$scope, $location , ngTableParams,FlashService ){
+administradorApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','$location','ngTableParams',function($stateParams,$state, $http ,$scope, $location , ngTableParams ){
 
         $scope.selected = false;
         var id = $stateParams.id;
@@ -33,14 +33,7 @@ freepongApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','
         $http.put('/usuario/ModificarUsuarioPorID/'+ id,usuario)
             .success(function (data)
             {
-                FlashService.Success('Usuario modificado correctamente', true);
-                // $state.go('admin');
-                // _.delay(function(){ $state.go('overview'); }, 1000);
-                // var i=0;
-                // while (i<8000){
-                //     console.log(i);
-                //     i++;
-                // }
+
                 swal({
                   title: "Actualización de Usuario",
                   text: "Usuario " + usuario.nombre + " " + usuario.apellidos + " actualizado correctamente",
@@ -51,7 +44,7 @@ freepongApp.controller('editarCtrl', ['$stateParams','$state','$http','$scope','
             })
             .error(function(error)
             {
-                FlashService.Error('Ha ocurrido un error en la actualización', true);
+
                 swal({
                   title: "Actualización de Usuario",
                   text: "Error al actualizar el usuario" + usuario.nombre + " " + usuario.apellidos + " ",

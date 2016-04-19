@@ -1,17 +1,19 @@
 
 'use strict';
 
-freepongApp.factory("Usuarios", function ($resource, $stateParams){
+administradorApp.factory("Usuarios", function ($resource, $stateParams){
     return $resource('usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
 });
 
-freepongApp.controller('adminCtrl', ['$state','$http','$scope','$location','Usuarios', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, $stateParams, ngTableParams ) {
+administradorApp.controller('adminusuariosCtrl', ['$state','$http','$scope','$location','Usuarios', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, $stateParams, ngTableParams ) {
 
-    // var user = $stateParams.usuario;
+    var login = $stateParams.login;
+    console.log(login);
+
     var params;
     var settings;
 
-    // console.log(user);
+
 
     params =
     {

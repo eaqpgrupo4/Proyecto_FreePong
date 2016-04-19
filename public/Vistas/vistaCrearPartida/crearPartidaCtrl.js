@@ -5,7 +5,7 @@
 'use strict';
 var box = {};
 
-freepongApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
+usuarioregistradoApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
     var id = $stateParams.id;
     console.log('crearpartida'+id);
 

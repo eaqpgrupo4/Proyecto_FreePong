@@ -17,6 +17,7 @@
     "font-awesome": "^4.5.0",
     "angular-resource": "^1.5.3",
     "angular-sweetalert": "latest",
-    "sweetalert": "^1.1.3"
+    "sweetalert": "^1.1.3",
+    "angular-cookies": "^1.5.5"
   }
 }

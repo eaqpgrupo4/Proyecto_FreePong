@@ -9,7 +9,7 @@ freepongApp.controller('registroCtrl', [ '$state', '$http', '$scope', 'FlashServ
         $http.post('/usuario/CrearUsuario', box).success(function (data)
         {
             FlashService.Success('Registro correcto', true);
-            $state.go('admin');
+            $state.go('login');
             swal({
                   title: "Usuario Creado",
                   text: "El usuario " + box.nombre + " " + box.apellidos + " se ha creado correctamente",
