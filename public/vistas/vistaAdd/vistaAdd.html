@@ -19,7 +19,7 @@
             <input type="email" name="email" key="email" id="email" class="form-control" ng-model="usuario.email" required />
             <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">El e-mail es necesario</span>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.telefono.$dirty && form.email.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': form.telefono.$dirty && form.telefono.$error.required }">
             <label for="telefono">Telefono</label>
             <input type="text" name="telefono" key="telefono" id="telefono" class="form-control" ng-model="usuario.telefono" required />
             <span ng-show="form.telefono.$dirty && form.telefono.$error.required" class="help-block">El teléfono es necesario</span>

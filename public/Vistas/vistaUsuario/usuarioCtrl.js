@@ -8,6 +8,7 @@ freepongApp.controller('usuarioCtrl', ['$stateParams','$state','$http','$scope',
 
     //Cargamos la variable login en la vista Usuario
     $scope.login = login;
+  
 
     $scope.partidas = function()
     {
