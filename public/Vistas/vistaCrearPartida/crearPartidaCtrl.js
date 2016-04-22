@@ -5,17 +5,10 @@
 'use strict';
 var box = {};
 
-usuarioregistradoApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', 'FlashService', function ( $state, $http, $scope, FlashService ) {
+usuarioregistradoApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope', '$stateParams',function ( $state, $http, $scope,$stateParams) {
     var id = $stateParams.id;
     console.log('crearpartida'+id);
 
-    $scope.demo = function(){
-        swal({
-            title: "Raul Lorenzo",
-            text: "Administrador de FreePong ®",
-            imageUrl: "images/perfil_user.png" });
-
-    };
     $scope.partida = {};
     box = $scope.partida;
     $scope.crearPartida= function () {
@@ -37,6 +30,20 @@ usuarioregistradoApp.controller('crearPartidaCtrl', [ '$state', '$http', '$scope
                   imageUrl: 'images/error.png'
             });
         })
+    };
+    $scope.uiConfig = {
+        calendar:{
+            height: 450,
+            editable: true,
+            header:{
+                left: 'month basicWeek basicDay agendaWeek agendaDay',
+                center: 'title',
+                right: 'today prev,next'
+            },
+            dayClick: $scope.alertEventOnClick,
+            eventDrop: $scope.alertOnDrop,
+            eventResize: $scope.alertOnResize
+        }
     };
 
 }]);

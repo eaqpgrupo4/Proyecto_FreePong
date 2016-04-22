@@ -1,4 +1,4 @@
-var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ui.router','ngTable','ngResource','ngCookies'])
+var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ui.calendar','ui.router','ngTable','ngResource','ngCookies'])
 
 usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -8,7 +8,7 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
 
         })
         .state('crearPartida', {
-            url: '/crearPartida',
+            url: '/crearPartida/:id',
             templateUrl: 'Vistas/vistaCrearPartida/vistaCrearPartida.html',
             controller: 'crearPartidaCtrl'
         });
