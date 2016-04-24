@@ -1,0 +1,11 @@
+<div class="container">
+    <div pickadate="" ng-model="date" min-date="minDate"></div>
+    <div class="selected-date">
+        Selected date is {{date || '(no date selected)'}}
+    </div>
+</div>
+
+<div class="fluid-control">
+    <h3>Move the slider to change the datepicker's width</h3>
+    <input id="slider" type="range" min="200" max="500" value="300"></input>
+</div>
