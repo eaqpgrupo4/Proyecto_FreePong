@@ -5,29 +5,18 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
         .state('inicio', {
             url: '/',
             templateUrl: 'usuarioregistrado.html',
-
+            controller: 'usuarioregistradoCtrl'
         })
         .state('crearPartida', {
             url: '/crearPartida/:id',
-            templateUrl: 'Vistas/vistaCrearPartida/vistaCrearPartida.html',
+            templateUrl: 'vistaCrearPartida/vistaCrearPartida.html',
             controller: 'crearPartidaCtrl'
-        });
-
-
-
-
+        })
+    .state('editar', {
+        url: '/editar/:id',
+        templateUrl: 'vistaEditar/vistaEditar.html',
+        controller: 'editarCtrl'
+    });
     $urlRouterProvider.otherwise('/');
 });
-usuarioregistradoApp.controller('loginmenu', ['$state','$http','$scope','$cookies',function($state, $http ,$scope,$cookies){
-    var login = $cookies.get('login');
-    var id = $cookies.get('id');
-    $scope.login =login;
-    $scope.crearPartida = function()
-    {
-        console.log(id);
-        $state.go('crearPartida',
-            {
-                id:id
-            });
-    };
-}]);
+
