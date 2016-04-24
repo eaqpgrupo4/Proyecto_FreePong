@@ -1,4 +1,4 @@
-var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ui.calendar','ui.router','ngTable','ngResource','ngCookies','pickadate'])
+var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ui.router','ngTable','ngResource','ngCookies','pickadate'])
 
 usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
