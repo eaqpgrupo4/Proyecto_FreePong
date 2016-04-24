@@ -7,6 +7,11 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'usuarioregistrado.html',
             controller: 'usuarioregistradoCtrl'
         })
+        .state('mesas', {
+            url: '/mesas',
+            templateUrl: 'vistaMesas/vistaMesas.html',
+            controller: 'vistaMesasCtrl'
+        })
         .state('crearPartida', {
             url: '/crearPartida/:id',
             templateUrl: 'vistaCrearPartida/vistaCrearPartida.html',
