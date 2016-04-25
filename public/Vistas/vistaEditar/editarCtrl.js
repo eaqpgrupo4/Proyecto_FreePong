@@ -37,7 +37,7 @@ administradorApp.controller('editarCtrl', ['$stateParams','$state','$http','$sco
                 swal({
                   title: "Actualización de Usuario",
                   text: "Usuario " + usuario.nombre + " " + usuario.apellidos + " actualizado correctamente",
-                  imageUrl: 'images/ok.png'
+                  imageUrl: '/images/ok.png'
                 });
 
                 $state.go('admin');
@@ -48,7 +48,7 @@ administradorApp.controller('editarCtrl', ['$stateParams','$state','$http','$sco
                 swal({
                   title: "Actualización de Usuario",
                   text: "Error al actualizar el usuario" + usuario.nombre + " " + usuario.apellidos + " ",
-                  imageUrl: 'images/error.png'
+                  imageUrl: '/images/error.png'
                 });
 
             })

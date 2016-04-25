@@ -2,7 +2,7 @@
 'use strict';
 
 administradorApp.factory("Usuarios", function ($resource, $stateParams){
-    return $resource('usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
+    return $resource('/usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
 });
 
 administradorApp.controller('adminusuariosCtrl', ['$state','$http','$scope','$location','Usuarios', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Usuarios, $stateParams, ngTableParams ) {
@@ -59,7 +59,7 @@ administradorApp.controller('adminusuariosCtrl', ['$state','$http','$scope','$lo
             {
                 if (usuario)
                 {
-                    $http.delete('usuario/EliminarUsuarioPorID/' + usuario._id)
+                    $http.delete('/usuario/EliminarUsuarioPorID/' + usuario._id)
                         .success(function (data)
                         {
 

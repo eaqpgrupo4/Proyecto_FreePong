@@ -120,7 +120,7 @@ module.exports = function (app) {
     app.post(   '/partida/CrearPartida', CrearPartida);
     app.put(    '/partida/UnirsePartida/:id', UnirsePartidaporID);
     app.get(    '/partida/ObtenerPartidas', ObtenerPartidas);
-    app.get(    '/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
+    app.get(    '/administradorAPP/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
     app.get(    '/partida/ObtenerPartidaPorID/:id', ObtenerPartidaporID);
     app.delete( '/partida/EliminarPartidaPorID/:id', EliminarPartidaporID);
 

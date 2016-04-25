@@ -24,14 +24,14 @@ administradorApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope',  fun
             swal({
                   title: "Mesa Creada",
                   text: "La mesa se ha creado correctamente",
-                  imageUrl: 'images/ok.png'
+                  imageUrl: '/images/ok.png'
             });
         }).error(function(error){
 
             swal({
                   title: "Error",
                   text: "Error al crear la mesa",
-                  imageUrl: 'images/error.png'
+                  imageUrl: '/images/error.png'
             });
         })
     };
