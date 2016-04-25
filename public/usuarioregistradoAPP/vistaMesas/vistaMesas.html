@@ -1,3 +1,7 @@
-<div>
-    vista mesas
-</div>
+
+    <ng-map zoom="11" center="barcelona,spain">
+        <marker ng-repeat='mesa in mesas'
+                position='{{mesa.localizacion}}'
+                title='{{mesa.nombre}}'
+                on-click="gotolink(event,mesa)"></marker>
+    </ng-map>

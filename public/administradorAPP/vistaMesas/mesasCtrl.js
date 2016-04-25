@@ -5,7 +5,7 @@
 'use strict';
 
 administradorApp.factory("Mesas", function ($resource, $stateParams) {
-    return $resource('mesa/ObtenerMesasPaginadas'); //la url donde queremos consumir
+    return $resource('/mesa/ObtenerMesasPaginadas'); //la url donde queremos consumir
 });
 
 administradorApp.controller('mesasCtrl', ['$state','$http','$scope','$location','Mesas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Mesas, $stateParams, ngTableParams ) {
@@ -68,7 +68,7 @@ administradorApp.controller('mesasCtrl', ['$state','$http','$scope','$location',
                 closeOnCancel: false },
             function(isConfirm){
                 if (isConfirm) {
-                    $http.delete('mesa/EliminarMesaPorID/' + id)
+                    $http.delete('/mesa/EliminarMesaPorID/' + id)
                         .success(function (data) {
                             $scope.newMesa = {};
                             swal("Eliminada", "Mesa eliminada de FreePong", "success");
