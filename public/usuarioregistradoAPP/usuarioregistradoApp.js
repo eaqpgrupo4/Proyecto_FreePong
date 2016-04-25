@@ -1,4 +1,4 @@
-var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ui.router','ngTable','ngResource','ngCookies','pickadate'])
+var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ngMap','ui.router','ngTable','ngResource','ngCookies','pickadate'])
 
 usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -6,6 +6,11 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/',
             templateUrl: 'usuarioregistrado.html',
             controller: 'usuarioregistradoCtrl'
+        })
+        .state('mesas', {
+            url: '/mesas',
+            templateUrl: 'vistaMesas/vistaMesas.html',
+            controller: 'vistaMesasCtrl'
         })
         .state('crearPartida', {
             url: '/crearPartida/:id',

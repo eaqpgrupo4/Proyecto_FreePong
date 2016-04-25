@@ -4,4 +4,6 @@ usuarioregistradoApp.controller('usuarioregistradoCtrl', ['$state','$http','$sco
     $scope.login =login;
     $scope.crearPartida = function(){$state.go('crearPartida',{id:id});};
     $scope.editar = function(){$state.go('editar',{id:id});};
+    $scope.vermesas = function(){$state.go('mesas')};
+
 }]);
