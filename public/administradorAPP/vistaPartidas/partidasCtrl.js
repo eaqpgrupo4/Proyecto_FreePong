@@ -4,7 +4,7 @@
 
 'use strict';
 administradorApp.factory("Partidas", function ($resource, $stateParams) {
-    return $resource('partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
+    return $resource('/partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
 });
 administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, $stateParams, ngTableParams ) {
 
@@ -39,7 +39,7 @@ administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$locatio
         });
 
         partida.$save(function(response) {
-            $location.path('customers/' + response._id);
+            $location.path('/customers/' + response._id);
 
             $scope.creador     = '';
             $scope.invitado    = '';
@@ -63,7 +63,7 @@ administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$locatio
                 closeOnCancel: false },
             function(isConfirm){
                 if (isConfirm) {
-                    $http.delete('partida/EliminarPartidaPorID/' + id)
+                    $http.delete('/partida/EliminarPartidaPorID/' + id)
                         .success(function (data) {
                             $scope.newPartida = {};
                             swal("Eliminada", "Partida eliminada de FreePong", "success");
@@ -85,7 +85,7 @@ administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$locatio
         var partida = $scope.partida ;
 
         partida.$update(function() {
-            $location.path('partidas/' + partida._id);
+            $location.path('/partidas/' + partida._id);
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;
         });

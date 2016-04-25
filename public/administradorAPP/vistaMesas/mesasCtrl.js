@@ -101,7 +101,7 @@ administradorApp.controller('mesasCtrl', ['$state','$http','$scope','$location',
         var mesa = $scope.mesa ;
 
         mesa.$update(function() {
-            $location.path('mesas/' + mesa._id);
+            $location.path('/mesas/' + mesa._id);
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;
         });

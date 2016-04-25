@@ -24,7 +24,7 @@ freepongApp.controller('addCtrl', [ '$state', '$http', '$scope', 'FlashService',
             swal({
                   title: "Usuario Creado",
                   text: "El usuario " + box.nombre + " " + box.apellidos + " se ha creado correctamente",
-                  imageUrl: 'images/ok.png'
+                  imageUrl: '/images/ok.png'
             });
 
         }).error(function(error){
@@ -32,7 +32,7 @@ freepongApp.controller('addCtrl', [ '$state', '$http', '$scope', 'FlashService',
             swal({
                   title: "Error",
                   text: "Error al crear el usuario" + box.nombre + " " + box.apellidos + " ",
-                  imageUrl: 'images/error.png'
+                  imageUrl: '/images/error.png'
             });
         })
     };

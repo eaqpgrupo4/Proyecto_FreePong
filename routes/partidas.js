@@ -5,9 +5,9 @@
 module.exports = function (app) {
 
     var mongoose = require('mongoose');
-    var Partida = require('../modelos/partida.js');
-    var Usuario = require('../modelos/usuario.js');
-    var Mesa = require('../modelos/mesa.js');
+    var Partida  = require('../modelos/partida.js');
+    var Usuario  = require('../modelos/usuario.js');
+    var Mesa     = require('../modelos/mesa.js');
     //GET - Obtener todas las partidas de la colecccion partidas de la BBDD
     ObtenerPartidas = function (req, res) {
         Partida.find(function (err, partidas) {
@@ -21,7 +21,7 @@ module.exports = function (app) {
     CrearPartida =  function(req, res, next){
         var partida = new Partida();
         partida.IDcreador = req.body.IDcreador;
-        partida.IDmesa =    req.body.IDmesa;
+        partida.IDmesa    = req.body.IDmesa;
 
         partida.save(function(err, partida){
             if(err){return next(err)}
@@ -71,8 +71,8 @@ module.exports = function (app) {
         console.log('post /obtenerpartidasP');
         var sort;
         var sortObject = {};
-        var count  = req.query.count || 5;
-        var page   = req.query.page || 1;
+        var count      = req.query.count || 5;
+        var page       = req.query.page || 1;
 
         var filter = {
             filters : {
@@ -87,7 +87,7 @@ module.exports = function (app) {
         };
 
         if (req.query.sorting) {
-            var sortKey = Object.keys(req.query.sorting)[0];
+            var sortKey   = Object.keys(req.query.sorting)[0];
             var sortValue = req.query.sorting[sortKey];
             sortObject[sortValue] = sortKey;
         }
@@ -120,7 +120,7 @@ module.exports = function (app) {
     app.post(   '/partida/CrearPartida', CrearPartida);
     app.put(    '/partida/UnirsePartida/:id', UnirsePartidaporID);
     app.get(    '/partida/ObtenerPartidas', ObtenerPartidas);
-    app.get(    '/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
+    app.get(    '/administradorAPP/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
     app.get(    '/partida/ObtenerPartidaPorID/:id', ObtenerPartidaporID);
     app.delete( '/partida/EliminarPartidaPorID/:id', EliminarPartidaporID);
 
