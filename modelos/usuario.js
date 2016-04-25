@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 Schema   = mongoose.Schema;
 ObjectId = Schema.ObjectId;
+
 var usuarioEsquema = new Schema({
     nombre:    	{	type: String  },
     apellidos:  {  	type: String  },
@@ -13,7 +14,7 @@ var usuarioEsquema = new Schema({
     login:   	{  	type: String  },
     password:   {  	type: String  },
     saldo:	    {  	type: Number,default: 0 },
-    created: {  	type: Date,default: Date.now},
+    created:    {  	type: Date,default: Date.now},
 });
 
 module.exports = mongoose.model('Usuario', usuarioEsquema);

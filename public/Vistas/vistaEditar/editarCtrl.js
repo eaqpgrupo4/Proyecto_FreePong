@@ -3,7 +3,7 @@ administradorApp.controller('editarCtrl', ['$stateParams','$state','$http','$sco
         $scope.selected = false;
         var id = $stateParams.id;
         console.log(id);
-         $http.get('/usuario/ObtenerUsuarioPorID/'+ id).success(function (data){
+        $http.get('/usuario/ObtenerUsuarioPorID/'+ id).success(function (data){
 
         $scope.nombre    = data.nombre;
         $scope.apellidos = data.apellidos;
