@@ -16,8 +16,8 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
       StatusBar.styleDefault();
     }
   });
-  $rootScope.authktd = false;
 
+  $rootScope.authktd = false;
     $rootScope.showLoading = function (msg) {
       $ionicLoading.show({
         // template: msg || 'Loading',
@@ -38,6 +38,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
         $rootScope.hideLoading();
       }, 3000);
     };
+
     $rootScope.toast2 = function (msg) {
       $rootScope.showLoading(msg);
       $timeout(function () {
@@ -45,7 +46,9 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
       }, 1000);
     };
 
-  }).factory('API', ['$http', function ($http) {
+  })
+
+.factory('API', ['$http', function ($http) {
 
     var _api = {
 
@@ -74,7 +77,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
         return $http.post(_base + '/usuario/Login/', user);
       },
       signup: function (user) {
-        return $http.post(_base + '/user', user);
+        return $http.post(_base + '/usuario/CrearUsuario', user);
       },
 
     };
@@ -90,6 +93,58 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 })
+
+.controller('LoginController', ['$rootScope', '$state', '$scope', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, api, $http, $ionicModal, $ionicHistory) {
+
+  $scope.login = {
+      username: '',
+      password: ''
+  }
+
+  $scope.loginUser = function () {
+      $ionicHistory.clearCache();
+      $ionicHistory.clearHistory()
+      if (($scope.login.username == '') && ($scope.login.password == '')) {
+        $rootScope.toast('Campo username y password vacíos');
+      }
+      else if ($scope.login.username == '') {
+        $rootScope.toast('Campo username vacío');
+      }
+      else if ($scope.login.password == '') {
+        $rootScope.toast('Campo password vacío');
+      }
+      else {
+        var usuario = {};
+        $rootScope.showLoading("Autenticando..");
+        api.login($scope.login).success(function (data) {
+          window.localStorage['idlogin'] = data.usuario[0]._id;
+          window.localStorage['username'] = data.usuario[0].login;
+          window.localStorage['saldo'] = data.usuario[0].saldo;
+          window.localStorage['nombre'] = data.usuario[0].nombre;
+          window.localStorage['apellidos'] = data.usuario[0].apellidos;
+          window.localStorage['email'] = data.usuario[0].email;
+          window.localStorage['telefono'] = data.usuario[0].telefono;
+          usuario.id = data.usuario[0]._id;
+          usuario.nombre = data.usuario[0].nombre;
+          usuario.apellidos = data.usuario[0].apellidos;
+          usuario.login = data.usuario[0].login;
+          usuario.email = data.usuario[0].email;
+          usuario.telefono = data.usuario[0].telefono;
+          usuario.saldo = data.usuario[0].saldo;
+          socket.emit('newUser', usuario, function (data) {
+
+          });
+
+          $state.go("freepong");
+          $rootScope.hideLoading();
+        }).error(function (data) {
+          $rootScope.hideLoading();
+          $rootScope.toast('Usuario o password incorrecto');
+        })
+      }
+    }
+
+}])
 
 .controller('UsuariosController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
 	
