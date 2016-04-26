@@ -40,31 +40,13 @@ module.exports = function (app) {
 
     //PUT Añadir usuario invitado a una partida creada ID
     UnirsePartidaporID = function (req, res) {
-
         console.log('Put/UnirsePartida/'+ req.body.IDinvitado)
-
         Partida.findById(req.params.id, function (err, partida)
         {
+            var hora= req.body.horario;
             console.log(partida);
-            switch(req.body.horario)
-            {
-                case"P1":
-                {
-                    partida.P1.invitado._id= req.body.IDinvitado;
-                    partida.P1.invitado.login= req.body.login;
-                    break;
-                }
-
-                case"P2":
-                {
-                    partida.P2.invitado._id= req.body.IDinvitado;
-                    partida.P2.invitado.login= req.body.login;
-                    break;
-                }
-                default:
-                    console.log("Error , ninguna hora seleccionada");
-            }
-
+            eval('partida.'+ hora +'.invitado._id = req.body.IDinvitado;');
+            eval('partida.'+ hora +'.invitado.login = req.body.login;');
             partida.save(function (err) {
                 if (err) return res.send(500, err.message);
                 res.status(200).jsonp(partida);
@@ -72,24 +54,14 @@ module.exports = function (app) {
         });
     };
     AsignarHoraPartidaporID = function (req, res) {
-        var user= new Object();
-        user._id= req.body.IDcreador;
-        user.login= req.body.login;
+        var hora= req.body.horario;
         console.log('Put/AsignarHoraPartidaporID')
-        Partida.findById(req.params.id, function (err, partida) {
-            switch(req.body.horario)
+        Partida.findById(req.params.id, function (err, partida)
+        {
+            eval('partida.'+ hora +'.creador._id = req.body.IDcreador;');
+            eval('partida.'+ hora +'.creador.login = req.body.login;');
+            partida.save(function (err)
             {
-                case"P1": {partida.P1.creador._id= req.body.IDcreador;
-                    partida.P1.creador.login= req.body.login;
-                    break;}
-                case"P2": {partida.P2.creador._id= req.body.IDcreador;
-                    partida.P2.creador.login= req.body.login;
-                    break;}
-                default:
-                    console.log("Error , ninguna hora seleccionada");
-            }
-
-            partida.save(function (err) {
                 if (err) return res.send(500, err.message);
                 res.status(200).jsonp(partida);
             });

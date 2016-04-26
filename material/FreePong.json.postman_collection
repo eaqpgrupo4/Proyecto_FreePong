@@ -13,7 +13,8 @@
 		"a49a1ad7-abf7-ca0d-c4cb-7ef5067ed04a",
 		"142d605a-f464-9095-3dea-7709e16a46bf",
 		"16e39dad-d833-e2ed-5c26-b6ecbc13ad4c",
-		"b1edab46-d2e2-904d-7bab-10437896b965"
+		"b1edab46-d2e2-904d-7bab-10437896b965",
+		"36ffb523-03b4-f3a2-ef38-0ff6f1a8f91c"
 	],
 	"folders": [],
 	"timestamp": 1458349873109,
@@ -62,7 +63,7 @@
 		{
 			"id": "16e39dad-d833-e2ed-5c26-b6ecbc13ad4c",
 			"headers": "Content-Type: application/json\n",
-			"url": "http://localhost:3000/partida/UnirsePartida/570fabfa28559da802e98217",
+			"url": "http://localhost:3000/partida/UnirsePartida/571f41f637a75e041588c391",
 			"preRequestScript": null,
 			"pathVariables": {},
 			"method": "PUT",
@@ -72,12 +73,32 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1460645996515,
+			"time": 1461668304888,
 			"name": "Unirse a partida creada",
 			"description": "",
 			"collectionId": "0ab4fd50-42d7-52fb-d9fa-e18cb812d919",
 			"responses": [],
-			"rawModeData": "{\n    \"IDinvitado\":\"570f9f8728559da802e98213\"\n}"
+			"rawModeData": "{\n    \"IDinvitado\":\"571ae4c5eb9fafdc13f8861e\",\n    \"login\":\"silvia\",\n    \"horario\":\"P1\"\n}"
+		},
+		{
+			"id": "36ffb523-03b4-f3a2-ef38-0ff6f1a8f91c",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:3000/partida/AsignarHoraPartidaporID/571f4a5cdcd7df501405b594",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1461668493358,
+			"name": "Crear nueva partida en una franja horaria de una  partida creada",
+			"description": "",
+			"collectionId": "0ab4fd50-42d7-52fb-d9fa-e18cb812d919",
+			"responses": [],
+			"rawModeData": "{\n    \"IDcreador\":\"571ae4c5eb9fafdc13f8861e\",\n    \"login\":\"silvia\",\n    \"horario\":\"P2\"\n}"
 		},
 		{
 			"id": "47a4d456-3a44-05cc-94b2-f7a1a3caff27",
@@ -167,12 +188,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1460645891693,
+			"time": 1461668467738,
 			"name": "Crear partida",
 			"description": "",
 			"collectionId": "0ab4fd50-42d7-52fb-d9fa-e18cb812d919",
 			"responses": [],
-			"rawModeData": "{\n    \"IDcreador\":\"570f9f8728559da802e98213\",\n    \"IDmesa\":\"570f9fcb28559da802e98215\"\n}"
+			"rawModeData": "{\n    \n    \"IDmesa\":\"571f2ae3b3bfefd8164be952\",\n    \"FechaPartida\":\"<2016-04-27>\",\n    \"P1\":{\n            \"creador\":\n            {\n                \"_id\":\"571615b33e37c8f014233aec\",\"login\":\"jesus\"\n                \n            },\n            \"invitado\":\n            {\n                \"_id\":null,\"login\":null\n                \n            }\n            \n        },\n        \"P2\":{\n            \"creador\":\n            {\n                \"_id\":null,\"login\":null\n                \n            },\n            \"invitado\":\n            {\n                \"_id\":null,\"login\":null\n                \n            }\n            \n        }\n}"
 		},
 		{
 			"id": "b1edab46-d2e2-904d-7bab-10437896b965",
