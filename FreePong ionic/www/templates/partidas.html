@@ -5,7 +5,7 @@
   <ion-content class="has-header">
 	<div>
 	  <label class="item item-input">
-		<span class="input-label">Filter:</span>
+		<span class="input-label">Buscar Partida:</span>
 		<input type="text" ng-model="searchText">
 	  </label>
 	</div>
@@ -15,6 +15,16 @@
         <p>{{partida.IDinvitado}}</p>
         <p>{{partida.IDmesa}}</p>
         <p>{{partida.created | date:'mediumDate'}}</p>
+        <br>
+        <button class="button button-small button-assertive" ng-click="deletePartida(partida._id)">
+          Eliminar
+        </button>
+        <button class="button button-small button-positive" ng-click="verPartida(partida._id)">
+          &nbsp;&nbsp;&nbsp;Perfil&nbsp;&nbsp;&nbsp;
+        </button>
+        <button class="button button-small button-balanced">
+          &nbsp;&nbsp;Editar&nbsp;&nbsp;
+        </button>
       </ion-item>
     </ion-list>
   </ion-content>

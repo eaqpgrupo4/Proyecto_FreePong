@@ -4,9 +4,10 @@
 // 'meetabroad' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'meetabroad.controllers' is found in controllers.js
-angular.module('freepong', ['ionic', 'freepong.controllers'])
+var _base = "http://localhost:3000";
+angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $location, $timeout) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,58 +21,116 @@ angular.module('freepong', ['ionic', 'freepong.controllers'])
       StatusBar.styleDefault();
     }
   });
+  $rootScope.authktd = false;
+
+    $rootScope.showLoading = function (msg) {
+      $ionicLoading.show({
+        template: msg || 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+    }
+
+    $rootScope.hideLoading = function () {
+      $ionicLoading.hide();
+    };
+
+    $rootScope.toast = function (msg) {
+      $rootScope.showLoading(msg);
+      $timeout(function () {
+        $rootScope.hideLoading();
+      }, 2999);
+    };
+    $rootScope.toast2 = function (msg) {
+      $rootScope.showLoading(msg);
+      $timeout(function () {
+        $rootScope.hideLoading();
+      }, 1000);
+    };
+
+  }).factory('API', ['$http', function ($http) {
+
+
+    var _api = {
+
+    	//GET GROUP
+    	getUsuarios: function () {
+	        return $http.get(_base + '/usuario/ObtenerUsuarios/');
+	    },
+	    getUsuario: function (id) {
+	    	console.log(id);
+	        return $http.get(_base + '/usuario/ObtenerUsuarioPorID/' + id);
+	    },
+	    getPartidas: function () {
+	        return $http.get(_base + '/partida/ObtenerPartidas');
+	    },
+
+	    //DELETE GROUP
+	    deleteUsuario: function (id) {
+	        return $http.delete(_base + '/usuario/EliminarUsuarioPorID/' + id);
+	    },
+	    deleteUsuario: function (id) {
+	        return $http.delete(_base + '/usuario/EliminarUsuarioPorID/' + id);
+	    },
+
+    };
+    return _api;
+}])
+
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $state) {
+
+  // With the new view caching in Ionic, Controllers are only called
+  // when they are recreated or on app start, instead of every page change.
+  // To listen for when this page is active (for example, to refresh data),
+  // listen for the $ionicView.enter event:
+  //$scope.$on('$ionicView.enter', function(e) {
+  //});
 })
 
-.factory('ApiData', function() {
-  return {
-      url : 'http://localhost:3000'
-  };
-})
+.controller('UsuariosController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
+	
+	api.getUsuarios().success(function (data) {
+			$rootScope.toast2('Cargando usuarios...');
+			$scope.usuarios = data;
+		}).error(function(data){
+	})
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+	$scope.deleteUser = function(id){
+		$rootScope.toast2('Borrando usuario...');
+		$http.delete(_base+'/usuario/EliminarUsuarioPorID/' + id)
+		$state.go("freepong.usuarios", {}, { reload: true });
+	};
 
-    .state('app', {
-		url: '/app',
-		abstract: true,
-		templateUrl: 'templates/menu.html',
-		controller: 'AppCtrl'
+	$scope.vistaPerfil = function(id){
+		console.log(id);
+		$state.go('freepong.perfil', {
+        	id: id
+      	})
+		
+	};
+
+
+}])
+
+.controller('PartidasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
+	api.getPartidas().success(function (data) {
+			$rootScope.toast2('Cargando partidas...');
+			$scope.partidas = data;
+		}).error(function(data){
 	})
-	.state('app.perfil', {
-      url: '/perfil',
-		views: {
-		'menuContent': {
-			templateUrl: 'templates/perfil.html',
-			controller: 'PerfilController'
-			}
-		}
+
+	
+}])
+
+.controller('PerfilController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
+	var id = $stateParams.id;
+	api.getUsuario(id).success(function (data) {
+			$rootScope.toast2('Cargando perfil...');
+			$scope.usuario = data;
+		}).error(function(data){
 	})
-	.state('app.search', {
-		url: '/search',
-		views: {
-			'menuContent': {
-			 templateUrl: 'templates/search.html'
-			}
-		}
-	})
-    .state('app.usuarios', {
-		url: '/usuarios',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/usuarios.html',
-          controller: 'UsuariosController'
-        }
-      }
-    })
-	.state('app.partidas', {
-		url: '/partidas',
-		views: {
-		'menuContent': {
-			templateUrl: 'templates/partidas.html',
-			controller: 'PartidasController'
-			}
-		}
-	});
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/usuarios');
-});
+}]);
+
+
