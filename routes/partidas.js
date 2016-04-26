@@ -18,12 +18,10 @@ module.exports = function (app) {
         });
     };
 
-    CrearPartida =  function(req, res, next){
-        var partida = new Partida();
-        partida.IDcreador = req.body.IDcreador;
-        partida.IDmesa    = req.body.IDmesa;
-
-        partida.save(function(err, partida){
+    CrearPartida =  function(req, res, next)
+    {
+        var partida = new Partida(req.body);
+               partida.save(function(err, partida){
             if(err){return next(err)}
             res.json(partida);
             console.log('POST /creador/' + req.body.creador);
@@ -42,12 +40,30 @@ module.exports = function (app) {
 
     //PUT Añadir usuario invitado a una partida creada ID
     UnirsePartidaporID = function (req, res) {
-        console.log('Put/UnirsePartida')
-        Partida.findById(req.params.id, function (err, partida) {
 
-            console.log(req.body);
+        console.log('Put/UnirsePartida/'+ req.body.IDinvitado)
 
-            partida.IDinvitado  =  req.body.IDinvitado;
+        Partida.findById(req.params.id, function (err, partida)
+        {
+            console.log(partida);
+            switch(req.body.horario)
+            {
+                case"P1":
+                {
+                    partida.P1.invitado._id= req.body.IDinvitado;
+                    partida.P1.invitado.login= req.body.login;
+                    break;
+                }
+
+                case"P2":
+                {
+                    partida.P2.invitado._id= req.body.IDinvitado;
+                    partida.P2.invitado.login= req.body.login;
+                    break;
+                }
+                default:
+                    console.log("Error , ninguna hora seleccionada");
+            }
 
             partida.save(function (err) {
                 if (err) return res.send(500, err.message);
@@ -55,6 +71,30 @@ module.exports = function (app) {
             });
         });
     };
+    AsignarHoraPartidaporID = function (req, res) {
+        var user= new Object();
+        user._id= req.body.IDcreador;
+        user.login= req.body.login;
+        console.log('Put/AsignarHoraPartidaporID')
+        Partida.findById(req.params.id, function (err, partida) {
+            switch(req.body.horario)
+            {
+                case"P1": {partida.P1.creador._id= req.body.IDcreador;
+                    partida.P1.creador.login= req.body.login;
+                    break;}
+                case"P2": {partida.P2.creador._id= req.body.IDcreador;
+                    partida.P2.creador.login= req.body.login;
+                    break;}
+                default:
+                    console.log("Error , ninguna hora seleccionada");
+            }
+
+            partida.save(function (err) {
+                if (err) return res.send(500, err.message);
+                res.status(200).jsonp(partida);
+            });
+        });
+    }
 
     //DELETE - Eliminar partida v2
     EliminarPartidaporID = function(req, res){
@@ -119,6 +159,7 @@ module.exports = function (app) {
     //ENDPOINTS
     app.post(   '/partida/CrearPartida', CrearPartida);
     app.put(    '/partida/UnirsePartida/:id', UnirsePartidaporID);
+    app.put(    '/partida/AsignarHoraPartidaporID/:id', AsignarHoraPartidaporID);
     app.get(    '/partida/ObtenerPartidas', ObtenerPartidas);
     app.get(    '/administradorAPP/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
     app.get(    '/partida/ObtenerPartidaPorID/:id', ObtenerPartidaporID);
