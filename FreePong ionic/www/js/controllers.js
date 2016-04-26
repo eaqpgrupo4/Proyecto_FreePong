@@ -7,3 +7,7 @@ angular.module('freepong.controllers', [])
 .controller('PartidasController', function($scope) {})
 
 .controller('PerfilController', function($scope) {})
+
+.controller('loginController', function($scope) {})
+
+.controller('registroController', function($scope) {})

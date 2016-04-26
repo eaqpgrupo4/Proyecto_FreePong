@@ -20,7 +20,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
     $rootScope.showLoading = function (msg) {
       $ionicLoading.show({
-        template: msg || 'Loading',
+        // template: msg || 'Loading',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
@@ -36,7 +36,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
       $rootScope.showLoading(msg);
       $timeout(function () {
         $rootScope.hideLoading();
-      }, 2999);
+      }, 3000);
     };
     $rootScope.toast2 = function (msg) {
       $rootScope.showLoading(msg);
