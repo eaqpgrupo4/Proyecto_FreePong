@@ -1,9 +1,4 @@
 
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'meetabroad' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'meetabroad.controllers' is found in controllers.js
 var _base = "http://localhost:3000";
 angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
@@ -52,7 +47,6 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
   }).factory('API', ['$http', function ($http) {
 
-
     var _api = {
 
     	//GET GROUP
@@ -74,6 +68,14 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 	    deleteUsuario: function (id) {
 	        return $http.delete(_base + '/usuario/EliminarUsuarioPorID/' + id);
 	    },
+
+      //LOG IN & SIGN UP
+      login: function (user) {
+        return $http.post(_base + '/user/login', user);
+      },
+      signup: function (user) {
+        return $http.post(_base + '/user', user);
+      },
 
     };
     return _api;
@@ -125,10 +127,19 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 }])
 
 .controller('PerfilController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
-	var id = $stateParams.id;
+	var id = window.localStorage['idlogin'];
+  var id = $stateParams.id;
 	api.getUsuario(id).success(function (data) {
 			$rootScope.toast2('Cargando perfil...');
 			$scope.usuario = data;
+      // $rootScope.toast2('Cargando perfil...');
+      // $scope.nombre = data.nombre;
+      // $scope.apellidos = data.apellidos;
+      // $scope.email = data.email;
+      // $scope.telefono = data.telefono;
+      // $scope.login = data.login;
+      // $scope.password = data.password;
+      // $scope.saldo = data.saldo;
 		}).error(function(data){
 	})
 }]);
