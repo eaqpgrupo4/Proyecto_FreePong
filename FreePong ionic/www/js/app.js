@@ -71,7 +71,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
       //LOG IN & SIGN UP
       login: function (user) {
-        return $http.post(_base + '/user/login', user);
+        return $http.post(_base + '/usuario/Login/', user);
       },
       signup: function (user) {
         return $http.post(_base + '/user', user);
@@ -109,11 +109,8 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 		console.log(id);
 		$state.go('freepong.perfil', {
         	id: id
-      	})
-		
+    })
 	};
-
-
 }])
 
 .controller('PartidasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
@@ -121,13 +118,11 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 			$rootScope.toast2('Cargando partidas...');
 			$scope.partidas = data;
 		}).error(function(data){
-	})
-
-	
+	})	
 }])
 
 .controller('PerfilController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
-	var id = window.localStorage['idlogin'];
+	var idlogin = window.localStorage['idlogin'];
   var id = $stateParams.id;
 	api.getUsuario(id).success(function (data) {
 			$rootScope.toast2('Cargando perfil...');

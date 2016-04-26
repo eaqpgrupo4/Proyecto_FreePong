@@ -14,20 +14,20 @@ angular.module('freepong.routes', [])
       templateUrl: 'templates/menu.html',
       controller: 'AppCtrl'
     })
-    .state('freepong.perfil', {
-        url: '/perfil',
-      views: {
-      'menuContent': {
-        templateUrl: 'templates/perfil.html',
-        controller: 'PerfilController'
-        }
-      }
-    })
     .state('freepong.search', {
       url: '/search',
       views: {
         'menuContent': {
          templateUrl: 'templates/search.html'
+        }
+      }
+    })
+    .state('freepong.perfil', {
+      url: '/perfil',
+      views: {
+      'menuContent': {
+        templateUrl: 'templates/perfil.html',
+        controller: 'PerfilController'
         }
       }
     })
@@ -49,8 +49,6 @@ angular.module('freepong.routes', [])
         }
       }
     });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/freepong/usuarios');
-
-    
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/freepong/usuarios');
 });
