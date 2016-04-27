@@ -9,17 +9,16 @@ module.exports = function (app) {
     var Usuario  = require('../modelos/usuario.js');
     var Mesa     = require('../modelos/mesa.js');
     //GET - Obtener todas las partidas de la colecccion partidas de la BBDD
-    ObtenerPartidas = function (req, res) {
-        Partida.find(function (err, partidas) {
+    ObtenerPartidas = function (req, res){
+        Partida.find(function (err, partidas)
+        {
             if (err) res.send(500, err.message);
-
             console.log('GET /partidas')
             res.status(200).jsonp(partidas);
         });
     };
 
-    CrearPartida =  function(req, res, next)
-    {
+    CrearPartida =  function(req, res, next){
         var partida = new Partida(req.body);
                partida.save(function(err, partida){
             if(err){return next(err)}
@@ -29,8 +28,9 @@ module.exports = function (app) {
     };
     //GET - Obtner partida a partir de el ID
 
-    ObtenerPartidaporID = function (req, res) {
-        Partida.findById(req.params.id, function (err, partida) {
+    ObtenerPartidaporID = function (req, res){
+        Partida.findById(req.params.id, function (err, partida)
+        {
             if (err) return res.send(500, err.message);
 
             console.log('GET /partida/' + req.params.id);
@@ -39,21 +39,23 @@ module.exports = function (app) {
     };
 
     //PUT Añadir usuario invitado a una partida creada ID
-    UnirsePartidaporID = function (req, res) {
+    UnirsePartidaporID = function (req, res){
+        var hora= req.body.horario;
         console.log('Put/UnirsePartida/'+ req.body.IDinvitado)
         Partida.findById(req.params.id, function (err, partida)
         {
-            var hora= req.body.horario;
             console.log(partida);
             eval('partida.'+ hora +'.invitado._id = req.body.IDinvitado;');
             eval('partida.'+ hora +'.invitado.login = req.body.login;');
-            partida.save(function (err) {
+            partida.save(function (err)
+            {
                 if (err) return res.send(500, err.message);
                 res.status(200).jsonp(partida);
             });
         });
     };
-    AsignarHoraPartidaporID = function (req, res) {
+
+    AsignarHoraPartidaporID = function (req, res){
         var hora= req.body.horario;
         console.log('Put/AsignarHoraPartidaporID')
         Partida.findById(req.params.id, function (err, partida)
@@ -66,8 +68,7 @@ module.exports = function (app) {
                 res.status(200).jsonp(partida);
             });
         });
-    }
-
+    };
     //DELETE - Eliminar partida v2
     EliminarPartidaporID = function(req, res){
         console.log('DELETE partida');
@@ -127,14 +128,24 @@ module.exports = function (app) {
 
     };
 
+    ObtenerPartidaPorFechaymesa = function (req, res)
+    {
+        console.log('GET/ObtenerPartidaPorFechaymesa'+ req.params.fechapartida + req.params.IDmesa);
+        Partida.find({FechaPartida: req.params.fechapartida,IDmesa: req.params.IDmesa}, function(err, partida)
+        {
+            if (err) return res.send(500, err.message);
+            res.status(200).jsonp(partida);
+        });
+    };
 
     //ENDPOINTS
     app.post(   '/partida/CrearPartida', CrearPartida);
     app.put(    '/partida/UnirsePartida/:id', UnirsePartidaporID);
     app.put(    '/partida/AsignarHoraPartidaporID/:id', AsignarHoraPartidaporID);
     app.get(    '/partida/ObtenerPartidas', ObtenerPartidas);
-    app.get(    '/administradorAPP/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
+    app.get(    '/partida/ObtenerPartidasPaginadas', ObtenerPartidasP);
     app.get(    '/partida/ObtenerPartidaPorID/:id', ObtenerPartidaporID);
+    app.get(    '/partida/ObtenerPartidaPorFechaymesa/:IDmesa/:fechapartida', ObtenerPartidaPorFechaymesa);
     app.delete( '/partida/EliminarPartidaPorID/:id', EliminarPartidaporID);
 
 }

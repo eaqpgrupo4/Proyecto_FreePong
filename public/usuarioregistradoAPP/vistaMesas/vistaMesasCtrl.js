@@ -1,18 +1,31 @@
 
-usuarioregistradoApp.controller('vistaMesasCtrl',['$scope','$http',function($scope,$http) {
+usuarioregistradoApp.controller('vistaMesasCtrl',['$scope','$http','NgMap',function($scope,$http,NgMap)
+{
+    var vm = this;
 
-    $http.get('/mesa/ObtenerMesas').success(function (data)
+    NgMap.getMap().then(function(map)
     {
-        var mesas= data;
-        console.log(mesas);
-        $scope.mesas= mesas;
-        $scope.gotolink= function(event,i)
+        $http.get('/mesa/ObtenerMesas').success(function (data)
         {
-            alert('has seleccionado la mesa: '+ i.nombre);
+            var mesas= data;
+            vm.mesas= mesas;
+            console.log(map);
+        });
+        vm.showCustomMarker= function(event,nombre)
+        {
+            console.log(nombre);
+            map.customMarkers[nombre].setVisible(true);
+            map.customMarkers[nombre].setPosition(this.getPosition());
         };
+        vm.closeCustomMarker= function(evt)
+        {
+            this.style.display = 'none';
+        };
+        vm.horarios = function(event,id){
+            console.log(id);
+            $state.go('crearPartida',{id:id});
 
+        }
     });
-
-
 
     }]);
