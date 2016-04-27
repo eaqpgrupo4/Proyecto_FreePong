@@ -73,11 +73,11 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 	    },
 
       //LOG IN & SIGN UP
-      login: function (user) {
-        return $http.post(_base + '/usuario/Login/', user);
+      login: function (usuario) {
+        return $http.post(_base + '/usuario/Login/', usuario);
       },
-      signup: function (user) {
-        return $http.post(_base + '/usuario/CrearUsuario', user);
+      signup: function (usuario) {
+        return $http.post(_base + '/usuario/CrearUsuario', usuario);
       },
 
     };
@@ -147,6 +147,49 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
       }
     }
 
+    $scope.register = function () {
+      $state.go('freepong.registro');
+    }
+
+}])
+
+.controller('registroController', ['$rootScope', '$state', '$scope', 'API', '$http', function ($rootScope, $state, $scope, api, $http) {
+
+    var nombre;
+    var apellidos;
+    var login;
+    var telefono;
+    var saldo;
+    var password;
+    var email;
+    var saldo;
+
+    // $scope.usuario = {
+    //       nombre: '',
+    //       apellidos: '',
+    //       email: '',
+    //       telefono: '',
+    //       login: '',
+    //       password: '',
+    //       saldo: ''
+    // }
+
+    $scope.usuario = {}
+
+    $scope.registerUser = function () {
+      $rootScope.hideLoading();
+      api.signup($scope.usuario).success(function (data) {
+        $rootScope.toast('Registrándote en FreePong...');
+        console.log(data);
+        console.log(data);
+        $state.go('freepong.usuarios');
+        $scope.usuario = {}
+      }).error(function (data) {
+        $rootScope.hideLoading();
+        $rootScope.toast('El usuario ya existe');
+        $scope.usuario = {}
+      })
+    }
 }])
 
 .controller('UsuariosController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
