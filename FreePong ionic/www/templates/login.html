@@ -1,27 +1,23 @@
-<ion-view view-title="Login">
-    <ion-content class="padding has-header">
-        <div class="bar bar-subheader">
-            <div class="list card padding">
-                <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" ng-model="log.login">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="password" ng-model="log.password">
-                </label>
-                <button ng-click="loginUser()" class="button button-block button-positive activated">
-                  Login
-                </button>
-            </div>
-            <div class="list" style="text-align:center">
-                <button ng-click="register()" class="button button-small button-outline icon-left ion-person-add button-positive">
-                  Create New Account
-                </button>
-                <button class="button button-calm button-block  icon ion-social-twitter" ng-click="twitterLogin()">
-                  Inicia sesión vía Twitter
-                </button>
-            </div>
-        </div>
-    </ion-content>
+<ion-view view-title="Login" name="login-view">
+  <ion-content class="padding">
+    <div class="list list-inset">
+     <div>
+         <img src="img/u54PfleQ5qGqiDrcUQqN_Ping_Pong.png" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+     </div>
+
+      <label class="item item-input">
+        <input type="text" placeholder="Username" ng-model="usuario.login">
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="Password" ng-model="usuario.password">
+      </label>
+    </div>
+    <button class="button button-stable  button-block" ng-click="login()">Login</button>
+     
+    <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+<br>
+<br>
+<br>
+    <button id="login-button3" style="font-weight:600;font-style:italic;font-size:-6px;border-radius:-7px -7px -7px -7px;" class="button button-positive  button-block icon-right ion-social-facebook">Conectate con</button>
+  </ion-content>
 </ion-view>
