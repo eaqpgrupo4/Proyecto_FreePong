@@ -20,7 +20,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
   $rootScope.authktd = false;
     $rootScope.showLoading = function (msg) {
       $ionicLoading.show({
-        // template: msg || 'Loading',
+        template: msg || 'Loading',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
@@ -96,46 +96,49 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
 .controller('LoginController', ['$rootScope', '$state', '$scope', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, api, $http, $ionicModal, $ionicHistory) {
 
-  $scope.login = {
-      username: '',
+  $scope.log = {
+      login: '',
       password: ''
   }
 
   $scope.loginUser = function () {
       $ionicHistory.clearCache();
       $ionicHistory.clearHistory()
-      if (($scope.login.username == '') && ($scope.login.password == '')) {
+      if (($scope.log.login == '') && ($scope.log.password == '')) {
         $rootScope.toast('Campo username y password vacíos');
       }
-      else if ($scope.login.username == '') {
+      else if ($scope.log.login == '') {
         $rootScope.toast('Campo username vacío');
       }
-      else if ($scope.login.password == '') {
+      else if ($scope.log.password == '') {
         $rootScope.toast('Campo password vacío');
       }
       else {
         var usuario = {};
         $rootScope.showLoading("Autenticando..");
-        api.login($scope.login).success(function (data) {
-          window.localStorage['idlogin'] = data.usuario[0]._id;
-          window.localStorage['username'] = data.usuario[0].login;
-          window.localStorage['saldo'] = data.usuario[0].saldo;
-          window.localStorage['nombre'] = data.usuario[0].nombre;
-          window.localStorage['apellidos'] = data.usuario[0].apellidos;
-          window.localStorage['email'] = data.usuario[0].email;
-          window.localStorage['telefono'] = data.usuario[0].telefono;
-          usuario.id = data.usuario[0]._id;
-          usuario.nombre = data.usuario[0].nombre;
-          usuario.apellidos = data.usuario[0].apellidos;
-          usuario.login = data.usuario[0].login;
-          usuario.email = data.usuario[0].email;
-          usuario.telefono = data.usuario[0].telefono;
-          usuario.saldo = data.usuario[0].saldo;
-          socket.emit('newUser', usuario, function (data) {
 
-          });
+        api.login($scope.log).success(function (data) {
+            window.localStorage['iduser'] = data.usuario[0]._id;
+            window.localStorage['username'] = data.usuario[0].login;
+            window.localStorage['saldo'] = data.usuario[0].saldo;
+            window.localStorage['nombre'] = data.usuario[0].nombre;
+            window.localStorage['apellidos'] = data.usuario[0].apellidos;
+            window.localStorage['email'] = data.usuario[0].email;
+            window.localStorage['telefono'] = data.usuario[0].telefono;
+            
+            usuario.id = data.usuario[0]._id;
+            usuario.nombre = data.usuario[0].nombre;
+            usuario.apellidos = data.usuario[0].apellidos;
+            usuario.login = data.usuario[0].login;
+            usuario.email = data.usuario[0].email;
+            usuario.telefono = data.usuario[0].telefono;
+            usuario.saldo = data.usuario[0].saldo;
+          // socket.emit('newUser', usuario, function (data) {
 
-          $state.go("freepong");
+          // });
+
+
+          $state.go('freepong.usuarios');
           $rootScope.hideLoading();
         }).error(function (data) {
           $rootScope.hideLoading();

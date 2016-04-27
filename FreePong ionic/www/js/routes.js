@@ -83,5 +83,5 @@ angular.module('freepong.routes', [])
       }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/freepong/usuarios');
+    $urlRouterProvider.otherwise('/freepong/login');
 });
