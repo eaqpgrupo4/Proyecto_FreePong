@@ -93,7 +93,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 })
-
+/*
 .controller('LoginController', ['$rootScope', '$state', '$scope', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, api, $http, $ionicModal, $ionicHistory) {
 
   $scope.log = {
@@ -151,7 +151,26 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
       $state.go('freepong.registro');
     }
 
-}])
+}])*/
+
+.controller('LoginController',function($scope,$http,$state){
+  console.log("DENTRO DE login");
+  $scope.usuario={};
+  $scope.login = function () {
+    //console.log($scope.user);
+    console.log($scope.usuario);
+    $http.post(_base+'/usuario/Login', $scope.usuario).then(function (response) {
+      console.log(response);
+      //$cookies.putObject('user', response);
+      $state.go('freepong.usuarios');
+    },
+    function(error){
+      alert("ERROR");
+    })
+  }
+
+
+})
 
 .controller('registroController', ['$rootScope', '$state', '$scope', 'API', '$http', function ($rootScope, $state, $scope, api, $http) {
 
