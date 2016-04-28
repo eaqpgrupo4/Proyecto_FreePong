@@ -35,7 +35,7 @@ angular.module('freepong.routes', [])
       views: {
         'menuContent': {
          templateUrl: 'templates/registro.html',
-         controller: 'registroController'
+         controller: 'RegistroController'
         }
       }
     })

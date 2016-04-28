@@ -155,9 +155,24 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
 .controller('LoginController',function($scope,$http,$state){
   console.log("DENTRO DE login");
+
   $scope.usuario={};
   $scope.login = function () {
-    //console.log($scope.user);
+    console.log($scope.user);
+/*
+if (($scope.usuario.login == '') && ($scope.usuario.password == '')) {
+        $rootScope.toast('Campo username y password vacíos');
+      }
+      else if ($scope.usuario.login == '') {
+        $rootScope.toast('Campo username vacío');
+      }
+      else if ($scope.usuario.password == '') {
+        $rootScope.toast('Campo password vacío');
+      }
+      else {
+        var usuario = {};
+        $rootScope.showLoading("Autenticando..");*/
+
     console.log($scope.usuario);
     $http.post(_base+'/usuario/Login', $scope.usuario).then(function (response) {
       console.log(response);
@@ -172,7 +187,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
 })
 
-.controller('registroController', ['$rootScope', '$state', '$scope', 'API', '$http', function ($rootScope, $state, $scope, api, $http) {
+.controller('RegistroController', ['$rootScope', '$state', '$scope', 'API', '$http', function ($rootScope, $state, $scope, api, $http) {
 
     var nombre;
     var apellidos;
