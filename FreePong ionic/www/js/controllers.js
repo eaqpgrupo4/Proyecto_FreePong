@@ -8,6 +8,6 @@ angular.module('freepong.controllers', [])
 
 .controller('PerfilController', function($scope) {})
 
-.controller('LoginController', function($scope) {})
+.controller('loginController', function($scope) {})
 
-.controller('RegistroController', function($scope) {})
+.controller('registroController', function($scope) {})
