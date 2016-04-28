@@ -74,6 +74,15 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.findamigos', {
+      url: '/findamigos',
+        views: {
+         'menuContent': {
+          templateUrl: 'templates/findamigos.html',
+          controller: 'UsuariosController'
+        }
+      }
+    })
     .state('freepong.partidas', {
       url: '/partidas',
       views: {

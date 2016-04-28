@@ -1,4 +1,4 @@
-angular.module('app.services', [])
+angular.module('freepong.services', [])
 
 .service('BlankService', [function(){
 
