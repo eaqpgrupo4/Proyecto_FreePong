@@ -1,14 +1,18 @@
 /* Empty. Add your own CSS if you like */
 
 /*imagen de perfil usuarios*/
-.imgPerfil{
+.imgUser{
 	position: relative;
 	display: inline-block;
 	width: 130px;
 	height: 130px;
 	border-radius: 10%;
 	margin-top: 20px;
+}
 
+.imgPerfil{
+	margin-left: 15px;
+	border-radius: 2%;
 }
 
 .datosPerfil{

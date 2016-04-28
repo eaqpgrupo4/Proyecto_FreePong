@@ -10,11 +10,11 @@
 	  </label>
 	</div>
     <ion-list>
-      <ion-item ng-repeat="partida in partidas | orderBy:'nombre' | filter:searchText">
-        <p>{{partida.IDcreador}}</p>
-        <p>{{partida.IDinvitado}}</p>
-        <p>{{partida.IDmesa}}</p>
-        <p>{{partida.created | date:'mediumDate'}}</p>
+      <ion-item ng-repeat="partida in partidas | orderBy:'mesa' | filter:searchText">
+        <p><strong>Creador de la partida: </strong>{{partida.creador}}</p>
+        <p><strong>Invitado a la partida: </strong>{{partida.invitado}}</p>
+        <p><strong>Mesa de la partida: </strong>{{partida.mesa}}</p>
+        <p><strong>Fecha de creación: </strong>{{partida.created | date:'mediumDate'}}</p>
         <br>
         <button class="button button-small button-assertive" ng-click="deletePartida(partida._id)">
           Eliminar
