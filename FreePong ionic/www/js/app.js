@@ -79,6 +79,9 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       signup: function (usuario) {
         return $http.post(_base + '/usuario/CrearUsuario', usuario);
       },
+        signup_twitter: function (user) {
+        return $http.post(_base + '/user-twitter', user);
+      },
 
     };
     return _api;
@@ -147,6 +150,20 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         })
       }
     }
+
+    $scope.twitterLogin = function () {
+      console.log ("hola");
+      $cordovaOauth.twitter("YApyMEj0kbItom0k5n5ohZOIo", "YApyMEj0kbItom0k5n5ohZOIo").then(function (user) {
+        api.signup_twitter(user).success(function (data) {
+          window.localStorage['idlogin'] = log._id;
+          window.localStorage['user'] = log.username;
+        }).error(function (data) {
+        })
+        $state.go('freepong.perfil');
+      }, function (error) {
+        console.log(JSON.stringify(error));
+      });
+    };
 
     $scope.registro = function () {
       $state.go('freepong.registro');
