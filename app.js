@@ -32,7 +32,7 @@ require('mongoose-middleware').initialize(mongoose);
 
 
 // Conexión a la base de datos de MongoDB que tenemos en local
-mongoose.connect('mongodb://localhost/freepong', function(err, res) {if(err) throw err;console.log('Conectado correctamente a la Base de Datos');});
+mongoose.connect('mongodb://127.0.0.1:27017/freepong', function(err, res) {if(err) throw err;console.log('Conectado correctamente a la Base de Datos');});
 
 // Iniciamos la aplicación Express
 var app = express();

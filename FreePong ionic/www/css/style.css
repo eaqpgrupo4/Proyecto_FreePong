@@ -1,1 +1,50 @@
 /* Empty. Add your own CSS if you like */
+
+/*imagen de perfil usuarios*/
+.imgUser{
+	position: relative;
+	display: inline-block;
+	width: 130px;
+	height: 130px;
+	border-radius: 10%;
+	margin-top: 20px;
+}
+
+.imgPerfil{
+	margin-left: 15px;
+	border-radius: 2%;
+}
+
+.datosPerfil{
+	position: relative;
+	display: inline-block;
+	float: right;
+	width: 60%;
+}
+
+.buttonsPerfil{
+	position: relative;
+	display: block;
+}
+
+#buttonDelete{
+	width: 30%;
+	margin-left: 10px;
+}
+
+#buttonPerfil{
+	width: 30%;
+}
+
+#buttonEdit{
+	width: 30%;
+}
+
+#buttonNewCount{
+	width: 100%;
+	background-color: rgb(246, 141, 4);
+}
+
+#fondoLogin{
+	background-color: rgba(0, 128, 0, 0.25);
+}
