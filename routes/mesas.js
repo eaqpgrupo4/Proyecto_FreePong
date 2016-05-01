@@ -1,6 +1,6 @@
 
 module.exports = function (app) {
-
+    var _base= "http://localhost:3000";
     var mongoose = require('mongoose');
     var Mesa = require('../modelos/mesa.js');
 
@@ -13,6 +13,53 @@ module.exports = function (app) {
             res.status(200).jsonp(mesas);
         });
     };
+    var fs = require('fs');
+    var imagen;
+    //PUT- Funcion para subir la foto al servidor
+    uploadimage = function (req, res) {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+            console.log (files);
+            var tmp_path = files.file.path;
+            var tipo = files.file.type;//tipo del archivo
+
+            if (tipo == 'image/png' || tipo == 'image/jpg' || tipo == 'image/jpeg') {
+                //Si es de tipo png jpg o jpeg
+                var aleatorio = Math.floor((Math.random() * 9999) + 1);//Variable aleatoria
+                filename = aleatorio + "" + files.file.name;//nombre del archivo mas variable aleatoria
+
+                var target_path = './public/images/' + filename;// hacia donde subiremos nuestro archivo dentro de nuestro servidor
+                fs.rename(tmp_path, target_path, function (err) {//Escribimos el archivo
+                    fs.unlink(tmp_path, function (err) {//borramos el archivo tmp
+                        //damos una respuesta al cliente
+                        console.log('<p>Imagen subida OK</p></br><img  src="./images/' + filename + '"/>');
+                    });
+
+                });
+                console.log (req.params.mesa);
+                Mesa.findOne({nombre: req.params.mesa}, function (err, mesa) {
+                     imagen = _base+"/images/" + filename;
+                    mesa.urlfoto = imagen;
+
+                    mesa.save(function (err) {
+                        if (err) return res.send(500, err.message);
+                        res.status(200).jsonp(mesa);
+                    });
+                });
+
+            } else {
+                console.log('Tipo de archivo imagen no soportada');
+            }
+
+            if (err) {
+                console.error(err.message);
+                return;
+            }
+
+
+        });
+
+    };
 
     //POST - Agregar mesa
     CrearMesa =  function(req, res, next){
@@ -21,7 +68,7 @@ module.exports = function (app) {
         mesa.save(function(err, mesa){
             if(err){return next(err)}
             res.json(mesa);
-            console.log('POST /partida/' + req.body.partida);
+            console.log('POST /mesa/' + req.body.mesa);
         })
     };
 
@@ -42,6 +89,7 @@ module.exports = function (app) {
             console.log(req.body);
                 mesa.localizacion    =  req.body.localizacion,
                 mesa.nombre   =  req.body.nombre,
+                mesa.urlfoto   =  req.body.urlfoto,
 
             mesa.save(function (err) {
                 if (err) return res.send(500, err.message);
@@ -116,4 +164,5 @@ module.exports = function (app) {
     app.get(    '/mesa/ObtenerMesaporID/:id', ObtenerMesaporID);
     app.put(    '/mesa/ModificarMesa/:id', ModificarMesa);
     app.delete( '/mesa/EliminarMesaporID/:id', EliminarMesaporID);
+    app.put('/upload/:mesa', uploadimage);
 }
