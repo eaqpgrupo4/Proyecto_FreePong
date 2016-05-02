@@ -1,8 +1,8 @@
-<ion-view title="Registro" hide-nav-bar="true">
-  <ion-nav-buttons side="left">
+<ion-view hide-nav-bar="false" title="Registro">
+  <!-- <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="padding">
+  </ion-nav-buttons> -->
+  <ion-content class="padding" has-header="true">
     <div class="list">
     </div>
     <div class="list card padding">
@@ -29,7 +29,12 @@
       </label>
       <br>
       <div class="button-bar social-login">
-        <button class="button button-calm button-block" ng-click="registerUser()" ng-disabled="!usuario.nombre || !usuario.apellidos || !usuario.login || !usuario.password || !usuario.email || !usuario.telefono">Registrar</button>
+        <button class="button button-balanced" ng-click="registerUser()" ng-disabled="!usuario.nombre || !usuario.apellidos || !usuario.login || !usuario.password || !usuario.email || !usuario.telefono">
+            Registrar
+        </button>
+        <button id="" class="button button-assertive" ui-sref='freepong.login'>
+            Cancelar
+        </button>
       </div>
       <br><br>
     </div>

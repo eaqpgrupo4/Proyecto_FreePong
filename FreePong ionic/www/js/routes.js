@@ -48,16 +48,6 @@ angular.module('freepong.routes', [])
         }
       }
     })
-
-    .state('freepong.posicion', {
-      url: '/posicion',
-      views: {
-         'menuContent': {
-          templateUrl: 'templates/posicion.html',
-          controller: 'posicionCtrl'
-        }
-      }
-    })
     .state('freepong.logout', {
       url: '/logout',
       views: {
@@ -67,7 +57,7 @@ angular.module('freepong.routes', [])
       }
     })
     .state('freepong.perfil', {
-      url: '/perfil',
+      url: '/perfil/:id',
       views: {
       'menuContent': {
         templateUrl: 'templates/perfil.html',

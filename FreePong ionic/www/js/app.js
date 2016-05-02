@@ -79,9 +79,6 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       signup: function (usuario) {
         return $http.post(_base + '/usuario/CrearUsuario', usuario);
       },
-        signup_twitter: function (user) {
-        return $http.post(_base + '/user-twitter', user);
-      },
 
     };
     return _api;
@@ -98,6 +95,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 })
 
 .controller('LoginController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
+
 
   $scope.log = {
       login: '',
@@ -151,20 +149,6 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       }
     }
 
-    $scope.twitterLogin = function () {
-      console.log ("hola");
-      $cordovaOauth.twitter("YApyMEj0kbItom0k5n5ohZOIo", "6qGv57d6ur4veWePl6RTjrgr75aKWXe1jaclQAsyfQfZtMoRqh").then(function (user) {
-        api.signup_twitter(user).success(function (data) {
-          window.localStorage['idlogin'] = log._id;
-          window.localStorage['user'] = log.username;
-        }).error(function (data) {
-        })
-        $state.go('freepong.perfil');
-      }, function (error) {
-        console.log(JSON.stringify(error));
-      });
-    };
-
     $scope.registro = function () {
       $state.go('freepong.registro');
     }
@@ -199,7 +183,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         $rootScope.toast('Registrándote en FreePong...');
         console.log(data);
         console.log(data);
-        $state.go('freepong.usuarios');
+        $state.go('freepong.notificaciones');
         $scope.usuario = {}
       }).error(function (data) {
         $rootScope.hideLoading();
@@ -209,6 +193,11 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     }
 }])
 
+//   api.getUsuarios().success(function (data) {
+            // ****$scope.usuarios.splice(0,1);  //= data;
+         // }).error(function(data){
+       // })
+
 .controller('UsuariosController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
 	
 	api.getUsuarios().success(function (data) {
@@ -217,24 +206,23 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 		}).error(function(data){
 	})
 
-	$scope.deleteUser = function(id){
-		$rootScope.toast2('Borrando usuario...');
-		$http.delete(_base+'/usuario/EliminarUsuarioPorID/' + id).success(function (data) {
+  $scope.deleteUser = function(id){
+    $rootScope.toast2('Borrando usuario...');
+    $http.delete(_base+'/usuario/EliminarUsuarioPorID/' + id).success(function (data){
           api.getUsuarios().success(function (data) {
             $scope.usuarios = data;
           }).error(function(data){
         })
       }).error(function (data) {
     })
-	};
+  };
 
 	$scope.vistaPerfil = function(id){
-    window.localStorage['id'] = id;
+    //window.localStorage['id'] = id;
 		console.log(id);
-    // $state.go('freepong.perfil', {
-    //     id:id;  
-    // })
-		$state.go('freepong.perfil');
+    $state.go('freepong.perfil', {
+        id:id
+    });
 	};
 }])
 
@@ -246,66 +234,9 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 	})	
 }])
 
-
-.controller('posicionCtrl', function ($scope, $cordovaGeolocation, $ionicLoading) {
-
-
-    ionic.Platform.ready(function () {
-      $ionicLoading.show({
-        template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Buscando localización'
-      });
-
-      var posOptions = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      };
-      $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
-
-        var myLatlng = new google.maps.LatLng(lat, long);
-
-        var mapOptions = {
-          center: myLatlng,
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-        $scope.map = map;
-        $ionicLoading.hide();
-        google.maps.event.addListenerOnce($scope.map, 'idle', function () {
-
-          var marker = new google.maps.Marker({
-            map: $scope.map,
-            animation: google.maps.Animation.DROP,
-            position: myLatlng
-          });
-
-          var infoWindow = new google.maps.InfoWindow({
-            content: "Here I am!"
-          });
-
-          google.maps.event.addListener(marker, 'click', function () {
-            infoWindow.open($scope.map, marker);
-          });
-
-        });
-
-      }, function (err) {
-        $ionicLoading.hide();
-        console.log(err);
-      });
-    });
-  })
-
-
-
 .controller('PerfilController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
-	var id = window.localStorage['id'];
-  //var id = $stateParams.id;
+	//var id = window.localStorage['id'];
+  var id = $stateParams.id;
 	api.getUsuario(id).success(function (data) {
 			$rootScope.toast2('Cargando el perfil de ' + data.login);
 			$scope.usuario = data;
@@ -320,5 +251,76 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 		}).error(function(data){
 	})
 }]);
+
+
+////////////http://www.citronlab.com/programacion/ionic-ejemplo-de-aplicacion-tipo-tabs/
+
+// angular.module('starter.services', [])
+ 
+// .factory('Tareas', ['$http', '$q', function($http, $q){
+ 
+//   /* 
+//     json con tareas de ejemplo precargadas 
+//   */
+//   var jsonTareas = [
+//     {"id": 0, "titulo": "Ir a la compra","texto": "Refrescos, Patatas fritas"},
+//     {"id": 1, "titulo": "Arreglar estantería baño","texto": "Se caen los botes de champú"}, 
+//     {"id": 2, "titulo": "Cortar pelo perro","texto": "Parece una oveja"}
+//   ];
+ 
+//   return {
+//     /* 
+//       devuelve todas las tareas 
+//     */
+//     tareasListado: function() {
+//       return jsonTareas;
+//     },
+ 
+//     /* 
+//       borra la tarea del json que se indique 
+//     */
+//     tareasBorrar: function(tarea) {
+//       jsonTareas.splice(jsonTareas.indexOf(tarea), 1);
+//     },
+ 
+     
+//       recorre el json de tareas hasta dar con la que tiene el 
+//       nodo id igual que el proporcionado y lo devuelve 
+    
+//     tareasDetalle: function(tareaId) {
+//       for (var i = 0; i < jsonTareas.length; i++) {
+//         if (jsonTareas[i].id === parseInt(tareaId)) {
+//           return jsonTareas[i];
+//         }
+//       }
+//       return null;
+//     },
+ 
+//     /* 
+//       crea una nueva tarea en el json en base a los 
+//       parámetros porporcionados 
+//     */
+//     tareasNueva: function(titulo,texto) {
+//       jsonTareas.push({"id": this.tareasNextId(), "titulo": titulo, "texto": texto});
+//     },
+ 
+//     /* 
+//       averigua el maximo "id" y devuelve un valor 
+//        superior para el alta de una nueva tarea 
+//     */
+//     tareasNextId: function() {
+//       var maxValue=0;
+//       for (var i = 0; i < jsonTareas.length; i++) {
+//         if (jsonTareas[i].id > maxValue) {
+//           maxValue=jsonTareas[i].id;
+//         }
+//       }
+//       return maxValue+1;
+//     },
+ 
+//   };
+//   return this;
+//   }
+// ])
 
 

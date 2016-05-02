@@ -1,13 +1,3 @@
-.scroll {
-    height: 100%;
-}
- 
-#map {
-    width: 100%;
-    height: 100%;
-}
-
-
 /* Empty. Add your own CSS if you like */
 
 /*imagen de perfil usuarios*/
@@ -20,9 +10,21 @@
 	margin-top: 20px;
 }
 
+.textPerfil{
+	margin-left: 15px;
+}
+
 .imgPerfil{
 	margin-left: 15px;
-	border-radius: 2%;
+	border-radius: 0%;
+	border-style: solid;
+	border-color: grey;
+	border-width: 1px;
+	padding: 10px;
+}
+
+.imgagenPerfil{
+
 }
 
 .datosPerfil{
@@ -51,8 +53,16 @@
 }
 
 #buttonNewCount{
-	width: 100%;
-	background-color: rgb(246, 141, 4);
+	/*width: 100%;
+	background-color: rgb(246, 141, 4);*/
+	padding: 10px;
+	margin-bottom: 10px;
+	width: 95%
+}
+
+#buttonTwitter{
+	padding: 12px;
+	width: 95%
 }
 
 #fondoLogin{
