@@ -5,7 +5,8 @@
 
 
         <custom-marker ng-repeat="mesa in vm.mesas" id="custom-marker-{{$index}}" visible="false" position="{{mesa.localizacion}}" on-click="vm.closeCustomMarker()">
-            <div>
+            <img>
+                <img width="64" src="{{mesa.urlfoto}}">
                 Nombre de la mesa:{{mesa.nombre}}<br/>
                 Direccion de la mesa:{{mesa.localizacion}}<br/>
 
