@@ -1,8 +1,9 @@
 
-usuarioregistradoApp.controller('vistaMesasCtrl',['$scope','$http','NgMap',function($scope,$http,NgMap)
+usuarioregistradoApp.controller('vistaMesasCtrl',['$stateParams','$state','$scope','$http','NgMap',function($stateParams,$state,$scope,$http,NgMap)
 {
     var vm = this;
-
+    var IDuser = $stateParams.IDuser;
+    var login = $stateParams.login;
     NgMap.getMap().then(function(map)
     {
         $http.get('/mesa/ObtenerMesas').success(function (data)
@@ -21,9 +22,15 @@ usuarioregistradoApp.controller('vistaMesasCtrl',['$scope','$http','NgMap',funct
         {
             this.style.display = 'none';
         };
-        vm.horarios = function(event,id){
-            console.log(id);
-            $state.go('crearPartida',{id:id});
+        $scope.horarios = function(mesa)
+        {
+            console.log(mesa._id);
+            $state.go('crearPartida',
+                {
+                    IDmesa:mesa._id,
+                    IDuser:IDuser,
+                    login:login
+                });
 
         }
     });

@@ -1,13 +1,15 @@
-;(function(angular){
-  var indexOf = [].indexOf || function(item) {
-        for (var i = 0, l = this.length; i < l; i++) {
+;(function(angular)
+{
+  var indexOf = [].indexOf || function(item)
+      {
+        for (var i = 0, l = this.length; i < l; i++)
+        {
           if (i in this && this[i] === item) return i;
         }
         return -1;
       };
 
-  angular.module('pickadate.utils', [])
-      .factory('pickadateUtils', ['dateFilter', function(dateFilter) {
+  angular.module('pickadate.utils', []).factory('pickadateUtils', ['dateFilter', function(dateFilter) {
         return {
           isDate: function(obj) {
             return Object.prototype.toString.call(obj) === '[object Date]';
@@ -39,9 +41,7 @@
         };
       }]);
 
-  angular.module('pickadate', ['pickadate.utils'])
-
-      .directive('pickadate', ['$locale', 'pickadateUtils', 'dateFilter', function($locale, dateUtils, dateFilter) {
+  angular.module('pickadate', ['pickadate.utils']).directive('pickadate', ['$locale', 'pickadateUtils', 'dateFilter', function($locale, dateUtils, dateFilter) {
         return {
           require: 'ngModel',
           scope: {
@@ -131,7 +131,8 @@
               scope.dates = dates;
             };
 
-            scope.setDate = function(dateObj) {
+            scope.setDate = function(dateObj)
+            {
               if (isDateDisabled(dateObj)) return;
               ngModel.$setViewValue(dateObj.date);
             };

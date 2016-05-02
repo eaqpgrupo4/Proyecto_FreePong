@@ -4,6 +4,7 @@
 
 module.exports = function (app) {
 
+
     var mongoose = require('mongoose');
     var Partida  = require('../modelos/partida.js');
     var Usuario  = require('../modelos/usuario.js');
@@ -17,17 +18,14 @@ module.exports = function (app) {
             res.status(200).jsonp(partidas);
         });
     };
-
     CrearPartida =  function(req, res, next){
-        var partida = new Partida(req.body);
-               partida.save(function(err, partida){
-            if(err){return next(err)}
-            res.json(partida);
-            console.log('POST /creador/' + req.body.creador);
-        })
+      eval('var partida = new Partida({IDmesa: req.body.IDmesa,FechaPartida:req.body.FechaPartida,'+req.body.horario+':{creador:{_id: req.body.IDcreador, login:req.body.login},invitado:{_id: null, login:null}}});');
+        partida.save(function (err)
+        {
+            if (err) return res.send(500, err.message);
+            res.status(200).jsonp(partida);
+        });
     };
-    //GET - Obtner partida a partir de el ID
-
     ObtenerPartidaporID = function (req, res){
         Partida.findById(req.params.id, function (err, partida)
         {
@@ -37,7 +35,6 @@ module.exports = function (app) {
             res.status(200).jsonp(partida);
         });
     };
-
     //PUT Añadir usuario invitado a una partida creada ID
     UnirsePartidaporID = function (req, res){
         var hora= req.body.horario;
@@ -55,13 +52,14 @@ module.exports = function (app) {
         });
     };
 
-    AsignarHoraPartidaporID = function (req, res){
+    AsignarHoraPartidaporID = function (req, res)
+    {
         var hora= req.body.horario;
         console.log('Put/AsignarHoraPartidaporID')
         Partida.findById(req.params.id, function (err, partida)
         {
-            eval('partida.'+ hora +'.creador._id = req.body.IDcreador;');
-            eval('partida.'+ hora +'.creador.login = req.body.login;');
+             var entidad=({creador:{_id: req.body.IDcreador, login:req.body.login},invitado:{_id: null, login:null}});
+            eval('partida.'+req.body.horario+'= entidad;');
             partida.save(function (err)
             {
                 if (err) return res.send(500, err.message);

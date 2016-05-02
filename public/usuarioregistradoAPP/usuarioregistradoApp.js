@@ -8,12 +8,12 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'usuarioregistradoCtrl'
         })
         .state('mesas', {
-            url: '/mesas',
+            url: '/mesas/:IDuser/:login',
             templateUrl: 'vistaMesas/vistaMesas.html',
             controller: 'vistaMesasCtrl'
         })
         .state('crearPartida', {
-            url: '/crearPartida/:id',
+            url: '/crearPartida/:IDmesa/:IDuser/:login',
             templateUrl: 'vistaCrearPartida/vistaCrearPartida.html',
             controller: 'crearPartidaCtrl'
         })
