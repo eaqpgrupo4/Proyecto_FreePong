@@ -19,6 +19,7 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
         })
     .state('editar', {
         url: '/editar/:id',
+
         templateUrl: 'vistaEditar/vistaEditar.html',
         controller: 'editarCtrl'
     });

@@ -1,4 +1,4 @@
-angular.module('app.directives', [])
+angular.module('freepong.directives', [])
 
   .directive('map', function() {
     return {

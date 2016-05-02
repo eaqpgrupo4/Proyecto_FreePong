@@ -15,11 +15,16 @@
             <span ng-show="form.localizacion.$dirty && form.localizacion.$error.required" class="help-block">Campo necesario</span>
         </div>
 
+        <div class="col-md-10"><h4>Agregar imagen</h4>
+            <input type="file" file-model="myFile"/>
+
+
+
+        </div>
+
         <div class="form-actions">
             <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Registro</button> -->
             <button type="submit" class="btn btn-success">Añadir</button>
-            <a href="" class="btn btn-primary" ng-click="demo();">Raul Lorenzo</a>
-            <a ui-sref="admin" class="btn btn-link">Cancelar</a>
         </div>
     </form>
 </div>

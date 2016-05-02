@@ -1,6 +1,6 @@
 
 var _base = "http://localhost:3000";
-angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
+angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 'freepong.services', 'freepong.directives', 'ngCordovaOauth', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope, $ionicLoading, $location, $timeout) {
   $ionicPlatform.ready(function() {
@@ -36,7 +36,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
       $rootScope.showLoading(msg);
       $timeout(function () {
         $rootScope.hideLoading();
-      }, 3000);
+      }, 2000);
     };
 
     $rootScope.toast2 = function (msg) {
@@ -73,11 +73,14 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 	    },
 
       //LOG IN & SIGN UP
-      login: function (user) {
-        return $http.post(_base + '/usuario/Login/', user);
+      login: function (usuario) {
+        return $http.post(_base + '/usuario/Login/', usuario);
       },
-      signup: function (user) {
-        return $http.post(_base + '/usuario/CrearUsuario', user);
+      signup: function (usuario) {
+        return $http.post(_base + '/usuario/CrearUsuario', usuario);
+      },
+        signup_twitter: function (user) {
+        return $http.post(_base + '/user-twitter', user);
       },
 
     };
@@ -94,7 +97,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
   //});
 })
 
-.controller('LoginController', ['$rootScope', '$state', '$scope', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, api, $http, $ionicModal, $ionicHistory) {
+.controller('LoginController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
 
   $scope.log = {
       login: '',
@@ -118,35 +121,92 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
         $rootScope.showLoading("Autenticando..");
 
         api.login($scope.log).success(function (data) {
-            window.localStorage['iduser'] = data.usuario[0]._id;
-            window.localStorage['username'] = data.usuario[0].login;
-            window.localStorage['saldo'] = data.usuario[0].saldo;
-            window.localStorage['nombre'] = data.usuario[0].nombre;
-            window.localStorage['apellidos'] = data.usuario[0].apellidos;
-            window.localStorage['email'] = data.usuario[0].email;
-            window.localStorage['telefono'] = data.usuario[0].telefono;
+
+            // $rootScope.toast('bien venido ' + usuario.login);
+
+            //Guardar datos en local Storage//
+            // window.localStorage['iduser'] = data.usuario[0]._id;
+            // window.localStorage['username'] = data.usuario[0].login;
+            // window.localStorage['saldo'] = data.usuario[0].saldo;
+            // window.localStorage['nombre'] = data.usuario[0].nombre;
+            // window.localStorage['apellidos'] = data.usuario[0].apellidos;
+            // window.localStorage['email'] = data.usuario[0].email;
+            // window.localStorage['telefono'] = data.usuario[0].telefono;
             
-            usuario.id = data.usuario[0]._id;
-            usuario.nombre = data.usuario[0].nombre;
-            usuario.apellidos = data.usuario[0].apellidos;
-            usuario.login = data.usuario[0].login;
-            usuario.email = data.usuario[0].email;
-            usuario.telefono = data.usuario[0].telefono;
-            usuario.saldo = data.usuario[0].saldo;
+            // usuario.id = data.usuario[0]._id;
+            // usuario.nombre = data.usuario[0].nombre;
+            // usuario.apellidos = data.usuario[0].apellidos;
+            // usuario.login = data.usuario[0].login;
+            // usuario.email = data.usuario[0].email;
+            // usuario.telefono = data.usuario[0].telefono;
+            // usuario.saldo = data.usuario[0].saldo;
           // socket.emit('newUser', usuario, function (data) {
 
           // });
-
-
-          $state.go('freepong.usuarios');
-          $rootScope.hideLoading();
+            $scope.log = {}
+            $state.go('freepong.usuarios');
         }).error(function (data) {
-          $rootScope.hideLoading();
-          $rootScope.toast('Usuario o password incorrecto');
+            $rootScope.toast('Usuario o password incorrecto');
         })
       }
     }
 
+    $scope.twitterLogin = function () {
+      console.log ("hola");
+      $cordovaOauth.twitter("YApyMEj0kbItom0k5n5ohZOIo", "YApyMEj0kbItom0k5n5ohZOIo").then(function (user) {
+        api.signup_twitter(user).success(function (data) {
+          window.localStorage['idlogin'] = log._id;
+          window.localStorage['user'] = log.username;
+        }).error(function (data) {
+        })
+        $state.go('freepong.perfil');
+      }, function (error) {
+        console.log(JSON.stringify(error));
+      });
+    };
+
+    $scope.registro = function () {
+      $state.go('freepong.registro');
+    }
+
+}])
+
+.controller('registroController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal) {
+
+    var nombre;
+    var apellidos;
+    var login;
+    var telefono;
+    var saldo;
+    var password;
+    var email;
+    var saldo;
+
+    // $scope.usuario = {
+    //       nombre: '',
+    //       apellidos: '',
+    //       email: '',
+    //       telefono: '',
+    //       login: '',
+    //       password: '',
+    //       saldo: ''
+    // }
+
+    $scope.usuario = {}
+    $scope.registerUser = function () {
+      $rootScope.hideLoading();
+      api.signup($scope.usuario).success(function (data) {
+        $rootScope.toast('Registrándote en FreePong...');
+        console.log(data);
+        console.log(data);
+        $state.go('freepong.usuarios');
+        $scope.usuario = {}
+      }).error(function (data) {
+        $rootScope.hideLoading();
+        $rootScope.toast('El usuario ya existe');
+        $scope.usuario = {}
+      })
+    }
 }])
 
 .controller('UsuariosController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
@@ -159,15 +219,22 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 
 	$scope.deleteUser = function(id){
 		$rootScope.toast2('Borrando usuario...');
-		$http.delete(_base+'/usuario/EliminarUsuarioPorID/' + id)
-		$state.go("freepong.usuarios", {}, { reload: true });
+		$http.delete(_base+'/usuario/EliminarUsuarioPorID/' + id).success(function (data) {
+          api.getUsuarios().success(function (data) {
+            $scope.usuarios = data;
+          }).error(function(data){
+        })
+      }).error(function (data) {
+    })
 	};
 
 	$scope.vistaPerfil = function(id){
+    window.localStorage['id'] = id;
 		console.log(id);
-		$state.go('freepong.perfil', {
-        	id: id
-    })
+    // $state.go('freepong.perfil', {
+    //     id:id;  
+    // })
+		$state.go('freepong.perfil');
 	};
 }])
 
@@ -180,10 +247,10 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes'])
 }])
 
 .controller('PerfilController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
-	var idlogin = window.localStorage['idlogin'];
-  var id = $stateParams.id;
+	var id = window.localStorage['id'];
+  //var id = $stateParams.id;
 	api.getUsuario(id).success(function (data) {
-			$rootScope.toast2('Cargando perfil...');
+			$rootScope.toast2('Cargando el perfil de ' + data.login);
 			$scope.usuario = data;
       // $rootScope.toast2('Cargando perfil...');
       // $scope.nombre = data.nombre;

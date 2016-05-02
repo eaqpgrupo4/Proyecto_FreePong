@@ -34,7 +34,8 @@ angular.module('freepong.routes', [])
       url: '/registro',
       views: {
         'menuContent': {
-         templateUrl: 'templates/registro.html'
+         templateUrl: 'templates/registro.html',
+         controller: 'registroController'
         }
       }
     })
@@ -69,6 +70,15 @@ angular.module('freepong.routes', [])
         views: {
          'menuContent': {
           templateUrl: 'templates/usuarios.html',
+          controller: 'UsuariosController'
+        }
+      }
+    })
+    .state('freepong.findamigos', {
+      url: '/findamigos',
+        views: {
+         'menuContent': {
+          templateUrl: 'templates/findamigos.html',
           controller: 'UsuariosController'
         }
       }

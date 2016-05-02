@@ -1,7 +1,7 @@
 /**
  * Created by carlos on 19/04/2016.
  */
-var administradorApp = angular.module('administradorApp', ['ui.router','ngTable','ngResource','ngCookies'])
+var administradorApp = angular.module('administradorApp', ['ui.router','ngTable','ngResource','ngCookies', 'file-model'])
 
 administradorApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

@@ -1,5 +1,5 @@
 
-var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResource','ngCookies'])
+var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResource','ngCookies','file-model'])
 
     freepongApp.config(function($stateProvider, $urlRouterProvider) {
       $stateProvider
