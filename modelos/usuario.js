@@ -13,6 +13,7 @@ var usuarioEsquema = new Schema({
     telefono:   {  	type: String  },
     login:   	{  	type: String  },
     password:   {  	type: String  },
+    urlfoto:   {  	type: String  },
     saldo:	    {  	type: Number,default: 0 },
     created:    {  	type: Date,default: Date.now},
 });

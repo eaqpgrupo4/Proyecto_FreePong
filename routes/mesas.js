@@ -13,6 +13,8 @@ module.exports = function (app) {
             res.status(200).jsonp(mesas);
         });
     };
+
+    //variables para operar con ficheros
     var fs = require('fs');
     var imagen;
     //PUT- Funcion para subir la foto al servidor

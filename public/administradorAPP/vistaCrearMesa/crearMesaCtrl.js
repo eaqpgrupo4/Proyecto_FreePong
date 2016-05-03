@@ -19,19 +19,7 @@ administradorApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope',  fun
     $scope.crearMesa= function () {
         console.log(box);
 
-     /*   $scope.onFileSelect = function($files) {
-            //$files: an array of files selected, each file has name, size, and type.
-            for (var i = 0; i < $files.length; i++) {
-                var $file = $files[i];
-                Upload.upload({
-                    url: 'my/upload/url',
-                    data: {file: $file}
-                }).then(function (data, status, headers, config) {
-                    // file is uploaded successfully
-                    console.log(data);
-                });
-            }
-        };*/
+     //variables para poder trabajar con archivos
         var formData = new FormData();
         var file = $scope.myFile;
         console.log ("El fichero es:", file);
@@ -39,6 +27,7 @@ administradorApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope',  fun
 
         $http.post('/mesa/CrearMesa', box).success(function (data)
         {
+            //funcion que actualiza el JSON con la imagen
             $http.put('/upload/' + box.nombre, formData, {
                     headers: {
                         "Content-type": undefined

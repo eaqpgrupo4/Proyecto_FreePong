@@ -1,6 +1,6 @@
 
 module.exports = function (app) {
-
+    var _base= "http://localhost:3000";
     var mongoose = require('mongoose');
     var Usuario = require('../modelos/usuario.js');
 
@@ -153,6 +153,55 @@ module.exports = function (app) {
 
     };
 
+    //variables para operar con ficheros
+    var fs = require('fs');
+    var imagen;
+    //PUT- Funcion para subir la foto al servidor
+    uploadimage = function (req, res) {
+        var form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+            console.log (files);
+            var tmp_path = files.file.path;
+            var tipo = files.file.type;//tipo del archivo
+
+            if (tipo == 'image/png' || tipo == 'image/jpg' || tipo == 'image/jpeg') {
+                //Si es de tipo png jpg o jpeg
+                var aleatorio = Math.floor((Math.random() * 9999) + 1);//Variable aleatoria
+                filename = aleatorio + "" + files.file.name;//nombre del archivo mas variable aleatoria
+
+                var target_path = './public/images/' + filename;// hacia donde subiremos nuestro archivo dentro de nuestro servidor
+                fs.rename(tmp_path, target_path, function (err) {//Escribimos el archivo
+                    fs.unlink(tmp_path, function (err) {//borramos el archivo tmp
+                        //damos una respuesta al cliente
+                        console.log('<p>Imagen subida OK</p></br><img  src="./images/' + filename + '"/>');
+                    });
+
+                });
+                console.log (req.params.usuario);
+                Usuario.findOne({nombre: req.params.usuario}, function (err, usuario) {
+                    imagen = _base+"/images/" + filename;
+                    usuario.urlfoto = imagen;
+
+                    usuario.save(function (err) {
+                        if (err) return res.send(500, err.message);
+                        res.status(200).jsonp(usuario);
+                    });
+                });
+
+            } else {
+                console.log('Tipo de archivo imagen no soportada');
+            }
+
+            if (err) {
+                console.error(err.message);
+                return;
+            }
+
+
+        });
+
+    };
+
     //ENDPOINTS
     app.post(   '/usuario/CrearUsuario', CrearUsuario);
     app.get(    '/usuario/ObtenerUsuarios', ObtenerUsuarios);
@@ -161,4 +210,5 @@ module.exports = function (app) {
     app.put(    '/usuario/ModificarUsuarioPorID/:id', ModificarUsuario);
     app.delete( '/usuario/EliminarUsuarioPorID/:id', EliminarUsuarioporID);
     app.post(   '/usuario/Login', loginIN);
+    app.put('/upload/:usuario', uploadimage);
 }

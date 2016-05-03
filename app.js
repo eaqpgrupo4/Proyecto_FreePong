@@ -11,7 +11,7 @@ var express         = require("express"),// Express: Framework HTTP para Node.js
 	cookieParser  	= require('cookie-parser');
 	passport      	= require('passport'); // Passport: Middleware de Node que facilita la autenticación de usuarios
 	cors 			= require('cors');
-	formidable = require('formidable')
+	formidable = require('formidable');
 
 
 var allowCrossDomain = function (req, res, next) {
