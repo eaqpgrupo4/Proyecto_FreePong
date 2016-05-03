@@ -5,12 +5,12 @@ var freepongApp = angular.module('freepongApp', ['ui.router','ngTable','ngResour
       $stateProvider
           .state('login', {
             url: '/login',
-            templateUrl: '/vistas/vistaLogin/vistaLogin.html',
+            templateUrl: '/Vistas/VistaLogin/vistaLogin.html',
             controller: 'loginCtrl'
           })
           .state('registro', {
             url: '/registro',
-            templateUrl: '/vistas/vistaRegistro/vistaRegistro.html',
+            templateUrl: '/Vistas/VistaRegistro/vistaRegistro.html',
             controller: 'registroCtrl'
           })
           ;
