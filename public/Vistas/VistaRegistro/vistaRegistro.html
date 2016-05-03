@@ -34,15 +34,22 @@
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Saldo</label>
             <input type="saldo" name="saldo" class="form-control" id="disabledInput" type="text" ng-model="usuario.saldo" value="0" placeholder="Disabled input here..." disabled>
+
+        </div><div class="col-md-6"><h4>Agregar imagen</h4>
+            <input type="file" file-model="myFile"/>
         </div>
 
+<div class="col-md-6">
         <div class="flash-message" ng-if="flash">
             <div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
         </div>
+</div>
+    <div class="col-md-6">
         <div class="form-actions">
             <!-- <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Registro</button> -->
             <button type="submit" class="btn btn-primary">Registro</button>
             <a href="#/login" class="btn btn-link">Cancel</a>
         </div>
+    </div>
     </form>
 </div>
