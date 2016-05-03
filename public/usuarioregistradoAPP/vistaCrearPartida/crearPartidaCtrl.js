@@ -5,7 +5,7 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams','$state','$h
     var IDmesa = $stateParams.IDmesa;
     var login = $stateParams.login;
     var Fecha={};
-    $scope.test=false;
+    $scope.mostrarhorarios=false;
 
     console.log();
     var partida= new Object();
@@ -21,7 +21,7 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams','$state','$h
         }
         $http.get('/partida/ObtenerPartidaPorFechaymesa/'+IDmesa+'/'+newValue).success(function (data)
         {
-            $scope.test=true;
+            $scope.mostrarhorarios=true;
             console.log(data);
             partida=data[0];
             $scope.partida=partida;
