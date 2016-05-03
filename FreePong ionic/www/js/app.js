@@ -256,6 +256,58 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 	})	
 }])
 
+.controller('PosicionController', function ($scope, $cordovaGeolocation, $ionicLoading) {
+    ionic.Platform.ready(function () {
+      $ionicLoading.show({
+        template: '<ion-spinner icon="bubbles"></ion-spinner><br/>Buscando localización'
+      });
+
+      var posOptions = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+
+        var myLatlng = new google.maps.LatLng(lat, long);
+
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 16,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        $scope.map = map;
+        $ionicLoading.hide();
+        google.maps.event.addListenerOnce($scope.map, 'idle', function () {
+
+          var marker = new google.maps.Marker({
+            map: $scope.map,
+            animation: google.maps.Animation.DROP,
+            position: myLatlng
+          });
+
+          var infoWindow = new google.maps.InfoWindow({
+            content: "Here I am!"
+          });
+
+          google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.open($scope.map, marker);
+          });
+
+        });
+
+      }, function (err) {
+        $ionicLoading.hide();
+        console.log(err);
+      });
+    });
+})
+
 .controller('PerfilController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
 	//var id = window.localStorage['id'];
   var id = $stateParams.id;

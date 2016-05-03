@@ -39,6 +39,15 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.posicion', {
+      url: '/posicion',
+      views: {
+         'menuContent': {
+          templateUrl: 'templates/posicion.html',
+          controller: 'PosicionController'
+        }
+      }
+    })
     .state('freepong.registro', {
       url: '/registro',
       views: {
