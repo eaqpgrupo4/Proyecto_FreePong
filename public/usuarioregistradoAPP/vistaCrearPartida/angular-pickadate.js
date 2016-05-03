@@ -1,14 +1,12 @@
 ;(function(angular)
 {
-  var indexOf = [].indexOf || function(item)
-      {
+  var indexOf = [].indexOf || function(item){
         for (var i = 0, l = this.length; i < l; i++)
         {
           if (i in this && this[i] === item) return i;
         }
         return -1;
       };
-
   angular.module('pickadate.utils', []).factory('pickadateUtils', ['dateFilter', function(dateFilter) {
         return {
           isDate: function(obj) {
@@ -40,7 +38,6 @@
           }
         };
       }]);
-
   angular.module('pickadate', ['pickadate.utils']).directive('pickadate', ['$locale', 'pickadateUtils', 'dateFilter', function($locale, dateUtils, dateFilter) {
         return {
           require: 'ngModel',

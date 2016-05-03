@@ -5,13 +5,13 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams','$state','$h
     var IDmesa = $stateParams.IDmesa;
     var login = $stateParams.login;
     var Fecha={};
-    $scope.mostrarhorarios=false;
-
-    console.log();
     var partida= new Object();
 
+    $scope.mostrarhorarios=false;
+    $scope.mostrartitulo=true;
     $scope.minDate = '2015-10-06';
-    $scope.$watch("date",function(newValue,oldValue) {
+
+    $scope.$watch("date",function(newValue,oldValue){
 
 
         $scope.date = newValue;
@@ -19,9 +19,9 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams','$state','$h
         if (newValue===oldValue) {
             return;
         }
-        $http.get('/partida/ObtenerPartidaPorFechaymesa/'+IDmesa+'/'+newValue).success(function (data)
-        {
+        $http.get('/partida/ObtenerPartidaPorFechaymesa/'+IDmesa+'/'+newValue).success(function (data){
             $scope.mostrarhorarios=true;
+            $scope.mostrartitulo=false;
             console.log(data);
             partida=data[0];
             $scope.partida=partida;
@@ -67,6 +67,6 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams','$state','$h
             partida=data;
             $scope.partida=partida;
         });
-    }
+    };
 }]);
 
