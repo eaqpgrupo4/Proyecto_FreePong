@@ -6,9 +6,10 @@
 
         <custom-marker ng-repeat="mesa in vm.mesas" id="custom-marker-{{$index}}" visible="false" position="{{mesa.localizacion}}" on-click="vm.closeCustomMarker()">
             <img>
-                <img width="64" src="{{mesa.urlfoto}}">
-                Nombre de la mesa:{{mesa.nombre}}<br/>
-                Direccion de la mesa:{{mesa.localizacion}}<br/>
+               {{mesa.nombre}}<br/>
+                <img width="200" height="100" src="{{mesa.urlfoto}}"><br/>
+
+                {{mesa.localizacion}}<br/>
 
                 Si quieres ver los horarios disponible, haz click <a ng-click="horarios(mesa)">here</a>
             </div>

@@ -19,6 +19,7 @@ module.exports = function (app) {
         });
     };
     CrearPartida =  function(req, res, next){
+        console.log('Crear partida/ IDmesa:'+ req.body.IDmesa+'Fecha partida:'+req.body.FechaPartida+'horario+ '+req.body.horario)
       eval('var partida = new Partida({IDmesa: req.body.IDmesa,FechaPartida:req.body.FechaPartida,'+req.body.horario+':{creador:{_id: req.body.IDcreador, login:req.body.login},invitado:{_id: null, login:null}}});');
         partida.save(function (err)
         {
@@ -51,9 +52,7 @@ module.exports = function (app) {
             });
         });
     };
-
-    AsignarHoraPartidaporID = function (req, res)
-    {
+    AsignarHoraPartidaporID = function (req, res){
         var hora= req.body.horario;
         console.log('Put/AsignarHoraPartidaporID')
         Partida.findById(req.params.id, function (err, partida)
@@ -76,7 +75,6 @@ module.exports = function (app) {
             res.json({message: 'Partida eliminada correctamente'});
         })
     };
-
     //GET Obtener todos las partidas de la colecccion partidas paginado
     ObtenerPartidasP = function (req, res){
         console.log('post /obtenerpartidasP');
@@ -126,8 +124,7 @@ module.exports = function (app) {
 
     };
 
-    ObtenerPartidaPorFechaymesa = function (req, res)
-    {
+    ObtenerPartidaPorFechaymesa = function (req, res){
         console.log('GET/ObtenerPartidaPorFechaymesa'+ req.params.fechapartida + req.params.IDmesa);
         Partida.find({FechaPartida: req.params.fechapartida,IDmesa: req.params.IDmesa}, function(err, partida)
         {
