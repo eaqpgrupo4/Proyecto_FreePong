@@ -1,6 +1,6 @@
 
 var _base = "http://localhost:3000";
-angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 'freepong.services', 'freepong.directives', 'ngCordovaOauth', 'ngCordova'])
+angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 'freepong.services', 'freepong.directives', 'ngCordovaOauth', 'ngCordova', 'pickadate'])
 
 .run(function($ionicPlatform, $rootScope, $ionicLoading, $location, $timeout) {
   $ionicPlatform.ready(function() {
@@ -92,6 +92,28 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+})
+
+.controller('DateController', function($scope, $ionicModal) {
+    
+    $ionicModal.fromTemplateUrl('templates/datemodal.html', 
+        function(modal) {
+            $scope.datemodal = modal;
+        },
+        {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope, 
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+        }
+    );
+    $scope.opendateModal = function() {
+      $scope.datemodal.show();
+    };
+    $scope.closedateModal = function(modal) {
+      $scope.datemodal.hide();
+      $scope.datepicker = modal;
+    };
 })
 
 .controller('LoginController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {

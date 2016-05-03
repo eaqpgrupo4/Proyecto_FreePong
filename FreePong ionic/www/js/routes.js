@@ -30,6 +30,15 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.calendario', {
+      url: "/calendario",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/calendario.html",
+          controller: 'DateController'
+        }
+      }
+    })
     .state('freepong.registro', {
       url: '/registro',
       views: {
