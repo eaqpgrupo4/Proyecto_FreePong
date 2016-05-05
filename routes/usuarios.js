@@ -1,6 +1,5 @@
-
 module.exports = function (app) {
-    var _base= "http://localhost:3000";
+    var _base = "http://localhost:3000";
     var mongoose = require('mongoose');
     var Usuario = require('../modelos/usuario.js');
 
@@ -16,25 +15,25 @@ module.exports = function (app) {
     };
 
     //POST - Agregar usuario login v2
-    CrearUsuario = function(req, res){
-      resultado = res;
-      var login = req.body.login;
-      //Comprueba si exite el login en la BD
-      Usuario.find({login:login},function(err,usuario){
-        //Si no exite
-        if(usuario == "") {
-          console.log('usuario no existente, OK');
-          var usuario = new Usuario(req.body);
-          usuario.save(function(err, usuario){
-            if (err) return resultado.send(500, err.message);
-            console.log('POST /user/' + req.body.nombre);
-            resultado.status(200).jsonp(usuario);
-          });
-        } else {
-          console.log('usuario ya existente');
-          return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
-        }
-      });
+    CrearUsuario = function (req, res) {
+        resultado = res;
+        var login = req.body.login;
+        //Comprueba si exite el login en la BD
+        Usuario.find({login: login}, function (err, usuario) {
+            //Si no exite
+            if (usuario == "") {
+                console.log('usuario no existente, OK');
+                var usuario = new Usuario(req.body);
+                usuario.save(function (err, usuario) {
+                    if (err) return resultado.send(500, err.message);
+                    console.log('POST /user/' + req.body.nombre);
+                    resultado.status(200).jsonp(usuario);
+                });
+            } else {
+                console.log('usuario ya existente');
+                return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
+            }
+        });
     };
 
     //GET - Obtner usuario a partir de el ID
@@ -49,16 +48,16 @@ module.exports = function (app) {
 
     //PUT Modificar datos de un usuario existente por ID
     ModificarUsuario = function (req, res) {
-        console.log('PUT/  = '+req.body.login );
+        console.log('PUT/  = ' + req.body.login);
         Usuario.findById(req.params.id, function (err, usuario) {
 
-                usuario.nombre     =  req.body.nombre,
-                usuario.apellidos  =  req.body.apellidos,
-                usuario.email      =  req.body.email,
-                usuario.telefono   =  req.body.telefono,
-                usuario.login      =  req.body.login,
-                usuario.password   =  req.body.password,
-                usuario.saldo      =  req.body.saldo
+            usuario.nombre = req.body.nombre,
+                usuario.apellidos = req.body.apellidos,
+                usuario.email = req.body.email,
+                usuario.telefono = req.body.telefono,
+                usuario.login = req.body.login,
+                usuario.password = req.body.password,
+                usuario.saldo = req.body.saldo
 
             usuario.save(function (err) {
                 if (err) return res.send(500, err.message);
@@ -68,13 +67,15 @@ module.exports = function (app) {
     };
 
     //DELETE - Eliminar usuario v2
-    EliminarUsuarioporID = function(req, res){
-      console.log('DELETE usuario');
-      console.log(req.params.id);
-      Usuario.findByIdAndRemove(req.params.id, function(err){
-        if(err){res.send(err)}
-        res.json({message: 'Usuario eliminado correctamente'});
-      })
+    EliminarUsuarioporID = function (req, res) {
+        console.log('DELETE usuario');
+        console.log(req.params.id);
+        Usuario.findByIdAndRemove(req.params.id, function (err) {
+            if (err) {
+                res.send(err)
+            }
+            res.json({message: 'Usuario eliminado correctamente'});
+        })
     };
 
     //POST loginIN Hacer login usuario
@@ -83,15 +84,15 @@ module.exports = function (app) {
         console.log(req.body);
         resultado = res;
         var login = req.body.login;
-        Usuario.find({login:login},function(err,user){
-            if(user.length == 0){
+        Usuario.find({login: login}, function (err, user) {
+            if (user.length == 0) {
                 return resultado.status(404).jsonp({"loginSuccessful": false, "login": login});
             }
             else {
                 console.log(user);
                 //console.log("login",user.login);
-                if (user[0].password==req.body.password) {
-                    console.log("OK",req.body.password);
+                if (user[0].password == req.body.password) {
+                    console.log("OK", req.body.password);
                     return resultado.status(200).jsonp({"loginSuccessful": true, "usuario": user});
                 }
                 else {
@@ -104,17 +105,17 @@ module.exports = function (app) {
     };
 
     //GET Obtener todos los usuarios de la colecccion usuarios paginado
-    ObtenerUsuariosP = function (req, res){
+    ObtenerUsuariosP = function (req, res) {
         console.log('post /obtenerusuariosP');
 
         var sort;
         var sortObject = {};
-        var count  = req.query.count || 5;
-        var page   = req.query.page || 1;
+        var count = req.query.count || 5;
+        var page = req.query.page || 1;
 
         var filter = {
-            filters : {
-                mandatory : {
+            filters: {
+                mandatory: {
                     contains: req.query.filter
                 }
             }
@@ -141,7 +142,7 @@ module.exports = function (app) {
             .find()
             .filter(filter)
             .order(sort)
-            .page(pagination, function(err, usuarios) {
+            .page(pagination, function (err, usuarios) {
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
@@ -149,7 +150,7 @@ module.exports = function (app) {
                 } else {
                     res.jsonp(usuarios);
                 }
-        });
+            });
 
     };
 
@@ -160,7 +161,7 @@ module.exports = function (app) {
     uploadimage = function (req, res) {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
-            console.log (files);
+            console.log(files);
             var tmp_path = files.file.path;
             var tipo = files.file.type;//tipo del archivo
 
@@ -177,9 +178,9 @@ module.exports = function (app) {
                     });
 
                 });
-                console.log (req.params.usuario);
+                console.log(req.params.usuario);
                 Usuario.findOne({nombre: req.params.usuario}, function (err, usuario) {
-                    imagen = _base+"/images/" + filename;
+                    imagen = _base + "/images/" + filename;
                     usuario.urlfoto = imagen;
 
                     usuario.save(function (err) {
@@ -203,12 +204,12 @@ module.exports = function (app) {
     };
 
     //ENDPOINTS
-    app.post(   '/usuario/CrearUsuario', CrearUsuario);
-    app.get(    '/usuario/ObtenerUsuarios', ObtenerUsuarios);
-    app.get(    '/usuario/ObtenerUsuariosPaginados', ObtenerUsuariosP);
-    app.get(    '/usuario/ObtenerUsuarioPorID/:id', ObtenerUsuarioporID);
-    app.put(    '/usuario/ModificarUsuarioPorID/:id', ModificarUsuario);
-    app.delete( '/usuario/EliminarUsuarioPorID/:id', EliminarUsuarioporID);
-    app.post(   '/usuario/Login', loginIN);
+    app.post('/usuario/CrearUsuario', CrearUsuario);
+    app.get('/usuario/ObtenerUsuarios', ObtenerUsuarios);
+    app.get('/usuario/ObtenerUsuariosPaginados', ObtenerUsuariosP);
+    app.get('/usuario/ObtenerUsuarioPorID/:id', ObtenerUsuarioporID);
+    app.put('/usuario/ModificarUsuarioPorID/:id', ModificarUsuario);
+    app.delete('/usuario/EliminarUsuarioPorID/:id', EliminarUsuarioporID);
+    app.post('/usuario/Login', loginIN);
     app.put('/upload/:usuario', uploadimage);
 }

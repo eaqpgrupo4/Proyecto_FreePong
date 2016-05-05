@@ -6,7 +6,7 @@
 administradorApp.factory("Partidas", function ($resource, $stateParams) {
     return $resource('/partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
 });
-administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$location','Partidas', '$stateParams', 'ngTableParams',function($state, $http ,$scope, $location , Partidas, $stateParams, ngTableParams ) {
+administradorApp.controller('partidasCtrl', ['$state', '$http', '$scope', '$location', 'Partidas', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Partidas, $stateParams, ngTableParams) {
 
     var params;
     var settings;
@@ -21,8 +21,8 @@ administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$locatio
         total: 0,
         counts: [5, 10, 25, 50, 100],
         filterDelay: 100,
-        getData: function($defer, params) {
-            Partidas.get(params.url(), function(response) {
+        getData: function ($defer, params) {
+            Partidas.get(params.url(), function (response) {
                 params.total(response.total);
                 $defer.resolve(response.results);
             });
@@ -30,38 +30,38 @@ administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$locatio
     };
     $scope.tableParams = new ngTableParams(params, settings);
 
-    $scope.create = function()
-    {
-        var partida = new Partidas ({
-            creador:    this.creador,
-            invitado:   this.invitado,
-            mesa:       this.mesa
+    $scope.create = function () {
+        var partida = new Partidas({
+            creador: this.creador,
+            invitado: this.invitado,
+            mesa: this.mesa
         });
 
-        partida.$save(function(response) {
+        partida.$save(function (response) {
             $location.path('/customers/' + response._id);
 
-            $scope.creador     = '';
-            $scope.invitado    = '';
-            $scope.mesa        = '';
+            $scope.creador = '';
+            $scope.invitado = '';
+            $scope.mesa = '';
 
-        }, function(errorResponse) {
+        }, function (errorResponse) {
             $scope.error = errorResponse.data.message;
         });
     };
 
     // Remove existing Customer
-    $scope.delete = function(id){
+    $scope.delete = function (id) {
         swal({
                 title: "¿Estás Seguro/a?",
                 text: "¡Vas a borrar esta partida de la base de datos!",
                 type: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#DD6B55",confirmButtonText: "Sí, borrar!",
+                confirmButtonColor: "#DD6B55", confirmButtonText: "Sí, borrar!",
                 cancelButtonText: "No, cancelar!",
                 closeOnConfirm: false,
-                closeOnCancel: false },
-            function(isConfirm){
+                closeOnCancel: false
+            },
+            function (isConfirm) {
                 if (isConfirm) {
                     $http.delete('/partida/EliminarPartidaPorID/' + id)
                         .success(function (data) {
@@ -80,35 +80,32 @@ administradorApp.controller('partidasCtrl', ['$state','$http','$scope','$locatio
     };
 
     // Update existing Customer
-    $scope.update = function()
-    {
-        var partida = $scope.partida ;
+    $scope.update = function () {
+        var partida = $scope.partida;
 
-        partida.$update(function() {
+        partida.$update(function () {
             $location.path('/partidas/' + partida._id);
-        }, function(errorResponse) {
+        }, function (errorResponse) {
             $scope.error = errorResponse.data.message;
         });
     };
 
 
-    $scope.find = function(){
+    $scope.find = function () {
         var partidas = {}
         return $http.get('/partida/ObtenerPartidas')
-            .success(function(data){
+            .success(function (data) {
                 $scope.partidas = data;
                 console.log(partidas);
-        })
+            })
     };
 
 
-    $scope.findOne = function()
-    {
+    $scope.findOne = function () {
         $scope.customer = Partidas.get({
             customerId: $stateParams.customerId
         });
     };
-
 
 
 }]);

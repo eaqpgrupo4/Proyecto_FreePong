@@ -5,28 +5,28 @@
 'use strict';
 var box = {};
 
-administradorApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope',  function ( $state, $http, $scope) {
-    $scope.demo = function(){
+administradorApp.controller('crearMesaCtrl', ['$state', '$http', '$scope', function ($state, $http, $scope) {
+    $scope.demo = function () {
         swal({
             title: "Raul Lorenzo",
             text: "Administrador de FreePong ®",
-            imageUrl: "images/perfil_user.png" });
+            imageUrl: "images/perfil_user.png"
+        });
 
     };
     $scope.mesa = {};
     box = $scope.mesa;
 
-    $scope.crearMesa= function () {
+    $scope.crearMesa = function () {
         console.log(box);
 
-     //variables para poder trabajar con archivos
+        //variables para poder trabajar con archivos
         var formData = new FormData();
         var file = $scope.myFile;
-        console.log ("El fichero es:", file);
+        console.log("El fichero es:", file);
         formData.append("file", file);
 
-        $http.post('/mesa/CrearMesa', box).success(function (data)
-        {
+        $http.post('/mesa/CrearMesa', box).success(function (data) {
             //funcion que actualiza el JSON con la imagen
             $http.put('/upload/' + box.nombre, formData, {
                     headers: {
@@ -47,18 +47,17 @@ administradorApp.controller('crearMesaCtrl', [ '$state', '$http', '$scope',  fun
                     console.log('Error: ' + data);
                 });
 
-        }).error(function(error){
+        }).error(function (error) {
 
             swal({
-                  title: "Error",
-                  text: "Error al crear la mesa",
-                  imageUrl: '/images/error.png'
+                title: "Error",
+                text: "Error al crear la mesa",
+                imageUrl: '/images/error.png'
             });
         })
 
 
     };
-
 
 
 }]);

@@ -1,6 +1,5 @@
-
 module.exports = function (app) {
-    var _base= "http://localhost:3000";
+    var _base = "http://localhost:3000";
     var mongoose = require('mongoose');
     var Mesa = require('../modelos/mesa.js');
 
@@ -21,7 +20,7 @@ module.exports = function (app) {
     uploadimage = function (req, res) {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
-            console.log (files);
+            console.log(files);
             var tmp_path = files.file.path;
             var tipo = files.file.type;//tipo del archivo
 
@@ -38,9 +37,9 @@ module.exports = function (app) {
                     });
 
                 });
-                console.log (req.params.mesa);
+                console.log(req.params.mesa);
                 Mesa.findOne({nombre: req.params.mesa}, function (err, mesa) {
-                     imagen = _base+"/images/" + filename;
+                    imagen = _base + "/images/" + filename;
                     mesa.urlfoto = imagen;
 
                     mesa.save(function (err) {
@@ -64,11 +63,13 @@ module.exports = function (app) {
     };
 
     //POST - Agregar mesa
-    CrearMesa =  function(req, res, next){
+    CrearMesa = function (req, res, next) {
         var mesa = new Mesa(req.body);
 
-        mesa.save(function(err, mesa){
-            if(err){return next(err)}
+        mesa.save(function (err, mesa) {
+            if (err) {
+                return next(err)
+            }
             res.json(mesa);
             console.log('POST /mesa/' + req.body.mesa);
         })
@@ -89,38 +90,40 @@ module.exports = function (app) {
         Mesa.findById(req.params.id, function (err, mesa) {
             console.log('PUT');
             console.log(req.body);
-                mesa.localizacion    =  req.body.localizacion,
-                mesa.nombre   =  req.body.nombre,
-                mesa.urlfoto   =  req.body.urlfoto,
+            mesa.localizacion = req.body.localizacion,
+                mesa.nombre = req.body.nombre,
+                mesa.urlfoto = req.body.urlfoto,
 
-            mesa.save(function (err) {
-                if (err) return res.send(500, err.message);
-                res.status(200).jsonp(mesa);
-            });
+                mesa.save(function (err) {
+                    if (err) return res.send(500, err.message);
+                    res.status(200).jsonp(mesa);
+                });
         });
     };
 
     //DELETE - Eliminar mesa v2
-    EliminarMesaporID = function(req, res){
+    EliminarMesaporID = function (req, res) {
         console.log('DELETE mesa');
         console.log(req.params.id);
-        Mesa.findByIdAndRemove(req.params.id, function(err){
-            if(err){res.send(err)}
+        Mesa.findByIdAndRemove(req.params.id, function (err) {
+            if (err) {
+                res.send(err)
+            }
             res.json({message: 'Mesa eliminada correctamente'});
         })
     };
 
     //GET Obtener todas las mesas de la colecccion mesas paginado
-    ObtenerMesasP = function (req, res){
+    ObtenerMesasP = function (req, res) {
         console.log('post /obtenermesasP');
         var sort;
         var sortObject = {};
-        var count  = req.query.count || 5;
-        var page   = req.query.page || 1;
+        var count = req.query.count || 5;
+        var page = req.query.page || 1;
 
         var filter = {
-            filters : {
-                mandatory : {
+            filters: {
+                mandatory: {
                     contains: req.query.filter
                 }
             }
@@ -147,7 +150,7 @@ module.exports = function (app) {
             .find()
             .filter(filter)
             .order(sort)
-            .page(pagination, function(err, mesas) {
+            .page(pagination, function (err, mesas) {
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
@@ -160,11 +163,11 @@ module.exports = function (app) {
     };
 
     //ENDPOINTS
-    app.post(   '/mesa/CrearMesa', CrearMesa);
-    app.get(    '/mesa/ObtenerMesas', ObtenerMesas);
-    app.get(    '/mesa/ObtenerMesasPaginadas', ObtenerMesasP);
-    app.get(    '/mesa/ObtenerMesaporID/:id', ObtenerMesaporID);
-    app.put(    '/mesa/ModificarMesa/:id', ModificarMesa);
-    app.delete( '/mesa/EliminarMesaporID/:id', EliminarMesaporID);
+    app.post('/mesa/CrearMesa', CrearMesa);
+    app.get('/mesa/ObtenerMesas', ObtenerMesas);
+    app.get('/mesa/ObtenerMesasPaginadas', ObtenerMesasP);
+    app.get('/mesa/ObtenerMesaporID/:id', ObtenerMesaporID);
+    app.put('/mesa/ModificarMesa/:id', ModificarMesa);
+    app.delete('/mesa/EliminarMesaporID/:id', EliminarMesaporID);
     app.put('/upload/:mesa', uploadimage);
 }
