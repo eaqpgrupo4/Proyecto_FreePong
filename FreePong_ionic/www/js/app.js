@@ -411,6 +411,14 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 	})	
 }])
 
+.controller('MesasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
+  api.getMesas().success(function (data) {
+      $rootScope.toast2('Cargando mesas...');
+      $scope.mesas = data;
+    }).error(function(data){
+  })  
+}])
+
 // .controller('MesasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
 //   api.getMesas().success(function (data) {
 //       $rootScope.toast2('Cargando mesas...');
@@ -426,7 +434,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       });
       var posOptions = {
         enableHighAccuracy: true,
-        timeout: 5000,
+        timeout: 10000,
         maximumAge: 0
       };
       $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
@@ -448,7 +456,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
             position: myLatlng
           });
           var infoWindow = new google.maps.InfoWindow({
-            content: "Here I am!"
+            content: "Estás aquí!"
           });
           google.maps.event.addListener(marker, 'click', function () {
             infoWindow.open($scope.map, marker);

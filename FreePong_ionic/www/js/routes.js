@@ -111,6 +111,15 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.mesas', {
+      url: '/mesas',
+      views: {
+      'menuContent': {
+        templateUrl: 'templates/mesas.html',
+        controller: 'MesasController'
+        }
+      }
+    })
     .state('freepong.partidas', {
       url: '/partidas',
       views: {

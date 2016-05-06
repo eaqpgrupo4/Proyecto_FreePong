@@ -21,7 +21,8 @@ var partidaEsquema = new Schema(
         P9: {creador: Usuario, invitado: Usuario}, //16:00-17:00
         P10: {creador: Usuario, invitado: Usuario},//17:00-18:00
         P11: {creador: Usuario, invitado: Usuario},//18:00-19:00
-        P12: {creador: Usuario, invitado: Usuario} //19:00-20:00
+        P12: {creador: Usuario, invitado: Usuario},//19:00-20:00
+        created: {type: Date, default: Date.now}
     });
 module.exports = mongoose.model('Partida', partidaEsquema);
 

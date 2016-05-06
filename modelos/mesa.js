@@ -6,7 +6,8 @@ ObjectId = Schema.ObjectId;
 var mesaEsquema = new Schema({
     localizacion: {type: String},
     nombre: {type: String},
-    urlfoto: {type: String}
+    urlfoto: {type: String},
+    created: {type: Date, default: Date.now}
     //foto: {type: file}
 });
 
