@@ -337,8 +337,8 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     }
 
        $scope.twitterLogin = function () {
-        var api_key = "KEY";
-        var api_secret = "KEY_SECRET";
+        var api_key = "YApyMEj0kbItom0k5n5ohZOIo";
+        var api_secret = "6qGv57d6ur4veWePl6RTjrgr75aKWXe1jaclQAsyfQfZtMoRqh";
         $cordovaOauth.twitter(api_key, api_secret, ["email"]).then(function (user) {
                 $rootScope.usuariotwitternombre = user.screen_name;
                 $rootScope.usuariotwitterid = user.user_id;
