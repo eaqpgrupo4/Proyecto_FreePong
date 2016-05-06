@@ -250,6 +250,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       var mesaID = $scope.partida.mesaID;
       var fecha = $scope.partida.fecha;
       api.getPartidasPorFechaID(mesaID, fecha).success(function (data) {
+        $rootScope.toast2('Cargando partidas...');
         $scope.partidas = data;
         console.log('----------------------------------------');
         console.log('Objeto Partida - partidas: '+$scope.partidas);
