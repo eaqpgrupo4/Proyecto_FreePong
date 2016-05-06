@@ -335,6 +335,21 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         })
       }
     }
+
+       $scope.twitterLogin = function () {
+        var api_key = "KEY";
+        var api_secret = "KEY_SECRET";
+        $cordovaOauth.twitter(api_key, api_secret, ["email"]).then(function (user) {
+                $rootScope.usuariotwitternombre = user.screen_name;
+                $rootScope.usuariotwitterid = user.user_id;
+                console.log(user);
+                $rootScope.tipologin = "twitter";
+                $state.go('paginaPrincipal');
+            },
+            function (error) {
+                console.log(error);
+            });
+    };
     $scope.registro = function () {
       $state.go('freepong.registro');
     }
