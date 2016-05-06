@@ -9,5 +9,8 @@ public/.idea/
 .idea/tasks.xml
 .idea/dictionaries
 .idea/shelf
-
+FreePong_ionic/plugins/
+FreePong_ionic/config.xml
+FreePong_ionic/platforms
+FreePong_ionic/platforms/android/AndroidManifest.xml
 
