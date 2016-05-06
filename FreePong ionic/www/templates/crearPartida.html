@@ -25,12 +25,33 @@
 		<div class="card">
 			<label class="item item-input">
 	          <input id="fondopikerdate" type="text" 
-	          placeholder="Pick date" 
-	          ng-model="datepicker" 
-	          name="datepicker" 
-	          ng-click="opendateModal()" 
+	          placeholder="Pick date"
+	          ng-model="datepicker"
+	          name="datepicker"
+	          ng-click="opendateModal()"
 	          readonly>
 	        </label>
 	    </div>
+	     <button style="margin-left: 10px" class="button button-big button-positive" ng-click="enviarPartida()">Enviar Partida</button>
+	     <br><br>
+	     <ion-list>
+	      <ion-item ng-repeat="partida in partidas | orderBy:'mesa' | filter:searchText">
+	        <p><strong>IDPartida: </strong>{{partida.IDmesa}}</p>
+	        <p><strong>Fecha Partida: </strong>{{partida.FechaPartida}}</p>
+	        <p>----------------------------------</p>
+	        <p>HORARIO: P3</p>
+	        <p><strong>Local: </strong>{{partida.P3.creador.login}}</p>
+	        <p><strong>Visitante: </strong>{{partida.P3.invitado.login}}</p>
+	        <p>----------------------------------</p>
+	        <p>HORARIO: P2</p>
+	        <p><strong>Local: </strong>{{partida.P2.creador.login}}</p>
+	        <p><strong>Visitante: </strong>{{partida.P2.invitado.login}}</p>
+	        <p>----------------------------------</p>
+	        <p>HORARIO: P1</p>
+	        <p><strong>Local: </strong>{{partida.P1.creador.login}}</p>
+	        <p><strong>Visitante: </strong>{{partida.P1.invitado.login}}</p>
+	        <br><br>
+	      </ion-item>
+	    </ion-list>
 	</ion-content>
 </ion-view>

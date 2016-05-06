@@ -123,8 +123,8 @@ module.exports = function (app) {
     };
 
     ObtenerPartidaPorFechaymesa = function (req, res) {
-        console.log('GET/ObtenerPartidaPorFechaymesa' + req.params.fechapartida + req.params.IDmesa);
-        Partida.find({FechaPartida: req.params.fechapartida, IDmesa: req.params.IDmesa}, function (err, partida) {
+        console.log('GET/ObtenerPartidaPorFechaymesa/'+ req.params.IDmesa + '/' + req.params.fechapartida);
+        Partida.find({ IDmesa: req.params.IDmesa, FechaPartida: req.params.fechapartida }, function (err, partida) {
             if (err) return res.send(500, err.message);
             res.status(200).jsonp(partida);
         });
