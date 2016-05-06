@@ -1,6 +1,6 @@
-var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ngMap','ui.router','ngTable','ngResource','ngCookies','pickadate'])
+var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ngMap', 'ui.router', 'ngTable', 'ngResource', 'ngCookies', 'pickadate'])
 
-usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
+usuarioregistradoApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('inicio', {
             url: '/',
@@ -17,12 +17,12 @@ usuarioregistradoApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'vistaCrearPartida/vistaCrearPartida.html',
             controller: 'crearPartidaCtrl'
         })
-    .state('editar', {
-        url: '/editar/:id',
+        .state('editar', {
+            url: '/editar/:id',
 
-        templateUrl: 'vistaEditar/vistaEditar.html',
-        controller: 'editarCtrl'
-    });
+            templateUrl: 'vistaEditar/vistaEditar.html',
+            controller: 'editarCtrl'
+        });
     $urlRouterProvider.otherwise('/');
 });
 

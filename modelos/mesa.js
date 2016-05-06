@@ -1,14 +1,12 @@
-
-
 var mongoose = require('mongoose');
-Schema   = mongoose.Schema;
+Schema = mongoose.Schema;
 ObjectId = Schema.ObjectId;
 
 
 var mesaEsquema = new Schema({
-    localizacion:      { type: String },
-    nombre:            { type: String },
-    urlfoto:           { type: String }
+    localizacion: {type: String},
+    nombre: {type: String},
+    urlfoto: {type: String}
     //foto: {type: file}
 });
 

@@ -1,6 +1,5 @@
-
 'use strict';
-freepongApp.controller('usuarioCtrl', ['$stateParams','$state','$http','$scope','ngTableParams',function($stateParams,$state, $http ,$scope,ngTableParams ) {
+freepongApp.controller('usuarioCtrl', ['$stateParams', '$state', '$http', '$scope', 'ngTableParams', function ($stateParams, $state, $http, $scope, ngTableParams) {
 
     //Obtenemos los datos state "login"
     var id = $stateParams.id;
@@ -8,22 +7,20 @@ freepongApp.controller('usuarioCtrl', ['$stateParams','$state','$http','$scope',
 
     //Cargamos la variable login en la vista Usuario
     $scope.login = login;
-  
 
-    $scope.partidas = function()
-    {
+
+    $scope.partidas = function () {
         console.log(id);
         $state.go('partidas',
             {
-                id:id
+                id: id
             });
     };
-    $scope.editar = function()
-    {
+    $scope.editar = function () {
         console.log(id);
         $state.go('editar',
             {
-                id:id
+                id: id
             });
     };
 }]);

@@ -1,0 +1,111 @@
+/* Empty. Add your own CSS if you like */
+
+/*imagen de perfil usuarios*/
+.imgUser{
+	position: relative;
+	display: inline-block;
+	width: 100px;
+	height: 135px;
+	border-radius: 10%;
+	margin-top: 20px;
+}
+
+.textPerfil{
+	margin-left: 15px;
+}
+
+.imgPerfil{
+	margin-left: 15px;
+	border-radius: 0%;
+	border-style: solid;
+	border-color: grey;
+	border-width: 1px;
+	padding: 10px;
+}
+
+.imgagenPerfil{
+
+}
+
+.datosPerfil{
+	position: relative;
+	display: inline-block;
+	float: right;
+	width: 60%;
+}
+
+.buttonsPerfil{
+	position: relative;
+	display: block;
+}
+
+#buttonDelete{
+	width: 30%;
+	margin-left: 10px;
+}
+
+#buttonPerfil{
+	width: 30%;
+}
+
+#buttonEdit{
+	width: 30%;
+}
+
+#buttonNewCount{
+	/*width: 100%;
+	background-color: rgb(246, 141, 4);*/
+	padding: 0px;
+	margin-bottom: 10px;
+	width: 95%
+}
+
+#buttonTwitter{
+	padding: 0px;
+	width: 95%
+}
+
+#fondoLogin{
+	background-color: rgba(0, 128, 0, 0.25);
+}
+
+/* Maps */
+.scroll {
+    height: 100%;
+}
+ 
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+#fondopikerdate{
+	background-color: white;
+	padding-right: 6px;
+}
+
+#fondopikermesa{ 
+	background-color: white;
+	padding-right: 6px;
+}
+
+#fondopikerusuario{
+	background-color: white;
+	padding-right: 6px;
+}
+
+#imagenUser{
+	width: 300px;
+	height: 300px;
+}
+
+#sidemenu{
+	padding-left: 10px;
+	background-color: rgba(95, 165, 42, 0.28);
+}
+
+#ronundImg{
+	border-radius: 40% 10% 40% 10%;
+}
+
+

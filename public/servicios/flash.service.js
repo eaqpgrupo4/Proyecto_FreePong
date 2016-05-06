@@ -34,7 +34,7 @@
         function Success(message, keepAfterLocationChange) {
             $rootScope.flash = {
                 message: message,
-                type: 'success', 
+                type: 'success',
                 keepAfterLocationChange: keepAfterLocationChange
             };
         }
@@ -47,7 +47,7 @@
             };
         }
 
-        
+
     }
 
 })();
