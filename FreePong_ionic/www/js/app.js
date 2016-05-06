@@ -337,11 +337,11 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     }
 
           $scope.facebookLogin = function () {
-        $cordovaOauth.facebook("KEY", ["email", "user_location"]).then(function (result) {
+        $cordovaOauth.facebook("204093466640429", ["email", "user_location"]).then(function (result) {
             $localStorage.accessToken = result.access_token;
             console.log(result);
             $rootScope.tipologin = "facebook";
-            $state.go('paginaPrincipal');
+            $state.go('freepong.usuarios');
         }, function (error) {
             alert("There was a problem signing in!  See the console for logs");
             console.log(error);
@@ -356,7 +356,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
                 $rootScope.usuariotwitterid = user.user_id;
                 console.log(user);
                 $rootScope.tipologin = "twitter";
-                $state.go('paginaPrincipal');
+                $state.go('freepong.usuarios');
             },
             function (error) {
                 console.log(error);
