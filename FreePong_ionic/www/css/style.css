@@ -65,6 +65,11 @@
 	width: 95%
 }
 
+#buttonFacebook {
+  padding: 0px;
+  margin-bottom: 10px;
+  width: 95%
+}
 #fondoLogin{
 	background-color: rgba(0, 128, 0, 0.25);
 }
@@ -107,5 +112,19 @@
 #ronundImg{
 	border-radius: 40% 10% 40% 10%;
 }
+
+.partidaInfo{
+	position: relative;
+	display: inline-block;
+	float: left;
+}
+
+.buttonPartida{
+	position: relative;
+	display: inline-block;
+	float: right;
+	margin: 8px;
+}
+
 
 

@@ -1,4 +1,7 @@
 <div ng-controller="vistaMesasCtrl as  vm">
+    <div class="flash-message" ng-if="flash">
+        <div id="error1" class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+    </div>
     <ng-map zoom="13" center="barcelona" style="height:600px"
             on-center-changed="centerCustomMarker()">
         <marker ng-repeat="mesa in vm.mesas" id="custom-marker-{{$index}}" position="{{mesa.localizacion}}"

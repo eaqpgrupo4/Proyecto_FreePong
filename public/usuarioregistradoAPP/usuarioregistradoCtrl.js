@@ -1,15 +1,14 @@
-usuarioregistradoApp.controller('usuarioregistradoCtrl', ['$state', '$http', '$scope', '$cookies', function ($state, $http, $scope, $cookies) {
-    var login = $cookies.get('login');
-    var IDuser = $cookies.get('id');
+usuarioregistradoApp.controller('usuarioregistradoCtrl', ['$state', '$http', '$scope', '$cookies','$window', function ($state, $http, $scope, $cookies, $window) {
+    var Urlactual=$window.location;
+    var userData=Urlactual.href.split("?");
+    var username=userData[2].split("#/");
+    var login= username[0];
+    var IDuser = userData[1]
+
     $scope.login = login;
-    $scope.crearPartida = function () {
-        $state.go('crearPartida', {
-            id: id
-        });
-    };
     $scope.editar = function () {
         $state.go('editar', {
-            id: id
+            id: IDuser
         });
     };
     $scope.vermesas = function () {

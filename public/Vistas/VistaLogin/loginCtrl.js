@@ -17,11 +17,10 @@ freepongApp.controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService'
                     $window.location.href = '/administradorAPP/administrador.html'
                 }
                 else {
-                    $cookies.put('login', data.usuario[0].login);
-                    $cookies.put('id', data.usuario[0]._id);
+
                     FlashService.Success('Login correcto', true);
 
-                    $window.location.href = '/usuarioregistradoAPP/usuarioregistrado.html'
+                    $window.location.href = ('/usuarioregistradoAPP/usuarioregistrado.html?' + data.usuario[0]._id+ '?'+ data.usuario[0].login)
                 }
             }
             else {
@@ -31,5 +30,8 @@ freepongApp.controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService'
             FlashService.Error('Login incorrecto', true);
             $state.go('login');
         })
+    };
+    $scope.loginFB = function () {
+        $window.location.href = 'http://localhost:3000/facebook';
     };
 }]);
