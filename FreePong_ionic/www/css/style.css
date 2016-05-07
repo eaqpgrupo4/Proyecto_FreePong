@@ -121,5 +121,23 @@
 	margin: 8px;
 }
 
+/*Mesas*/
 
+.infoMesa{
+	position: relative;
+	display: block;
+}
 
+.fofoMesa{
+	position: relative;
+	display: block;
+}
+
+.smallpick{
+	width: 320px;
+	height: 200px;
+}
+
+h3{
+	margin: 10px;
+}
