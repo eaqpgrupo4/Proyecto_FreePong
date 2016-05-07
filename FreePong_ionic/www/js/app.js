@@ -359,6 +359,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
                 $state.go('freepong.usuarios');
             },
             function (error) {
+              alert("There was a problem signing in!  See the console for logs");
                 console.log(error);
             });
     };
