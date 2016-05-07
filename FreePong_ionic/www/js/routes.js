@@ -30,6 +30,15 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.buscarPartida', {
+      url: "/buscarPartida",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/buscarPartida.html",
+          controller: 'BuscarPartidaController'
+        }
+      }
+    })
     .state('freepong.crearPartida', {
       url: "/crearPartida",
       views: {
