@@ -2,6 +2,7 @@ module.exports = function (app) {
     var _base = "http://localhost:3000";
     var mongoose = require('mongoose');
     var Usuario = require('../modelos/usuario.js');
+    var formidable = require('formidable');
 
 
     //GET - Obtener todos los usuarios de la colecccion usuarios de la BBDD
