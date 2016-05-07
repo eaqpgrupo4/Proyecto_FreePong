@@ -156,7 +156,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     }
 }])
 
-.controller('CrearPartidaController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
+.controller('BuscarPartidaController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
     //Guardar datos en local Storage//
     var idusuario = window.localStorage['idusuario'];
     var login = window.localStorage['login'];
@@ -166,7 +166,8 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
           fecha: '',
           mesaID: '',
           mesaNombre: '',
-          mesaLoc: ''
+          mesaLoc: '',
+          horario: ''
     };
     // var apellidos = window.localStorage['apellidos'];
     // var saldo = window.localStorage['saldo'];
@@ -262,6 +263,144 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         // console.log('----------------------------------------');
         }).error(function (data) {
       })
+    }
+}])
+
+.controller('CrearPartidaController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
+    //Guardar datos en local Storage//
+    $scope.verHorarios=false;
+    $scope.verPartida=false;
+    var idusuario = window.localStorage['idusuario'];
+    var login = window.localStorage['login'];
+    $scope.partida = {
+          usuarioID: '',
+          usuarioLogin: '',
+          fecha: '',
+          mesaID: '',
+          mesaNombre: '',
+          mesaLoc: '',
+          horario: ''
+    };
+    // var apellidos = window.localStorage['apellidos'];
+    // var saldo = window.localStorage['saldo'];
+    // var nombre = window.localStorage['nombre'];
+    // var email = window.localStorage['email'];
+    // var telefono = window.localStorage['telefono'];
+    // var urlfoto = window.localStorage['urlfoto'];
+    //Guardar datos en local Storage//
+    // window.localStorage['idusuario'] = data.usuario[0]._id;
+    // window.localStorage['login'] = data.usuario[0].login;
+    // window.localStorage['saldo'] = data.usuario[0].saldo;
+    // window.localStorage['nombre'] = data.usuario[0].nombre;
+    // window.localStorage['apellidos'] = data.usuario[0].apellidos;
+    // window.localStorage['email'] = data.usuario[0].email;
+    // window.localStorage['telefono'] = data.usuario[0].telefono;
+    console.log(idusuario);
+    console.log(login);
+    console.log("El Usuario creador de la partida es: "+login+" con id: "+idusuario);
+    $scope.verusuario ="Local: "+login+" id: "+idusuario;
+    $scope.partida.usuarioID = idusuario; 
+    $scope.partida.usuarioLogin = login;
+    $ionicModal.fromTemplateUrl('templates/datemodal.html', 
+        function(modal) {
+            $scope.datemodal = modal;
+        },
+        {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope, 
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+        }
+    );
+    $scope.opendateModal = function() {
+      $scope.datemodal.show();
+    };
+    $scope.closedateModal = function(modal) {
+      $scope.datemodal.hide();
+      $scope.datepicker ="Fecha: "+modal;
+      $scope.partida.fecha = modal;
+      console.log(modal);
+      console.log("la fecha es: "+modal);
+    };
+    api.getMesas().success(function (data) {
+        console.log(data);
+        $scope.mesas = data;
+        // console.log(mesas);
+      }).error(function(data){
+    })  
+    $ionicModal.fromTemplateUrl('templates/datemodalmesas.html', 
+        function(mesa) {
+            $scope.datemodalM = mesa;
+        },
+        {
+        // Use our scope for the scope of the modal to keep it simple
+        scope: $scope, 
+        // The animation we want to use for the modal entrance
+        animation: 'slide-in-up'
+        }
+    );
+    $scope.opendateModalM = function() {
+      $scope.datemodalM.show();
+    };
+    $scope.closedateModalM = function(mesa) {
+      $scope.datemodalM.hide();
+      $scope.vermesas = mesa.nombre+" - "+mesa.localizacion;
+      $scope.partida.mesaNombre = mesa.nombre;
+      $scope.partida.mesaLoc = mesa.localizacion;
+      $scope.partida.mesaID = mesa._id;
+      console.log("La mesa es: "+mesa.nombre);
+      console.log(mesa);
+    };
+
+
+
+    $scope.enviarPartida = function (){
+      // console.log("Entro");
+      // console.log("Objeto Partida: "+$scope.partida);
+      // console.log("Objeto Partida.usuarioLogin: "+$scope.partida.usuarioLogin);
+      // console.log("Objeto Partida.usuarioID: "+$scope.partida.usuarioID);
+      // console.log("Objeto Partida.fecha: "+$scope.partida.fecha);
+      // console.log("Objeto Partida.mesaID: "+$scope.partida.mesaID);
+      // console.log("Objeto Partida.mesaNombre: "+$scope.partida.mesaNombre);
+      // console.log("Objeto Partida.mesaLoc: "+$scope.partida.mesaLoc);
+      var mesaID = $scope.partida.mesaID;
+      var fecha = $scope.partida.fecha;
+      var login = $scope.partida.usuarioLogin;
+      api.getPartidasPorFechaID(mesaID, fecha).success(function (data) {
+        $rootScope.toast2('Cargando partidas...');
+        $scope.partidas = data;
+
+        
+        // console.log('----------------------------------------');
+        // console.log('Objeto Partida - partidas: '+$scope.partidas);
+        // console.log('Objeto Partida - idpartida: '+$scope.partidas[0]._id);
+        // console.log('Objeto Partida - IDmesa: '+$scope.partidas[0].IDmesa);
+        // console.log('Objeto Partida - FechaPartida: '+$scope.partidas[0].FechaPartida);
+        // console.log('Objeto Partida - creadorLogin: '+$scope.partidas[0].P3.creador.login);
+        // console.log('Objeto Partida - invitadoLogin: '+$scope.partidas[0].P3.invitado.login);
+        // console.log('----------------------------------------');
+        }).error(function (data) {
+      })
+    }
+
+    $scope.obtenerHorarios = function(){
+      var mesaID = $scope.partida.mesaID;
+      var fecha = $scope.partida.fecha;
+      var login = $scope.partida.usuarioLogin;
+      api.getPartidasPorFechaID(mesaID, fecha).success(function (data) {
+        $rootScope.toast2('Cargando horarios...');
+        //console.log("data222: "+data[0]._id);
+          if(data[0]==null){
+            console.log("entro data: ");
+            $scope.verHorarios=true;
+          }
+          else{
+            $scope.partidas=data;
+            console.log("entro else: ");
+            $scope.verHorarios=false;
+            $scope.verPartida=true;
+          }
+        })
     }
 }])
 

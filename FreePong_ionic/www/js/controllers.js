@@ -16,6 +16,6 @@ angular.module('freepong.controllers', [])
 
 .controller('PosicionController', function($scope) {})
 
-.controller('CrearPartidaController', function($scope) {})
+.controller('BuscarPartidaController', function($scope) {})
 
 .controller('MiPerfilController', function($scope) {})
