@@ -1,7 +1,8 @@
-usuarioregistradoApp.controller('vistaMesasCtrl', ['$stateParams', '$state', '$scope', '$http', 'NgMap', function ($stateParams, $state, $scope, $http, NgMap) {
+usuarioregistradoApp.controller('vistaMesasCtrl', ['$stateParams', '$state', '$scope', '$http', 'NgMap',function ($stateParams, $state, $scope, $http, NgMap) {
     var vm = this;
     var IDuser = $stateParams.IDuser;
     var login = $stateParams.login;
+
     NgMap.getMap().then(function (map) {
         $http.get('/mesa/ObtenerMesas').success(function (data) {
             var mesas = data;

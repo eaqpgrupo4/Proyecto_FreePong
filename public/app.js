@@ -11,7 +11,6 @@ freepongApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/registro',
             templateUrl: './vistas/vistaRegistro/vistaRegistro.html',
             controller: 'registroCtrl'
-        })
-    ;
+        });
     $urlRouterProvider.otherwise('login');
-})
+});

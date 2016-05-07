@@ -7,7 +7,7 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams', '$state', '
 
     $scope.mostrarhorarios = false;
     $scope.mostrartitulo = true;
-    $scope.minDate = '2015-10-06';
+    $scope.minDate = new Date();
 
     $scope.$watch("date", function (newValue, oldValue) {
 
