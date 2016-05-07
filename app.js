@@ -7,11 +7,8 @@ path = require('path'),
 favicon = require('serve-favicon'),
 crypto = require('crypto'),
 cookieParser = require('cookie-parser'),
-
-// Passport: Middleware de Node que facilita la autenticación de usuarios
-cors = require('cors'),
-formidable = require('formidable');
-
+formidable = require('formidable'),
+cors = require('cors');
 require('mongoose-middleware').initialize(mongoose);
 
 // Conexión a la base de datos de MongoDB que tenemos en local
@@ -38,9 +35,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
 
-
-//app.use(bodyParser());
-//app.use(bodyParser({uploadDir:'./images'}));
+app.use(bodyParser());
+app.use(bodyParser({uploadDir:'./images'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
