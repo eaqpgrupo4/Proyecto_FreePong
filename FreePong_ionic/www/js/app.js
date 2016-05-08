@@ -453,6 +453,38 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         })
       }
     }
+
+     $scope.facebookLogin = function () {
+        $cordovaOauth.facebook("204093466640429", ["email", "user_location"]).then(function (result) {
+            $localStorage.accessToken = result.access_token;
+            console.log(result);
+            $rootScope.tipologin = "facebook";
+            $state.go('freepong.usuarios');
+        }, function (error) {
+            alert("There was a problem signing in!  See the console for logs");
+            console.log(error);
+        });
+    };
+
+    $scope.twitterLogin = function () {
+        var api_key = "YApyMEj0kbItom0k5n5ohZOIo";
+        var api_secret = "6qGv57d6ur4veWePl6RTjrgr75aKWXe1jaclQAsyfQfZtMoRqh";
+        $cordovaOauth.twitter(api_key, api_secret, ["email"]).then(function (user) {
+                $rootScope.usuariotwitternombre = user.screen_name;
+                $rootScope.usuariotwitterid = user.user_id;
+                console.log(user);
+                $rootScope.tipologin = "twitter";
+
+                $state.go('freepong.usuarios');
+            },
+            function (error) {
+              alert("There was a problem signing in!  See the console for logs");
+                console.log(error);
+            });
+    };
+    $scope.registro = function () {
+      $state.go('freepong.registro');
+    }
     $scope.registro = function () {
       $state.go('freepong.registro');
     }
