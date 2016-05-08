@@ -16,31 +16,31 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     }
   })
   $rootScope.authktd = false;
-    $rootScope.showLoading = function (msg) {
-      $ionicLoading.show({
-        template: msg || 'Loading',
-        animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
-      });
-    }
-    $rootScope.hideLoading = function () {
-      $ionicLoading.hide();
-    };
-    $rootScope.toast = function (msg) {
-      $rootScope.showLoading(msg);
-      $timeout(function () {
-        $rootScope.hideLoading();
-      }, 2000);
-    };
-    $rootScope.toast2 = function (msg) {
-      $rootScope.showLoading(msg);
-      $timeout(function () {
-        $rootScope.hideLoading();
-      }, 1000);
-    };
-  })
+  $rootScope.showLoading = function (msg) {
+    $ionicLoading.show({
+      template: msg || 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
+  }
+  $rootScope.hideLoading = function () {
+    $ionicLoading.hide();
+  };
+  $rootScope.toast = function (msg) {
+    $rootScope.showLoading(msg);
+    $timeout(function () {
+      $rootScope.hideLoading();
+    }, 2000);
+  };
+  $rootScope.toast2 = function (msg) {
+    $rootScope.showLoading(msg);
+    $timeout(function () {
+      $rootScope.hideLoading();
+    }, 1000);
+  };
+})
 
 .factory('API', ['$http', function ($http) {
     var _api = {
@@ -115,41 +115,42 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 
 .controller('MiPerfilController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
     //Guardar datos en local Storage//
-    // var idusuario = window.localStorage['idusuario'];
-    // var login = window.localStorage['login'];
-    // var apellidos = window.localStorage['apellidos'];
-    // var saldo = window.localStorage['saldo'];
-    // var nombre = window.localStorage['nombre'];
-    // var email = window.localStorage['email'];
-    // var telefono = window.localStorage['telefono'];
-    // var urlfoto = window.localStorage['urlfoto'];
-    // var created = window.localStorage['created'];
-    // $scope.id = idusuario;
-    // $scope.login = login;
-    // $scope.nombre = nombre;
-    // $scope.apellidos = apellidos;
-    // $scope.email = email;
-    // $scope.saldo = saldo;
-    // $scope.urlfoto = urlfoto;
-    // $scope.created = created;
-    // console.log("idusuario: "+idusuario);
-    // console.log("id: "+$scope.id);
-    // console.log("id: "+$scope.login);
+    var idusuario = window.localStorage['idusuario'];
+    var login = window.localStorage['login'];
+    var apellidos = window.localStorage['apellidos'];
+    var saldo = window.localStorage['saldo'];
+    var nombre = window.localStorage['nombre'];
+    var email = window.localStorage['email'];
+    var telefono = window.localStorage['telefono'];
+    var urlfoto = window.localStorage['urlfoto'];
+    var created = window.localStorage['created'];
+    $scope.id = idusuario;
+    $scope.login = login;
+    $scope.nombre = nombre;
+    $scope.apellidos = apellidos;
+    $scope.email = email;
+    $scope.saldo = saldo;
+    $scope.urlfoto = urlfoto;
+    $scope.created = created;
+    console.log("idusuario: "+idusuario);
+    console.log("id: "+$scope.id);
+    console.log("id: "+$scope.login);
 }])
 
 .controller('LogoutController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
     $scope.signout = function () {
+      // window.localStorage['idusuario'] = '';
+      // window.localStorage['login'] = '';
+      // window.localStorage['saldo'] = '';
+      // window.localStorage['nombre'] = '';
+      // window.localStorage['apellidos'] = '';
+      // window.localStorage['email'] = '';
+      // window.localStorage['telefono'] = '';
+      // window.localStorage['urlfoto'] = '';
+      // window.localStorage['created'] = '';
+      localStorage.clear();
       $ionicHistory.clearCache();
       $ionicHistory.clearHistory();
-      window.localStorage['idusuario'] = '';
-      window.localStorage['login'] = '';
-      window.localStorage['saldo'] = '';
-      window.localStorage['nombre'] = '';
-      window.localStorage['apellidos'] = '';
-      window.localStorage['email'] = '';
-      window.localStorage['telefono'] = '';
-      window.localStorage['urlfoto'] = '';
-      window.localStorage['created'] = '';
       $state.go('freepong.login');
     }
 }])
@@ -360,16 +361,21 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       console.log('invitado P'+index+': '+invitado);
       if(creador==null && invitado==null){
         console.log('no hay usuario creador ni usuario invitado');
+        console.log('__________________________________________');
         $scope.crearUnaPartida = function(){
           //Crear partida
 
         }
       } else if(invitado==null){
           console.log('no hay usuario invitado pero si creador');
+          console.log('________________________________________');
           $scope.unirsePartida = function(){
             //unirse a partida
             
-        }
+          } 
+      } else{
+          console.log('Partida cerrada!');
+          console.log('________________________________________');
       }
     }
 }])
@@ -436,8 +442,12 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
             // usuario.saldo = data.usuario[0].saldo;
             // socket.emit('newUser', usuario, function (data) {
             // });
+            $ionicHistory.nextViewOptions({
+              disableBack: true 
+            });
             $scope.log = {}
             $state.go('freepong.usuarios');
+            // $state.go('freepong.usuarios', {}, {reload: true});
           }).error(function (data) {
             $rootScope.toast('Usuario o password incorrecto');
         })

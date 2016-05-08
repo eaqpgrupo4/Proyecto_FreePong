@@ -11,19 +11,18 @@
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-
   <ion-side-menu side="left" class="main-menu" expose-aside-when="large">
     <ion-content>
       <ion-list>
-        <ion-item id="" class="heading-item item item-avatar" nav-clear menu-close href="#/freepong/miPerfil">
-          <div id="" class="user-image-container">
-            <pre-img ratio="_1_1" helper-class="rounded-image">
+        <ion-item class="heading-item item item-avatar" nav-clear menu-close href="#/freepong/miPerfil">
+          <div class="user-image-container">
               <!-- <img id="imagenUser" class="user-image" ng-src="{{urlfoto}}" spinner-on-load> -->
-              <img id="ronundImg" class="imgPerfil col-90" src="{{urlfoto}}">
-            </pre-img>
+              <img class="smallpickp" src="{{urlfoto}}">
           </div>
-          <h2 class="greeting">Hola {{nombre}} {{apellidos}}</h2>
-          <p class="message">Bienvenido</p>
+          <div class="menuInfo">
+            <h2 class="greeting">Hola {{nombre}} {{apellidos}}</h2>
+            <p class="message">Bienvenid@</p>
+          </div>
         </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close href="#/freepong/miPerfil">
           <i class="icon ion-tshirt-outline"></i>

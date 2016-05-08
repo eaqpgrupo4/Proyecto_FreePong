@@ -10,7 +10,7 @@
 	  </label>
 	</div>
     <ion-list>
-      <ion-item ng-repeat="partida in partidas | orderBy:'mesa' | filter:searchText">
+      <ion-item ng-repeat="partida in partidas | orderBy:'created' | filter:searchText">
         <hr>
         <p><strong>IDMesa: </strong>{{partida.IDmesa}}</p>
         <p><strong>Fecha Partida: </strong>{{partida.FechaPartida}}</p>
