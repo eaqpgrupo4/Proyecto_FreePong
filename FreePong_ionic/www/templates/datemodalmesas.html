@@ -10,8 +10,14 @@
 		<div class="card">
 			<ion-list>
 			    <ion-item ng-repeat="mesa in mesas | orderBy:'nombre' | filter:searchText" ng-click="closedateModalM(mesa)">
-			    	<p><strong>Nombre: </strong>{{mesa.nombre}}</p>
-		        	<p><strong>Localización: </strong>{{mesa.localizacion}}</p>
+				    <div class="infoMesa">
+				    	<p><strong>Nombre: </strong>{{mesa.nombre}}</p>
+			        	<p><strong>Localización: </strong>{{mesa.localizacion}}</p>
+			        </div>
+			        <br>
+			        <div class="fotoMesa">
+			        	<img class="smallpick" src="{{mesa.urlfoto}}">
+			        </div>
 			    </ion-item>
 			</ion-list>
 		</div>
