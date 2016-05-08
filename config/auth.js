@@ -2,8 +2,8 @@ module.exports = {
 
     'facebookAuth':
     {
-        id: '230153647346505',
-        secret: '0c0fa7e2cbe2dfb8481d9f2b3f8db65f',
+        id: '203907273328129',
+        secret: '8f35db556a12680a940a8853d7c62b5d',
         callbackURL:'http://localhost:3000/auth/facebook/callback',
         profileFields: ['id','name','emails','photos']
 
