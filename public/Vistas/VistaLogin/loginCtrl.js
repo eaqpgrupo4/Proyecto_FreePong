@@ -1,9 +1,6 @@
-'use strict';
-var box = {};
-freepongApp.controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService', '$window', '$cookies', function ($state, $http, $scope, FlashService, $window, $cookies) {
+angular.module('freepongApp').controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService', '$window', '$cookies', function ($state, $http, $scope, FlashService, $window, $cookies) {
+    var box = {};
     $scope.userInfo = {};
-
-
     box = $scope.userInfo;
     $scope.login = function () {
         console.log("box", box);
