@@ -12,7 +12,7 @@
     <ion-list>
       <ion-item ng-repeat="partida in partidas | orderBy:'mesa' | filter:searchText">
         <hr>
-        <p><strong>IDPartida: </strong>{{partida.IDmesa}}</p>
+        <p><strong>IDMesa: </strong>{{partida.IDmesa}}</p>
         <p><strong>Fecha Partida: </strong>{{partida.FechaPartida}}</p>
         <p><strong>Fecha de creación: </strong>{{partida.created | date:'mediumDate'}}</p> 
         <br>

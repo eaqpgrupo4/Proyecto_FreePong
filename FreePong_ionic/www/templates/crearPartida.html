@@ -3,7 +3,7 @@
 		<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
 	</ion-nav-buttons>
 	<ion-content class="has-header">
-		<div class="card">
+		<!-- <div class="card">
 			<label class="item item-input">
 	          <input id="fondopikerusuario" type="text" 
 	          placeholder="Usuario" 
@@ -11,27 +11,33 @@
 	          name="verusuario" 
 	          readonly>
 	        </label>
-	    </div>
-	    <div class="card">
-			<label class="item item-input">
-	          <input id="fondopikermesa" type="text" 
-	          placeholder="Mesas" 
-	          ng-model="vermesas" 
-	          name="vermesas" 
-	          ng-click="opendateModalM()" 
-	          readonly>
-	        </label>
-	    </div>
-		<div class="card">
-			<label class="item item-input">
-	          <input id="fondopikerdate" type="text" 
-	          placeholder="Pick date"
-	          ng-model="datepicker"
-	          name="datepicker"
-	          ng-click="opendateModal()"
-	          readonly>
-	        </label>
-	    </div>
+	    </div> -->
+	    <ion-item>
+	    	<h2 style="color: green">Mesa:</h2>
+		    <div class="card">
+				<label class="item item-input">
+		          <input id="fondopikermesa" type="text" 
+		          placeholder="Mesas" 
+		          ng-model="vermesas" 
+		          name="vermesas" 
+		          ng-click="opendateModalM()" 
+		          readonly>
+		        </label>
+		    </div>
+		</ion-item>
+		<ion-item>
+		  <h2 style="color: green">Fecha:</h2>
+			<div class="card">
+				<label class="item item-input">
+		          <input id="fondopikerdate" type="text" 
+		          placeholder="Pick date"
+		          ng-model="datepicker"
+		          name="datepicker"
+		          ng-click="opendateModal()"
+		          readonly>
+		        </label>
+		    </div>
+	    </ion-item>
 	    <button style="margin-left: 10px; width: 95%" class="button button-big button-positive" ng-click="obtenerHorarios()">Mostrar Horarios</button>
 	    <br><br>
 	    <div ng-show="verHorarios">
@@ -39,11 +45,11 @@
 	      		<h2><strong>IDPartida: </strong>NO HAY PARTIDAS</h2>
 	        	<h2><strong>Fecha Partida: </strong>NO HAY FECHAS</h2>
 	        	<br>
+	        	<button class="button button-small button-positive" style="width: 49%" ng-click="verPartidaB=true">
+		          Mostrar Horarios
+		        </button>
 	        	<button class="button button-small button-assertive" style="width: 49%" ng-click="verPartidaB=false">
 		          Ocultar Horarios
-		        </button>
-		        <button class="button button-small button-positive" style="width: 49%" ng-click="verPartidaB=true">
-		          Mostrar Horarios
 		        </button>
 		        <br>
 		        <hr>
@@ -55,7 +61,7 @@
 			        		<p><strong>Visitante: </strong>{{partida.P1.invitado.login}}</p>
 			        	</div>
 			        	<div class="buttonPartida">
-			        		<button class="button button-balanced icon ion-plus"></button>
+			        		<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P1.creador.login, partida.P1.invitado.login, $index+1)"></button>
 			        	</div>
 			      	</ion-item>
 			      	<ion-item>
@@ -65,7 +71,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P2.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P2.creador.login, partida.P2.invitado.login, $index+2)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -75,7 +81,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P3.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P3.creador.login, partida.P3.invitado.login, $index+3)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -85,7 +91,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P4.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P4.creador.login, partida.P4.invitado.login, $index+4)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -95,7 +101,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P5.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P5.creador.login, partida.P5.invitado.login, $index+5)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -105,7 +111,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P6.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P6.creador.login, partida.P6.invitado.login, $index+6)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -115,7 +121,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P7.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P7.creador.login, partida.P7.invitado.login, $index+7)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -125,7 +131,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P8.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P8.creador.login, partida.P8.invitado.login, $index+8)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -135,7 +141,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P9.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P9.creador.login, partida.P9.invitado.login, $index+9)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -145,7 +151,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P10.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P10.creador.login, partida.P10.invitado.login, $index+10)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -155,7 +161,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P11.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P11.creador.login, partida.P11.invitado.login, $index+11)"></button>
 				        </div>
 			      	</ion-item>
 			      	<ion-item>
@@ -165,7 +171,7 @@
 				        	<p><strong>Visitante: </strong>{{partida.P12.invitado.login}}</p>
 				        </div>
 				        <div class="buttonPartida">
-				        	<button class="button button-balanced icon ion-plus"></button>
+				        	<button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P12.creador.login, partida.P12.invitado.login, $index+12)"></button>
 				        </div>
 			      	</ion-item>
 			    </div>
@@ -175,7 +181,7 @@
 	    <div ng-show="verPartida">
         	<ion-item ng-repeat="partida in partidas | orderBy:'mesa' | filter:searchText">
 		        <hr>
-		        <p><strong>IDPartida: </strong>{{partida.IDmesa}}</p>
+		        <p><strong>IDMesa: </strong>{{partida.IDmesa}}</p>
 		        <p><strong>Fecha Partida: </strong>{{partida.FechaPartida}}</p>
 		        <p><strong>Fecha de creación: </strong>{{partida.created | date:'mediumDate'}}</p> 
 		        <br>
@@ -195,7 +201,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P1.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P1.creador.login, partida.P1.invitado.login, $index+1)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -205,7 +211,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P2.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P2.creador.login, partida.P2.invitado.login, $index+2)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -215,7 +221,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P3.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P3.creador.login, partida.P3.invitado.login, $index+3)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -225,7 +231,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P4.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P4.creador.login, partida.P4.invitado.login, $index+4)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -235,7 +241,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P5.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P5.creador.login, partida.P5.invitado.login, $index+5)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -245,7 +251,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P6.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P6.creador.login, partida.P6.invitado.login, $index+6)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -255,7 +261,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P7.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P7.creador.login, partida.P7.invitado.login, $index+7)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -265,7 +271,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P8.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P8.creador.login, partida.P8.invitado.login, $index+8)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -275,7 +281,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P9.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P9.creador.login, partida.P9.invitado.login, $index+9)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -285,7 +291,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P10.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P10.creador.login, partida.P10.invitado.login, $index+10)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -295,7 +301,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P11.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P11.creador.login, partida.P11.invitado.login, $index+11)"></button>
 		              </div>
 		            </ion-item>
 		            <ion-item>
@@ -305,7 +311,7 @@
 		                <p><strong>Visitante: </strong>{{partida.P12.invitado.login}}</p>
 		              </div>
 		              <div class="buttonPartida">
-		                <button class="button button-balanced icon ion-plus"></button>
+		                <button class="button button-balanced icon ion-plus" ng-click="crearPartida(partida.P12.creador.login, partida.P12.invitado.login, $index+12)"></button>
 		              </div>
 		            </ion-item>
         		</div>
