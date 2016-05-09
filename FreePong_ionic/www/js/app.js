@@ -524,10 +524,10 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       })
     }
 }])
-//   api.getUsuarios().success(function (data) {
+            //   api.getUsuarios().success(function (data) {
             // ****$scope.usuarios.splice(0,1);  //= data;
-         // }).error(function(data){
-       // })
+            // }).error(function(data){
+            // })
        
 .controller('UsuariosController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
 	api.getUsuarios().success(function (data) {

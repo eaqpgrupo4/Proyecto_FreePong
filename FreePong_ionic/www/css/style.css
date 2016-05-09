@@ -62,7 +62,14 @@
 
 #buttonTwitter{
 	padding: 0px;
-	width: 95%
+	width: 95%;
+}
+
+#buttonFacebook{
+	padding: 0px;
+	width: 95%;
+	margin-bottom: 10px;
+
 }
 
 #fondoLogin{
