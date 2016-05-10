@@ -35,7 +35,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
 
-app.use(bodyParser());
+
 app.use(bodyParser({uploadDir:'./images'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -45,7 +45,7 @@ app.use(cookieParser());
 
 // Ruta de los archivos estáticos (HTML estáticos, JS, CSS,...)
 app.use(express.static(__dirname + '/public'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+//app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 
 

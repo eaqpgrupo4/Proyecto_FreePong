@@ -20,20 +20,38 @@ module.exports = function (app) {
         resultado = res;
         var login = req.body.login;
         //Comprueba si exite el login en la BD
-        Usuario.find({login: login}, function (err, usuario) {
+        Usuario.find({login:login},function(err,usuario){
             //Si no exite
-            if (usuario == "") {
-                console.log('usuario no existente, OK');
-                var usuario = new Usuario(req.body);
+            if(usuario == ""){
+                console.log('usuario no encontrado');
+                var usuario = new Usuario({
+                    nombre: req.body.nombre,
+                    apellidos: req.body.apellidos,
+                    email:req.body.email,
+                    telefono:req.body.telefono,
+                    login:req.body.login,
+                    password:req.body.password
+                })
                 usuario.save(function (err, usuario) {
                     if (err) return resultado.send(500, err.message);
-                    console.log('POST /user/' + req.body.nombre);
                     resultado.status(200).jsonp(usuario);
                 });
-            } else {
-                console.log('usuario ya existente');
-                return resultado.status(409).jsonp("El username: " + login + " ya existe, elije otro diferente.");
             }
+            //Si existe
+            else{
+                console.log('usuario  encontrado');
+                return resultado.status(409).jsonp("usuario " + login + " ya existe");
+            }
+        });
+    };
+
+    //GET - Obtner usuario a partir de el ID
+    ObtenerusuarioporID = function (req, res) {
+        Usuario.findById(req.params.id, function (err, usuario) {
+            if (err) return res.send(500, err.message);
+
+            console.log('GET /user/' + req.params.id);
+            res.status(200).jsonp(usuario);
         });
     };
 
@@ -157,44 +175,57 @@ module.exports = function (app) {
 
     //variables para operar con ficheros
     var fs = require('fs');
+    var filename;
     var imagen;
     //PUT- Funcion para subir la foto al servidor
-    uploadimage = function (req, res) {
+    uploadimage = function (req, res){
+
+        var u = req.params.login;
+        console.log('PUT/Cargar imagen '+u);
         var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            console.log(files);
+        form.parse(req, function (err, fields, files)
+        {
             var tmp_path = files.file.path;
             var tipo = files.file.type;//tipo del archivo
 
-            if (tipo == 'image/png' || tipo == 'image/jpg' || tipo == 'image/jpeg') {
+            if (tipo == 'image/png' || tipo == 'image/jpg' || tipo == 'image/jpeg')
+            {
                 //Si es de tipo png jpg o jpeg
                 var aleatorio = Math.floor((Math.random() * 9999) + 1);//Variable aleatoria
                 filename = aleatorio + "" + files.file.name;//nombre del archivo mas variable aleatoria
 
                 var target_path = './public/images/' + filename;// hacia donde subiremos nuestro archivo dentro de nuestro servidor
-                fs.rename(tmp_path, target_path, function (err) {//Escribimos el archivo
-                    fs.unlink(tmp_path, function (err) {//borramos el archivo tmp
+                fs.rename(tmp_path, target_path, function (err)
+                {
+                    //Escribimos el archivo
+                    fs.unlink(tmp_path, function (err)
+                    {//borramos el archivo tmp
                         //damos una respuesta al cliente
                         console.log('<p>Imagen subida OK</p></br><img  src="./images/' + filename + '"/>');
                     });
 
                 });
-                console.log(req.params.usuario);
-                Usuario.findOne({nombre: req.params.usuario}, function (err, usuario) {
-                    imagen = _base + "/images/" + filename;
+                Usuario.findOne({login: u}, function (err, usuario)
+                {
+                    console.log('find '+usuario);
+                    imagen = _base +"/images/" + filename;
+
                     usuario.urlfoto = imagen;
 
-                    usuario.save(function (err) {
+                    usuario.save(function (err)
+                    {
                         if (err) return res.send(500, err.message);
                         res.status(200).jsonp(usuario);
                     });
                 });
 
-            } else {
+            } else
+            {
                 console.log('Tipo de archivo imagen no soportada');
             }
 
-            if (err) {
+            if (err)
+            {
                 console.error(err.message);
                 return;
             }
@@ -204,6 +235,7 @@ module.exports = function (app) {
 
     };
 
+
     //ENDPOINTS
     app.post('/usuario/CrearUsuario', CrearUsuario);
     app.get('/usuario/ObtenerUsuarios', ObtenerUsuarios);
@@ -212,5 +244,5 @@ module.exports = function (app) {
     app.put('/usuario/ModificarUsuarioPorID/:id', ModificarUsuario);
     app.delete('/usuario/EliminarUsuarioPorID/:id', EliminarUsuarioporID);
     app.post('/usuario/Login', loginIN);
-    app.put('/upload/:usuario', uploadimage);
+    app.put('/usuario/upload/:login', uploadimage);
 }

@@ -5,16 +5,42 @@ freepongApp.controller('registroCtrl', ['$state', '$http', '$scope', 'FlashServi
     box = $scope.usuario;
 
 
-    $scope.registro = function () {
+    $scope.registro = function ()
+    {
+        var conflict=false;
         console.log(box);
         //variables para poder trabajar con archivos
         var formData = new FormData();
         var file = $scope.myFile;
         console.log("El fichero es:", file);
         formData.append("file", file);
+        $http.post('/usuario/CrearUsuario', box)
+            .success(function (data)
+            {
 
-        $http.post('/usuario/CrearUsuario', box).success(function (data) {//funcion que actualiza el JSON con la imagen
-            $http.put('/upload/' + box.nombre, formData, {
+                FlashService.Success('Registro correcto', true);
+                $state.go('login');
+                swal({
+                    title: "Usuario Creado",
+                    text: "El usuario " + box.nombre + " " + box.apellidos + " se ha creado correctamente",
+                    imageUrl: '/images/ok.png'
+                });
+            })
+            .error(function (data)
+            {
+                conflict = true;
+                FlashService.Error('Login ya existente, introduzca otro', true);
+                swal({
+                    title: "Error",
+                    text: "Error al crear el usuario" + box.nombre + " " + box.apellidos + " ",
+                    imageUrl: '/images/error.png'
+                });
+                // console.log('Error: ' + data.status);
+            });
+        if (conflict==false)
+        {
+            console.log('fffff'+box.login);
+            $http.put('/usuario/upload/' + box.login, formData, {
                     headers: {
                         "Content-type": undefined
                     },
@@ -22,23 +48,16 @@ freepongApp.controller('registroCtrl', ['$state', '$http', '$scope', 'FlashServi
                 }
                 )
                 .success(function (data) {
-                    FlashService.Success('Registro correcto', true);
-                    $state.go('login');
-                    swal({
-                        title: "Usuario Creado",
-                        text: "El usuario " + box.nombre + " " + box.apellidos + " se ha creado correctamente",
-                        imageUrl: '/images/ok.png'
-                    });
-                })
 
-        }).error(function (error) {
-            FlashService.Error('Username ya existente, introduzca otro', true);
-            swal({
-                title: "Error",
-                text: "Error al crear el usuario" + box.nombre + " " + box.apellidos + " ",
-                imageUrl: '/images/error.png'
-            });
-        })
+                    $state.go('login');
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        }
+
+
+
     };
 
 }]);

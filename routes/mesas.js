@@ -170,5 +170,5 @@ module.exports = function (app) {
     app.get('/mesa/ObtenerMesaporID/:id', ObtenerMesaporID);
     app.put('/mesa/ModificarMesa/:id', ModificarMesa);
     app.delete('/mesa/EliminarMesaporID/:id', EliminarMesaporID);
-    app.put('/upload/:mesa', uploadimage);
+    app.put('/mesa/upload/:mesa', uploadimage);
 }

@@ -11,3 +11,11 @@ angular.module('freepong.controllers', [])
 .controller('loginController', function($scope) {})
 
 .controller('registroController', function($scope) {})
+
+.controller('MesasController', function($scope) {})
+
+.controller('PosicionController', function($scope) {})
+
+.controller('BuscarPartidaController', function($scope) {})
+
+.controller('MiPerfilController', function($scope) {})

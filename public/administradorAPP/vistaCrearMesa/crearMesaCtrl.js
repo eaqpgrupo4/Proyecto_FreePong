@@ -28,7 +28,7 @@ administradorApp.controller('crearMesaCtrl', ['$state', '$http', '$scope', funct
 
         $http.post('/mesa/CrearMesa', box).success(function (data) {
             //funcion que actualiza el JSON con la imagen
-            $http.put('/upload/' + box.nombre, formData, {
+            $http.put('/mesa/upload/' + box.nombre, formData, {
                     headers: {
                         "Content-type": undefined
                     },

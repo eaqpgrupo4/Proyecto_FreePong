@@ -13,12 +13,11 @@ var usuarioEsquema = new Schema({
     telefono: {type: String},
     login: {type: String},
     password: {type: String},
-    rol: {type: String},
-    provider: String,
-    provider_id: {type: String, unique: true},
+    //rol: {type: String},
+    provider_id: {type: String},
     urlfoto: {type: String},
     saldo: {type: Number, default: 0},
-    created: {type: Date, default: Date.now},
+    created: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('Usuario', usuarioEsquema);
