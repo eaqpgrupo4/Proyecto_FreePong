@@ -32,7 +32,14 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams', '$state', '
             console.log(data);
             if (data == '') {
                 console.log('entro en crear partida');
-                var box = ({IDmesa: IDmesa, FechaPartida: Fecha, IDcreador: IDuser, login: login, horario: p});
+                var box = 
+                ({
+                    IDmesa: IDmesa, 
+                    FechaPartida: Fecha, 
+                    IDcreador: IDuser, 
+                    login: login, 
+                    horario: p
+                });
                 $http.post('/partida/CrearPartida', box).success(function (data) {
                     console.log(data);
                     partida = data;
@@ -41,7 +48,12 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams', '$state', '
             }
             else {
                 console.log('entro en asignar hora');
-                var box1 = ({IDcreador: IDuser, login: login, horario: p});
+                var box1 = 
+                ({
+                    IDcreador: IDuser, 
+                    login: login, 
+                    horario: p
+                });
                 $http.put('/partida/AsignarHoraPartidaporID/' + partida._id, box1).success(function (data) {
                     console.log(data);
                     partida = data;
@@ -53,7 +65,11 @@ usuarioregistradoApp.controller('crearPartidaCtrl', ['$stateParams', '$state', '
     };
     $scope.unirseapartida = function (p) {
         console.log(p);
-        var box2 = ({IDinvitado: IDuser, login: login, horario: p});
+        var box2 = ({
+            IDinvitado: IDuser, 
+            login: login, 
+            horario: p
+        });
         $http.put('/partida/UnirsePartida/' + partida._id, box2).success(function (data) {
             console.log(data);
             partida = data;

@@ -56,7 +56,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 	        return $http.get(_base + '/partida/ObtenerPartidas');
 	    },
       getPartidasPorFechaID: function (id, fecha){
-          console.log("id api: " + id);
+          console.log("id mesa api: " + id);
           console.log("fecha api: " + fecha);
           console.log("query api: " + '/partida/ObtenerPartidaPorFechaymesa/' + id + '/' + fecha + '/');
           return $http.get(_base + '/partida/ObtenerPartidaPorFechaymesa/' + id + '/' + fecha + '/');
@@ -271,8 +271,13 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     //Guardar datos en local Storage//
     $scope.verHorarios=false;
     $scope.verPartida=false;
+    var partida = new Object();
     var idusuario = window.localStorage['idusuario'];
     var login = window.localStorage['login'];
+    var FechaPartida = '';
+    var h = '';
+    var IDmesa = '';
+    var IDpartida = '';
     $scope.partida = {
           usuarioID: '',
           usuarioLogin: '',
@@ -306,6 +311,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       $scope.datemodal.hide();
       $scope.datepicker ="Fecha: "+modal;
       $scope.partida.fecha = modal;
+      FechaPartida = modal;
       console.log(modal);
       console.log("la fecha es: "+modal);
     };
@@ -335,6 +341,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       $scope.partida.mesaNombre = mesa.nombre;
       $scope.partida.mesaLoc = mesa.localizacion;
       $scope.partida.mesaID = mesa._id;
+      IDmesa = mesa._id;
       console.log("La mesa es: "+mesa.nombre);
       console.log(mesa);
     };
@@ -347,44 +354,127 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         //console.log("data222: "+data[0]._id);
         if(data[0]==null){
             console.log("entro data: ");
-            $scope.verHorarios=true;
-            $scope.verPartida=false;
+            $scope.verHorarios=false;
+            $scope.verPartida=true;
         }
         else{
-            $scope.partidas=data;
+            partida=data[0];
+            $scope.partida=partida;
             console.log("entro else: ");
             $scope.verHorarios=false;
             $scope.verPartida=true;
         }
       })
     }
-    $scope.crearPartida = function(creador, invitado, index){
-      console.log('creador  P'+index+': '+creador);
-      console.log('invitado P'+index+': '+invitado);
-      alert('creador  P'+index+': '+creador+' - invitado P'+index+': '+invitado);
-      if(creador==null && invitado==null){
-        console.log('no hay usuario creador ni usuario invitado');
-        console.log('__________________________________________');
-        alert('no hay usuario creador ni usuario invitado');
-        $scope.crearUnaPartida = function(){
-          //Crear partida
-          
+    // $scope.crearPartida = function(creador, invitado, index){
+    //   console.log('creador  P'+index+': '+creador);
+    //   console.log('invitado P'+index+': '+invitado);
+    //   alert('creador  P'+index+': '+creador+' - invitado P'+index+': '+invitado);
+    //   if(creador==null && invitado==null){
+    //     console.log('no hay usuario creador ni usuario invitado');
+    //     console.log('__________________________________________');
+    //     alert('no hay usuario creador ni usuario invitado');
+    //     $scope.crearUnaPartida = function(){
+    //       //Crear partida  
+    //     }
+    //   } else if(invitado==null){
+    //       console.log('no hay usuario invitado pero si creador');
+    //       console.log('________________________________________');
+    //       alert('no hay usuario invitado pero si creador');
+    //       $scope.unirsePartida = function(){
+    //         //unirse a partida
+    //       } 
+    //   } else{
+    //       console.log('Partida cerrada!');
+    //       console.log('________________________________________');
+    //       alert('Partida cerrada!!');
+    //   }
+    // }
+    $scope.crearPartida = function(h){
+      $state.reload();
+      $http.get(_base+'/partida/ObtenerPartidaPorFechaymesa/' + IDmesa + '/' + FechaPartida).success(function (data) {
+        if(data == ''){
+          console.log('No hay partidas para esta fecha!');
+          var box = 
+          ({
+            IDmesa: IDmesa, 
+            FechaPartida: FechaPartida, 
+            IDcreador: idusuario, 
+            login: login, 
+            horario: h
+          });
+          console.log('_____________________________________');
+          console.log('|');
+          console.log('| IDmesa: '+box.IDmesa);
+          console.log('| FechaPartida: '+box.FechaPartida);
+          console.log('| IDcreador: '+box.IDcreador);
+          console.log('| login creador: '+box.login);
+          console.log('| horario: '+box.horario);
+          console.log('|_____________________________________');
+          $http.post(_base+'/partida/CrearPartida', box).success(function (data) {
+            console.log('Entramos en PUT/ crearPartida');
+            console.log(data);
+            partida = data;
+            $scope.partida = partida;
+          });
         }
-      } else if(invitado==null){
-          console.log('no hay usuario invitado pero si creador');
-          console.log('________________________________________');
-          alert('no hay usuario invitado pero si creador');
-          $scope.unirsePartida = function(){
-            //unirse a partida
-            
-          } 
-      } else{
-          console.log('Partida cerrada!');
-          console.log('________________________________________');
-          alert('Partida cerrada!!');
-
-      }
+        else {
+          partida = data[0];
+          console.log('Hay partidas creadas ya en esa fecha!');
+          console.log('Partida seleccionada: '+data);
+          console.log('IDpartida: '+partida._id);
+          IDpartida = partida._id;
+          var box1 = 
+          ({
+            IDcreador: idusuario, 
+            login: login, 
+            horario: h
+          });
+          console.log('_____________________________________');
+          console.log('|');
+          console.log('| IDmesa: '+IDmesa);
+          console.log('| FechaPartida: '+FechaPartida);
+          console.log('| IDcreador: '+box1.IDcreador);
+          console.log('| login creador: '+box1.login);
+          console.log('| horario: '+box1.horario);
+          console.log('|_____________________________________');
+          $http.put(_base+'/partida/AsignarHoraPartidaporID/' + IDpartida, box1).success(function (data) {
+            console.log('Entramos en PUT/ AsignarHoraPartidaporID');
+            console.log(data);
+            partida = data;
+            $scope.partida = partida;
+          });
+        }
+      });
     }
+    $scope.unirseapartida = function (h) {
+      $http.get(_base+'/partida/ObtenerPartidaPorFechaymesa/' + IDmesa + '/' + FechaPartida).success(function (data) {
+        p = data[0];
+        IDpartida = p._id;
+        console.log(h);
+        var box2 = ({
+            IDinvitado: idusuario, 
+            login: login, 
+            horario: h
+        });
+        console.log('_____________________________________');
+        console.log('|');
+        console.log('| IDmesa: '+IDmesa);
+        console.log('| FechaPartida: '+FechaPartida);
+        console.log('| IDinvitado: '+box2.IDinvitado);
+        console.log('| login creador: '+box2.login);
+        console.log('| horario: '+box2.horario);
+        console.log('|_____________________________________');
+        console.log('IDpartida: '+IDpartida);
+        console.log('partida._id: '+p._id);
+        $http.put(_base+'/partida/UnirsePartida/' + IDpartida, box2).success(function (data) {
+            console.log('Entramos en PUT/ unirseapartida');
+            console.log(data);
+            partida = data;
+            $scope.partida = partida;
+        });
+      });
+    };
 }])
 
 .controller('LoginController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
