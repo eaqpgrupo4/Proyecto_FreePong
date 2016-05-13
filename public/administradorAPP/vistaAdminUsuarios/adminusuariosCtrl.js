@@ -1,10 +1,10 @@
 'use strict';
 
-administradorApp.factory("Usuarios", function ($resource, $stateParams) {
+administradorapp.factory("Usuarios", function ($resource, $stateParams) {
     return $resource('/usuario/ObtenerUsuariosPaginados'); //la url donde queremos consumir
 });
 
-administradorApp.controller('adminusuariosCtrl', ['$state', '$http', '$scope', '$location', 'Usuarios', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Usuarios, $stateParams, ngTableParams) {
+administradorapp.controller('adminusuariosctrl', ['$state', '$http', '$scope', '$location', 'Usuarios', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Usuarios, $stateParams, ngTableParams) {
 
     var login = $stateParams.login;
     console.log(login);

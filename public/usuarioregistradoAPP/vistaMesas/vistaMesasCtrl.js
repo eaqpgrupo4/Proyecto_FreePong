@@ -1,4 +1,4 @@
-usuarioregistradoApp.controller('vistaMesasCtrl', ['$stateParams', '$state', '$scope', '$http', 'NgMap',function ($stateParams, $state, $scope, $http, NgMap) {
+usuarioregistradoapp.controller('vistamesasctrl', ['$stateParams', '$state', '$scope', '$http', 'NgMap',function ($stateParams, $state, $scope, $http, NgMap) {
     var vm = this;
     var IDuser = $stateParams.IDuser;
     var login = $stateParams.login;
@@ -19,7 +19,7 @@ usuarioregistradoApp.controller('vistaMesasCtrl', ['$stateParams', '$state', '$s
         };
         $scope.horarios = function (mesa) {
             console.log(mesa._id);
-            $state.go('crearPartida',
+            $state.go('crearpartida',
                 {
                     IDmesa: mesa._id,
                     IDuser: IDuser,

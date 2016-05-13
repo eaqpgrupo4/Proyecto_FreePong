@@ -5,7 +5,7 @@
 'use strict';
 var box = {};
 
-administradorApp.controller('crearMesaCtrl', ['$state', '$http', '$scope', function ($state, $http, $scope) {
+administradorapp.controller('crearmesactrl', ['$state', '$http', '$scope', function ($state, $http, $scope) {
     $scope.demo = function () {
         swal({
             title: "Raul Lorenzo",
@@ -17,7 +17,7 @@ administradorApp.controller('crearMesaCtrl', ['$state', '$http', '$scope', funct
     $scope.mesa = {};
     box = $scope.mesa;
 
-    $scope.crearMesa = function () {
+    $scope.crearmesa = function () {
         console.log(box);
 
         //variables para poder trabajar con archivos

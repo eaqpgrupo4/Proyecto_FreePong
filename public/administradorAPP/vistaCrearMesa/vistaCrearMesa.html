@@ -3,7 +3,7 @@
         <i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;Salir
     </a>
     <h2>Crear mesa</h2>
-    <form name="form" ng-submit="crearMesa()" role="form">
+    <form name="form" ng-submit="crearmesa()" role="form">
         <div class="form-group" ng-class="{ 'has-error': form.nombre.$dirty && form.nombre.$error.required }">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" id="nombre" class="form-control" ng-model="mesa.nombre" required/>

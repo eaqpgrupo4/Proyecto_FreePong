@@ -1,4 +1,4 @@
-usuarioregistradoApp.controller('usuarioregistradoCtrl', ['$state', '$http', '$scope', '$cookies','$window', function ($state, $http, $scope, $cookies, $window) {
+usuarioregistradoapp.controller('usuarioregistradoctrl', ['$state', '$http', '$scope', '$cookies','$window', function ($state, $http, $scope, $cookies, $window) {
     var Urlactual=$window.location;
     var userData=Urlactual.href.split("?");
     var username=userData[2].split("#/");

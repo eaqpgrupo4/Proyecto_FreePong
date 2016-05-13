@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    freepongApp.factory('FlashService', Service);
+    freepongapp.factory('FlashService', Service);
 
     function Service($rootScope) {
         var service = {};

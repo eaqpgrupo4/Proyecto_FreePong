@@ -1,6 +1,6 @@
 'use strict';
 var box = {};
-freepongApp.controller('registroCtrl', ['$state', '$http', '$scope', 'FlashService', function ($state, $http, $scope, FlashService) {
+freepongapp.controller('registroctrl', ['$state', '$http', '$scope', 'FlashService', function ($state, $http, $scope, FlashService) {
     $scope.usuario ={};
     box = $scope.usuario;
     $scope.registro = function()

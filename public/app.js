@@ -1,16 +1,16 @@
-var freepongApp = angular.module('freepongApp', ['ui.router', 'ngTable', 'ngResource', 'ngCookies', 'file-model'])
+var freepongapp = angular.module('freepongapp', ['ui.router', 'ngTable', 'ngResource', 'ngCookies', 'file-model'])
 
-freepongApp.config(function ($stateProvider, $urlRouterProvider) {
+freepongapp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: '../vistas/vistaLogin/vistaLogin.html',
+            templateUrl: '../vistas/vistalogin/vistalogin.html',
             controller: 'loginCtrl'
         })
         .state('registro', {
             url: '/registro',
-            templateUrl: '../vistas/vistaRegistro/vistaRegistro.html',
-            controller: 'registroCtrl'
+            templateUrl: '../vistas/vistaregistro/vistaregistro.html',
+            controller: 'registroctrl'
         });
     $urlRouterProvider.otherwise('login');
 });

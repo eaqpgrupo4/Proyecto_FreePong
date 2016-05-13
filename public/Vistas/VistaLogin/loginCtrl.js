@@ -1,4 +1,4 @@
-angular.module('freepongApp').controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService', '$window', '$cookies', function ($state, $http, $scope, FlashService, $window, $cookies) {
+angular.module('freepongapp').controller('loginCtrl', ['$state', '$http', '$scope', 'FlashService', '$window', '$cookies', function ($state, $http, $scope, FlashService, $window, $cookies) {
     var box = {};
     $scope.userInfo = {};
     box = $scope.userInfo;
@@ -11,13 +11,13 @@ angular.module('freepongApp').controller('loginCtrl', ['$state', '$http', '$scop
             if (data.loginSuccessful == true) {
                 if (data.usuario[0].login == 'admin' || data.usuario[0].password == 'admin') {
                     FlashService.Success('Login correcto', true);
-                    $window.location.href = '/administradorAPP/administrador.html'
+                    $window.location.href = '/administradorapp/administrador.html'
                 }
                 else {
 
                     FlashService.Success('Login correcto', true);
 
-                    $window.location.href = ('/usuarioregistradoAPP/usuarioregistrado.html?' + data.usuario[0]._id+ '?'+ data.usuario[0].login)
+                    $window.location.href = ('/usuarioregistradoapp/usuarioregistrado.html?' + data.usuario[0]._id+ '?'+ data.usuario[0].login)
                 }
             }
             else {

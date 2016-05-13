@@ -1,9 +1,9 @@
 /**
  * Created by carlos on 19/04/2016.
  */
-var administradorApp = angular.module('administradorApp', ['ui.router', 'ngTable', 'ngResource', 'ngCookies', 'file-model'])
+var administradorapp = angular.module('administradorapp', ['ui.router', 'ngTable', 'ngResource', 'ngCookies', 'file-model'])
 
-administradorApp.config(function ($stateProvider, $urlRouterProvider) {
+administradorapp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('inicio', {
             url: '/',
@@ -12,31 +12,31 @@ administradorApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('adminusuarios', {
             url: '/adminusuarios',
-            templateUrl: 'vistaAdminUsuarios/vistaAdminUsuarios.html',
-            controller: 'adminusuariosCtrl'
+            templateUrl: 'vistaadminusuarios/vistaadminusuarios.html',
+            controller: 'adminusuariosctrl'
         })
 
         .state('partidas', {
             url: '/partidas/:id',
-            templateUrl: 'vistaPartidas/vistaPartidas.html',
-            controller: 'partidasCtrl'
+            templateUrl: 'vistapartidas/vistapartidas.html',
+            controller: 'partidasctrl'
         })
 
 
         .state('mesas', {
             url: '/mesas',
-            templateUrl: 'vistaMesas/vistaMesas.html',
-            controller: 'mesasCtrl'
+            templateUrl: 'vistamesas/vistamesas.html',
+            controller: 'mesasctrl'
         })
         .state('editar', {
             url: '/editar/:id',
-            templateUrl: '../usuarioregistradoAPP/vistaEditar/vistaEditar.html',
+            templateUrl: '../usuarioregistradoapp/vistaeditar/vistaeditar.html',
             controller: 'editarCtrl'
         })
-        .state('crearMesa', {
-            url: '/crearMesa',
-            templateUrl: 'vistaCrearMesa/vistaCrearMesa.html',
-            controller: 'crearMesaCtrl'
+        .state('crearmesa', {
+            url: '/crearmesa',
+            templateUrl: 'vistacrearmesa/vistacrearmesa.html',
+            controller: 'crearmesactrl'
 
         });
     $urlRouterProvider.otherwise('/');

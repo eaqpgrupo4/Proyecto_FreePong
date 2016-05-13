@@ -1,21 +1,21 @@
-var usuarioregistradoApp = angular.module('usuarioregistradoApp', ['ngMap', 'ui.router', 'ngTable', 'ngResource', 'ngCookies', 'pickadate'])
+var usuarioregistradoapp = angular.module('usuarioregistradoapp', ['ngMap', 'ui.router', 'ngTable', 'ngResource', 'ngCookies', 'pickadate'])
 
-usuarioregistradoApp.config(function ($stateProvider, $urlRouterProvider) {
+usuarioregistradoapp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('inicio', {
             url: '/',
             templateUrl: 'usuarioregistrado.html',
-            controller: 'usuarioregistradoCtrl'
+            controller: 'usuarioregistradoctrl'
         })
         .state('mesas', {
             url: '/mesas/:IDuser/:login',
-            templateUrl: 'vistaMesas/vistaMesas.html',
-            controller: 'vistaMesasCtrl'
+            templateUrl: 'vistamesas/vistamesas.html',
+            controller: 'vistamesasctrl'
         })
-        .state('crearPartida', {
-            url: '/crearPartida/:IDmesa/:IDuser/:login',
-            templateUrl: 'vistaCrearPartida/vistaCrearPartida.html',
-            controller: 'crearPartidaCtrl'
+        .state('crearpartida', {
+            url: '/crearpartida/:IDmesa/:IDuser/:login',
+            templateUrl: 'vistacrearpartida/vistacrearpartida.html',
+            controller: 'crearpartidactrl'
         })
         .state('insertarresultados', {
             url: '/insertarresultados/:login',
@@ -29,7 +29,7 @@ usuarioregistradoApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('editar', {
             url: '/editar/:id',
-            templateUrl: 'vistaEditar/vistaEditar.html',
+            templateUrl: 'vistaeditar/vistaeditar.html',
             controller: 'editarCtrl'
         });
     $urlRouterProvider.otherwise('/');

@@ -1,4 +1,4 @@
-usuarioregistradoApp.controller('editarCtrl', ['$stateParams', '$state', '$http', '$scope', '$location', 'ngTableParams', function ($stateParams, $state, $http, $scope, $location, ngTableParams) {
+usuarioregistradoapp.controller('editarCtrl', ['$stateParams', '$state', '$http', '$scope', '$location', 'ngTableParams', function ($stateParams, $state, $http, $scope, $location, ngTableParams) {
     $scope.selected = false;
     var id = $stateParams.id;
 

@@ -3,10 +3,10 @@
  */
 
 'use strict';
-administradorApp.factory("Partidas", function ($resource, $stateParams) {
+administradorapp.factory("Partidas", function ($resource, $stateParams) {
     return $resource('/partida/ObtenerPartidasPaginadas'); //la url donde queremos consumir
 });
-administradorApp.controller('partidasCtrl', ['$state', '$http', '$scope', '$location', 'Partidas', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Partidas, $stateParams, ngTableParams) {
+administradorapp.controller('partidasctrl', ['$state', '$http', '$scope', '$location', 'Partidas', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Partidas, $stateParams, ngTableParams) {
 
     var params;
     var settings;

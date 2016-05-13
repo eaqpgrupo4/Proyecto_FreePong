@@ -1,4 +1,4 @@
-usuarioregistradoApp.controller('vistainsertarresultadosctrl', ['$stateParams', '$state', '$scope', '$http',function ($stateParams, $state, $scope, $http) {
+usuarioregistradoapp.controller('vistainsertarresultadosctrl', ['$stateParams', '$state', '$scope', '$http',function ($stateParams, $state, $scope, $http) {
     var partidas= new Array();
     var login = $stateParams.login;
     console.log('entro');

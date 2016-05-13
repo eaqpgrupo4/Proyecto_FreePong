@@ -4,11 +4,11 @@
 
 'use strict';
 
-administradorApp.factory("Mesas", function ($resource, $stateParams) {
+administradorapp.factory("Mesas", function ($resource, $stateParams) {
     return $resource('/mesa/ObtenerMesasPaginadas'); //la url donde queremos consumir
 });
 
-administradorApp.controller('mesasCtrl', ['$state', '$http', '$scope', '$location', 'Mesas', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Mesas, $stateParams, ngTableParams) {
+administradorapp.controller('mesasctrl', ['$state', '$http', '$scope', '$location', 'Mesas', '$stateParams', 'ngTableParams', function ($state, $http, $scope, $location, Mesas, $stateParams, ngTableParams) {
 
 
     var params;

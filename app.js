@@ -80,7 +80,7 @@ app.get('/auth/facebook/callback',
     function(req,res)
     {
         console.log('3333333333333333333'+req.user);
-        res.redirect('/usuarioregistradoAPP/usuarioregistrado.html?' + req.user._id+ '?'+ req.user.login);
+        res.redirect('/usuarioregistradoapp/usuarioregistrado.html?' + req.user._id+ '?'+ req.user.login);
     });
 app.get('*', function(req, res) {res.sendfile('./public/index.html');});
 
