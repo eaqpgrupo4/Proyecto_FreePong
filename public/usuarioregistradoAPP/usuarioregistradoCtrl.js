@@ -17,5 +17,13 @@ usuarioregistradoApp.controller('usuarioregistradoCtrl', ['$state', '$http', '$s
             login: login
         });
     };
+    $scope.resultados = function () {
+        $state.go('insertarresultados', {
+             login: login
+        });
+    };
+    $scope.historial = function () {
+        $state.go('historial');
+    };
 
 }]);

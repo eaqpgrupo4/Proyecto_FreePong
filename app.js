@@ -60,7 +60,7 @@ app.use(passport.session());
 routes = require('./routes/usuarios')(app);
 routes = require('./routes/partidas')(app);
 routes = require('./routes/mesas')(app);
-
+routes = require('./routes/historiales')(app);
 
 
 var router = express.Router();

@@ -17,9 +17,18 @@ usuarioregistradoApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'vistaCrearPartida/vistaCrearPartida.html',
             controller: 'crearPartidaCtrl'
         })
+        .state('insertarresultados', {
+            url: '/insertarresultados/:login',
+            templateUrl: 'vistainsertarresultados/vistainsertarresultados.html',
+            controller: 'vistainsertarresultadosctrl'
+        })
+        .state('historial', {
+            url: '/vistahistorial/:login',
+            templateUrl: 'vistahistorial/vistahistorial.html',
+            controller: 'vistahistorialctrl'
+        })
         .state('editar', {
             url: '/editar/:id',
-
             templateUrl: 'vistaEditar/vistaEditar.html',
             controller: 'editarCtrl'
         });

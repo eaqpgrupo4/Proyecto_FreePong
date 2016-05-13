@@ -17,7 +17,9 @@ var usuarioEsquema = new Schema({
     provider_id: {type: String},
     urlfoto: {type: String},
     saldo: {type: Number, default: 0},
-    created: {type: Date, default: Date.now}
+    created: {type: Date, default: Date.now},
+    pjugados:{type: Number, default: 0},
+    pganados:{type: Number, default: 0}
 });
 
 module.exports = mongoose.model('Usuario', usuarioEsquema);
