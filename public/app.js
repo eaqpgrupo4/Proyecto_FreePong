@@ -4,12 +4,12 @@ freepongApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
-            templateUrl: './vistas/vistaLogin/vistaLogin.html',
+            templateUrl: '../vistas/vistaLogin/vistaLogin.html',
             controller: 'loginCtrl'
         })
         .state('registro', {
             url: '/registro',
-            templateUrl: './vistas/vistaRegistro/vistaRegistro.html',
+            templateUrl: '../vistas/vistaRegistro/vistaRegistro.html',
             controller: 'registroCtrl'
         });
     $urlRouterProvider.otherwise('login');

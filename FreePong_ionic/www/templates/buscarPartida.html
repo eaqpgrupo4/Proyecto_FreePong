@@ -26,7 +26,7 @@
 		    </div>
 		</ion-item>
 		<ion-item>
-		    <h2 style="color: green">Fecha:</h2>
+		  <h2 style="color: green">Fecha:</h2>
 			<div class="card">
 				<label class="item item-input">
 		          <input id="fondopikerdate" type="text" 
@@ -39,12 +39,12 @@
 		    </div>
 	    </ion-item>
 	    <br>
-	     <button style="margin-left: 10px; width: 95%" class="button button-big button-positive" ng-click="enviarPartida()">Buscar Partidas</button>
-	     <br><br>
-	     <ion-list>
+	    <button style="margin-left: 10px; width: 95%" class="button button-big button-positive" ng-click="enviarPartida()">Buscar Partidas</button>
+	    <br><br>
+	    <ion-list>
       <ion-item ng-repeat="partida in partidas | orderBy:'mesa' | filter:searchText">
         <hr>
-        <p><strong>IDPartida: </strong>{{partida.IDmesa}}</p>
+        <p><strong>IDMesa: </strong>{{partida.IDmesa}}</p>
         <p><strong>Fecha Partida: </strong>{{partida.FechaPartida}}</p>
         <p><strong>Fecha de creación: </strong>{{partida.created | date:'mediumDate'}}</p> 
         <br>

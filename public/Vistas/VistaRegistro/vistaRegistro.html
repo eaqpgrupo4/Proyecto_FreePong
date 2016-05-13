@@ -42,8 +42,11 @@
                    ng-model="usuario.saldo" value="0" placeholder="Disabled input here..." disabled>
 
         </div>
-        <div class="col-md-6"><h4>Agregar imagen</h4>
-            <input type="file" file-model="myFile"/>
+        <div class="col-md-6" ><h4>Agregar imagen</h4>
+            <div class="form-group" ng-class="{ 'has-error': form.imagen.$dirty && form.imagen.$error.required }">
+                <input type="file" file-model="myFile" class="form-control" name="imagen" required/>
+                <span ng-show="form.imagen.$dirty && form.imagen.$error.required" class="help-block">La imagen es necesaria</span>
+            </div>
         </div>
 
         <div class="col-md-6">

@@ -1,4 +1,4 @@
-<ion-view hide-nav-bar="true" view-title="Login">
+<ion-view hide-nav-bar="true" view-title="Login" >
     <ion-content id="fondoLogin" class="login" has-header="false">
         <div class="list card padding">
             <div>
@@ -20,12 +20,23 @@
             <button id="buttonNewCount" class="button button-balanced icon ion-person-add" ng-click="registro()">
               Crear una cuenta nueva
             </button>
-            <button id="buttonFacebook" class="button button-positive icon ion-social-facebook" ng-click="facebookLogin()">
-+             Inicia sesión vía Facebook
-+           </button>
-            <button id="buttonTwitter" class="button button-calm icon ion-social-twitter" ng-click="twitterLogin()">
-              Inicia sesión vía Twitter
-            </button>
+            <!-- <div>
+                <button id="buttonFacebook" class="button button-positive icon ion-social-facebook" ng-click="facebookLogin()">
+                Inicia sesión vía Facebook
+                </button>
+                <button id="buttonTwitter" class="button button-calm icon ion-social-twitter" ng-click="twitterLogin()">
+                  Inicia sesión vía Twitter
+                </button>
+            </div> -->
+            <div class="button-bar social-login">
+                <button id="buttonFacebook" class="button button-positive icon ion-social-facebook" ng-click="facebookLogin()">
+                    Facebook
+                </button>
+                <button id="buttonTwitter" class="button button-calm icon ion-social-twitter" ng-click="twitterLogin()">
+                    Twitter
+                </button>
+            </div>
         </div>
+        
     </ion-content>
 </ion-view>
