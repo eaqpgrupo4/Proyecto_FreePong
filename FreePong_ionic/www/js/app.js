@@ -153,7 +153,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       localStorage.clear();
       $ionicHistory.clearCache();
       $ionicHistory.clearHistory();
-      $state.go('freepong.login');
+      $state.go('login');
     }
 }])
 
@@ -278,7 +278,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     var h = '';
     var IDmesa = '';
     var IDpartida = '';
-    $scope.partida = {
+    $scope.partidaLoc = {
           usuarioID: '',
           usuarioLogin: '',
           fecha: '',
@@ -291,8 +291,8 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     console.log(login);
     console.log("El Usuario creador de la partida es: "+login+" con id: "+idusuario);
     $scope.verusuario ="Local: "+login+" id: "+idusuario;
-    $scope.partida.usuarioID = idusuario; 
-    $scope.partida.usuarioLogin = login;
+    $scope.partidaLoc.usuarioID = idusuario; 
+    $scope.partidaLoc.usuarioLogin = login;
     $ionicModal.fromTemplateUrl('templates/datemodal.html', 
         function(modal) {
             $scope.datemodal = modal;
@@ -310,7 +310,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     $scope.closedateModal = function(modal) {
       $scope.datemodal.hide();
       $scope.datepicker ="Fecha: "+modal;
-      $scope.partida.fecha = modal;
+      $scope.partidaLoc.fecha = modal;
       FechaPartida = modal;
       console.log(modal);
       console.log("la fecha es: "+modal);
@@ -338,32 +338,35 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     $scope.closedateModalM = function(mesa) {
       $scope.datemodalM.hide();
       $scope.vermesas = mesa.nombre+" - "+mesa.localizacion;
-      $scope.partida.mesaNombre = mesa.nombre;
-      $scope.partida.mesaLoc = mesa.localizacion;
-      $scope.partida.mesaID = mesa._id;
+      $scope.partidaLoc.mesaNombre = mesa.nombre;
+      $scope.partidaLoc.mesaLoc = mesa.localizacion;
+      $scope.partidaLoc.mesaID = mesa._id;
       IDmesa = mesa._id;
       console.log("La mesa es: "+mesa.nombre);
       console.log(mesa);
     };
     $scope.obtenerHorarios = function(){
-      var mesaID = $scope.partida.mesaID;
-      var fecha = $scope.partida.fecha;
-      var login = $scope.partida.usuarioLogin;
+      var mesaID = $scope.partidaLoc.mesaID;
+      var fecha = $scope.partidaLoc.fecha;
+      var login = $scope.partidaLoc.usuarioLogin;
       api.getPartidasPorFechaID(mesaID, fecha).success(function (data) {
         $rootScope.toast2('Cargando horarios...');
-        //console.log("data222: "+data[0]._id);
-        if(data[0]==null){
-            console.log("entro data: ");
-            $scope.verHorarios=false;
-            $scope.verPartida=true;
-        }
-        else{
-            partida=data[0];
-            $scope.partida=partida;
-            console.log("entro else: ");
-            $scope.verHorarios=false;
-            $scope.verPartida=true;
-        }
+        partida=data[0];
+        $scope.partida=partida;
+        $scope.verHorarios=false;
+        $scope.verPartida=true;
+        // if(data[0]==null){
+        //     console.log("entro data: ");
+        //     $scope.verHorarios=false;
+        //     $scope.verPartida=true;
+        // }
+        // else{
+        //     partida=data[0];
+        //     $scope.partida=partida;
+        //     console.log("entro else: ");
+        //     $scope.verHorarios=false;
+        //     $scope.verPartida=true;
+        // }
       })
     }
     // $scope.crearPartida = function(creador, invitado, index){
@@ -391,7 +394,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     //   }
     // }
     $scope.crearPartida = function(h){
-      $state.reload();
+      //$state.reload();
       $http.get(_base+'/partida/ObtenerPartidaPorFechaymesa/' + IDmesa + '/' + FechaPartida).success(function (data) {
         if(data == ''){
           console.log('No hay partidas para esta fecha!');
@@ -474,6 +477,37 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
             $scope.partida = partida;
         });
       });
+    };
+}])
+
+.controller('ResultadosController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
+    var idusuario = window.localStorage['idusuario'];
+    var login = window.localStorage['login'];
+    $scope.login=login;
+    $http.get(_base+'/partida/ObtenerPartidasconestadodos/' + login).success(function (data) {
+      partidas=data;
+      console.log(partidas);
+      $scope.partidas=partidas;
+    });
+    $scope.insertarresultados= function (h, id, juegoscreador, juegosinvitado){
+        console.log(h, id, juegoscreador, juegosinvitado);
+        var box = 
+        ({
+          juegoscreador: juegoscreador, 
+          juegosinvitado: juegosinvitado, 
+          horario: h
+        });
+        console.log(box);
+        $http.put(_base+'/partida/insertartarresultados/'+id, box).success(function (data){
+          var res='2';
+          $scope.resul='1';
+          console.log($scope.resul);
+          $http.get(_base+'/partida/ObtenerPartidasconestadodos/'+login).success(function (data) {
+            partidas=data;
+            console.log(partidas);
+            $scope.partidas=partidas;
+          });
+        });
     };
 }])
 

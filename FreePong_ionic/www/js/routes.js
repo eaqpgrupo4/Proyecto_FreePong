@@ -39,6 +39,15 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.resultados', {
+      url: "/resultados",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/resultados.html",
+          controller: 'ResultadosController'
+        }
+      }
+    })
     .state('freepong.crearPartida', {
       url: "/crearPartida",
       views: {
@@ -75,14 +84,10 @@ angular.module('freepong.routes', [])
         }
       }
     })
-    .state('freepong.login', {
+    .state('login', {
       url: '/login',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/login.html',
-          controller: 'LoginController'
-        }
-      }
+      templateUrl: 'templates/login.html',
+      controller: 'LoginController'
     })
     .state('freepong.logout', {
       url: '/logout',
@@ -139,5 +144,5 @@ angular.module('freepong.routes', [])
       }
     });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/freepong/login');
+    $urlRouterProvider.otherwise('/login');
 });
