@@ -122,9 +122,11 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     var saldo = window.localStorage['saldo'];
     var nombre = window.localStorage['nombre'];
     var email = window.localStorage['email'];
+    var password = window.localStorage['password'];
     var telefono = window.localStorage['telefono'];
     var urlfoto = window.localStorage['urlfoto'];
     var created = window.localStorage['created'];
+    var puntuacion = window.localStorage['puntuacion'];
     $scope.id = idusuario;
     $scope.login = login;
     $scope.nombre = nombre;
@@ -134,9 +136,45 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
     $scope.saldo = saldo;
     $scope.urlfoto = urlfoto;
     $scope.created = created;
+    $scope.puntuacion = puntuacion;
     console.log("idusuario: "+idusuario);
     console.log("id: "+$scope.id);
     console.log("id: "+$scope.login);
+    console.log("PATH urlfoto: ",urlfoto);
+    console.log("puntuacion: "+$scope.puntuacion);
+    $scope.editarPerfil = function(){
+      console.log(idusuario);
+      $state.go('freepong.editarperfil', {
+          id:idusuario
+      });
+    };
+}])
+
+.controller('EditarPerfilController', ['$rootScope', '$state', '$stateParams', '$scope', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $stateParams, $scope, $http, $ionicModal, $ionicHistory) {
+  var id = $stateParams.id;
+  console.log(id);
+  $http.get(_base + '/usuario/ObtenerUsuarioPorID/' + id).success(function (data) {
+      $rootScope.toast2('Cargando Perfil');
+      usuario = data;
+      $scope.usuario = usuario;
+      console.log("usuario: ", usuario);
+      console.log("usuario.nombre: ", $scope.usuario.nombre);
+      console.log("usuario.apellidos: ", usuario.apellidos);
+    }).error(function(data){
+  })
+  $scope.editarPerfil = function(nombre, apellidos, email, telefono, password){
+      var usuario = {};
+      usuario.nombre = nombre;
+      usuario.apellidos = apellidos;
+      usuario.email = email;
+      usuario.telefono = telefono;
+      usuario.password = password;
+      console.log("Usuario: "+usuario);
+      $http.put(_base + '/usuario/ModificarUsuarioPorID/' + id, usuario).success(function (data) {
+        $rootScope.toast2('Perfil Editado!');
+      }).error(function(data){
+    })
+  }
 }])
 
 .controller('LogoutController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
@@ -245,44 +283,8 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         $scope.partida=partida;
         $scope.verHorarios=false;
         $scope.verPartida=true;
-        // if(data[0]==null){
-        //     console.log("entro data: ");
-        //     $scope.verHorarios=false;
-        //     $scope.verPartida=true;
-        // }
-        // else{
-        //     partida=data[0];
-        //     $scope.partida=partida;
-        //     console.log("entro else: ");
-        //     $scope.verHorarios=false;
-        //     $scope.verPartida=true;
-        // }
       })
     }
-    // $scope.crearPartida = function(creador, invitado, index){
-    //   console.log('creador  P'+index+': '+creador);
-    //   console.log('invitado P'+index+': '+invitado);
-    //   alert('creador  P'+index+': '+creador+' - invitado P'+index+': '+invitado);
-    //   if(creador==null && invitado==null){
-    //     console.log('no hay usuario creador ni usuario invitado');
-    //     console.log('__________________________________________');
-    //     alert('no hay usuario creador ni usuario invitado');
-    //     $scope.crearUnaPartida = function(){
-    //       //Crear partida  
-    //     }
-    //   } else if(invitado==null){
-    //       console.log('no hay usuario invitado pero si creador');
-    //       console.log('________________________________________');
-    //       alert('no hay usuario invitado pero si creador');
-    //       $scope.unirsePartida = function(){
-    //         //unirse a partida
-    //       } 
-    //   } else{
-    //       console.log('Partida cerrada!');
-    //       console.log('________________________________________');
-    //       alert('Partida cerrada!!');
-    //   }
-    // }
     $scope.crearPartida = function(h){
       //$state.reload();
       $http.get(_base+'/partida/ObtenerPartidaPorFechaymesa/' + IDmesa + '/' + FechaPartida).success(function (data) {
@@ -332,10 +334,14 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
           console.log('| horario: '+box1.horario);
           console.log('|_____________________________________');
           $http.put(_base+'/partida/AsignarHoraPartidaporID/' + IDpartida, box1).success(function (data) {
-            console.log('Entramos en PUT/ AsignarHoraPartidaporID');
-            console.log(data);
-            partida = data;
-            $scope.partida = partida;
+            // console.log('Entramos en PUT/ AsignarHoraPartidaporID');
+            // console.log(data);
+            // partida = data;
+            // $scope.partida = partida;
+            api.getPartidasPorFechaID(IDmesa, FechaPartida).success(function (data) {
+              partida=data[0];
+              $scope.partida=partida;
+            })
           });
         }
       });
@@ -361,18 +367,22 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         console.log('IDpartida: '+IDpartida);
         console.log('partida._id: '+p._id);
         $http.put(_base+'/partida/UnirsePartida/' + IDpartida, box2).success(function (data) {
-            console.log('Entramos en PUT/ unirseapartida');
-            console.log(data);
-            partida = data;
-            $scope.partida = partida;
+            // console.log('Entramos en PUT/ unirseapartida');
+            // console.log(data);
+            // partida = data;
+            // $scope.partida = partida;
+            api.getPartidasPorFechaID(IDmesa, FechaPartida).success(function (data) {
+              partida=data[0];
+              $scope.partida=partida;
+            })
         });
       });
     };
 }])
 
 .controller('ResultadosController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
-    datosOK=true;
-    $scope.$on('$ionicView.beforeEnter', function(){      
+    $scope.$on('$ionicView.beforeEnter', function(){  
+      datosOK=true;    
       var idusuario = window.localStorage['idusuario'];
       var login = window.localStorage['login'];
       var partidas = new Object();//
@@ -406,13 +416,18 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
               $scope.resul='1';
               console.log($scope.resul);
               $http.get(_base+'/partida/ObtenerPartidasconestadodos/'+login).success(function (data) {
-                $rootScope.toast2('Resultado Enviado!');
+                $rootScope.toast('Resultado Enviado!');
                 partidas=data;
+                if(partidas[0]==null){
+                  $scope.datosOK = false;
+                }else{
+                  $scope.datosOK = true;
+                }
                 console.log(partidas);
                 $scope.partidas=partidas;
               });
             });
-          }
+        }
       };
     });
 }])
@@ -434,17 +449,150 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
 //     });
 // }])
 
-.controller('HistorialController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
-    $scope.$on('$ionicView.beforeEnter', function(){      
-      var login = window.localStorage['login'];
-      $http.get(_base+'/historial/ObtenerHistorialesLogin/'+login).success(function (data) {
-        historiales=data;
-        console.log(historiales);
-        console.log(historiales[0]);
-        $scope.historiales=historiales;
-      });
+.controller('HistorialController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) { 
+    var login = window.localStorage['login'];
+    var id = window.localStorage['idusuario'];
+    var adversario = [];
+    // usuarioCreador = {};
+    var usuarioCreador = new Object();
+    // usuarioInvitado = {};
+    var usuarioInvitado = new Object();
+    $scope.login = login;
+    // $http.get(_base+'/historial/ObtenerusuarioporLogin/' + login).success(function (data) {
+    //   usuarioCreador = data[0];
+    //   $scope.usuarioCreador = usuarioCreador;
+    //   console.log("creador: ", usuarioCreador);
+    // });
+    $http.get(_base+'/usuario/ObtenerUsuarioPorID/'+id).success(function (data) {
+      usuario = data;
+      $scope.usuario = usuario;
+    });
+    $http.get(_base+'/historial/ObtenerHistorialesLogin/'+login).success(function (data) {
+      historiales=data;
+      console.log(historiales);
+      console.log(historiales[0]);
+      $scope.historiales=historiales;
+      $scope.obtenerInvitado = function(creador, invitado) {
+        console.log("creador: ",creador);
+        console.log("invitado: ",invitado);
+        $http.get(_base+'/historial/ObtenerusuarioporLogin/' + creador).success(function (data) {
+          usuarioCreador = data[0];
+          $scope.usuarioCreador = usuarioCreador;
+          console.log("creador: ", usuarioCreador);
+        });
+        $http.get(_base+'/historial/ObtenerusuarioporLogin/' + invitado).success(function (data) {
+          usuarioInvitado = data[0];
+          $scope.usuarioInvitado = usuarioInvitado;
+          console.log("invitado: ", usuarioInvitado);
+        });
+      };
+      // for (var i=0, l=historiales.length; i<l; i++ ){
+      //   adversario=historiales[i].logininvitado;
+      //   console.log(adversario);
+      //   $http.get(_base+'/historial/ObtenerusuarioporLogin/'+adversario).success(function (data) {
+      //     usuarioInvitado = data[0];
+      //     $scope.usuarioInvitado = usuarioInvitado;
+      //     console.log("invitado: ", usuarioInvitado);
+      //     //console.log("foto invitado: ", usuarioInvitado[0].urlfoto);
+      //     //$scope.fotoInvitado = usuarioCreador[0].urlfoto;
+      //   });
+      // }
+
+      // for (var i=0, l=historiales.length; i<l; i++ ){
+      //     // $scope.students=students;
+      //     if (historiales[i].resultadocreador > historiales[i].resultadoinvitado){
+      //       $scope.ganado = true;
+      //       $scope.nulo = false;
+      //       console.log("ganado SI: ",$scope.ganado);
+      //     }
+      //     else if (historiales[i].resultadocreador < historiales[i].resultadoinvitado){
+      //       $scope.ganado=false;
+      //       $scope.nulo = false;
+      //       console.log("ganado NO: ",$scope.ganado);
+      //     }
+      //     else {
+      //       $scope.nulo = true;
+      //       console.log("nulo: ",$scope.nulo);
+      //     }
+      // }  
+      $scope.doRefresh = function() {
+        $http.get(_base+'/historial/ObtenerHistorialesLogin/'+login)
+         .success(function(newItems) {
+            $scope.historiales = newItems;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+        });
+      };
     });
 }])
+
+// .controller('HistorialController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) { 
+//     var login = window.localStorage['login'];
+//     var adversario = '';
+//     // usuarioCreador = {};
+//     var usuarioCreador = new Object();
+//     // usuarioInvitado = {};
+//     var usuarioInvitado = new Object();
+//     // var historiales = [{
+//     //   logincreador: '',
+//     //   logininvitado: '',
+//     //   ganador: '',
+//     //   fecha: '',
+//     //   resultadocreador: '',
+//     //   resultadoinvitado: '',
+//     //   nombremesa: '',
+//     //   fotourl: ''
+//     // }]
+//     // $scope.historiales = historiales;
+//     $scope.login = login;
+//     $http.get(_base+'/historial/ObtenerusuarioporLogin/' + login).success(function (data) {
+//       usuarioCreador = data[0];
+//       $scope.usuarioCreador = usuarioCreador;
+//       console.log("creador: ", usuarioCreador);
+//       //console.log("fot creador: ", usuarioCreador[0].urlfoto);
+//       //$scope.fotoCreador = usuarioCreador[0].urlfoto;
+//     });
+//     $http.get(_base+'/historial/ObtenerHistorialesLogin/'+login).success(function (data) {
+//       historiales=data;
+//       console.log(historiales);
+//       console.log(historiales[0]);
+//       $scope.historiales=historiales;
+//       for (var i=0, l=historiales.length; i<l; i++){
+//         adversario=historiales[i].logininvitado;
+//         console.log(adversario);
+//         $http.get(_base+'/historial/ObtenerusuarioporLogin/'+adversario).success(function (data) {
+//           usuarioInvitado = data[0];
+//           $scope.usuarioInvitado = usuarioInvitado;
+//           // historiales.fotourl = usuarioInvitado.urlfoto;
+//           // $scope.historiales = historiales;
+//           // console.log("88888",historiales.fotourl);
+//           console.log("invitado: ", usuarioInvitado);
+//           //console.log("foto invitado: ", usuarioInvitado[0].urlfoto);
+//           //$scope.fotoInvitado = usuarioCreador[0].urlfoto;
+//         });
+//       }
+
+//       // for (var i=0, l=historiales.length; i<l; i++ ){
+//       //     // $scope.students=students;
+//       //     if (historiales[i].resultadocreador > historiales[i].resultadoinvitado){
+//       //       $scope.ganado = true;
+//       //       $scope.nulo = false;
+//       //       console.log("ganado SI: ",$scope.ganado);
+//       //     }
+//       //     else if (historiales[i].resultadocreador < historiales[i].resultadoinvitado){
+//       //       $scope.ganado=false;
+//       //       $scope.nulo = false;
+//       //       console.log("ganado NO: ",$scope.ganado);
+//       //     }
+//       //     else {
+//       //       $scope.nulo = true;
+//       //       console.log("nulo: ",$scope.nulo);
+//       //     }
+//       // }  
+//     });
+// }])
 
 .controller('LoginController', ['$rootScope', '$state', '$scope', '$cordovaOauth', 'API', '$http', '$ionicModal', '$ionicHistory', function ($rootScope, $state, $scope, $cordovaOauth, api, $http, $ionicModal, $ionicHistory) {
   $scope.log = {
@@ -465,7 +613,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
       }
       else {
         var usuario = {};
-        $rootScope.showLoading("Autenticando..");
+        $rootScope.toast2("Autenticando..");
         api.login($scope.log).success(function (data) {
           var id = data.usuario[0]._id;
           window.localStorage['idusuario'] = data.usuario[0]._id;
@@ -483,13 +631,17 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
               window.localStorage['nombre'] = data.nombre;
               window.localStorage['apellidos'] = data.apellidos;
               window.localStorage['email'] = data.email;
+              window.localStorage['password'] = data.password;
               window.localStorage['telefono'] = data.telefono;
               window.localStorage['urlfoto'] = data.urlfoto;
               window.localStorage['created'] = data.created;
+              window.localStorage['puntuacion'] = data.puntuacion;
               $rootScope.login = data.login;
               $rootScope.urlfoto = data.urlfoto;
               $rootScope.nombre = data.nombre;
               $rootScope.apellidos = data.apellidos;
+              $rootScope.password = data.password;
+              $rootScope.puntuacion = data.puntuacion;
             }).error(function(data){
           })
             // $rootScope.toast('bienvenido ' + usuario.login);
@@ -516,7 +668,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
               disableBack: true 
             });
             $scope.log = {}
-            $state.go('freepong.usuarios');
+            $state.go('freepong.home');
             // $state.go('freepong.usuarios', {}, {reload: true});
           }).error(function (data) {
             $rootScope.toast('Usuario o password incorrecto');
@@ -543,7 +695,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
           $localStorage.accessToken = result.access_token;
           console.log(JSON.stringify(result));
           $rootScope.tipologin = "facebook";
-          $state.go('freepong.usuarios');
+          $state.go('freepong.home');
         },  
         function (error) {
           console.log(JSON.stringify(error));
@@ -555,7 +707,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
             $localStorage.accessToken = result.access_token;
             console.log(result);
             $rootScope.tipologin = "facebook";
-            $state.go('freepong.usuarios');
+            $state.go('freepong.home');
         }, function (error) {
             alert("There was a problem signing in!  See the console for logs");
             console.log(error);
@@ -570,7 +722,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
                 $rootScope.usuariotwitterid = user.user_id;
                 console.log(user);
                 $rootScope.tipologin = "twitter";
-                $state.go('freepong.usuarios');
+                $state.go('freepong.home');
             },
             function (error) {
               alert("There was a problem signing in!  See the console for logs");
@@ -607,7 +759,7 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
         $rootScope.toast('Registrándote en FreePong...');
         console.log(data);
         console.log(data);
-        $state.go('freepong.notificaciones');
+        $state.go('login');
         $scope.usuario = {}
       }).error(function (data) {
         $rootScope.hideLoading();
@@ -648,24 +800,140 @@ angular.module('freepong', ['ionic', 'freepong.controllers', 'freepong.routes', 
   });
 }])
 
-.controller('PartidasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
-  $scope.$on('$ionicView.beforeEnter', function(){ 	
-    api.getPartidas().success(function (data) {
-  			$rootScope.toast2('Cargando partidas...');
-  			$scope.partidas = data;
-  		}).error(function(data){
-  	})
-  });	
+.controller('PartidasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {	
+  api.getPartidas().success(function (data) {
+  		$rootScope.toast2('Cargando partidas...');
+  		$scope.partidas = data;
+      $scope.doRefresh = function() {
+        api.getPartidas()
+         .success(function(newItems) {
+           $scope.partidas = newItems;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
+  	}).error(function(data){
+  })
 }])
 
-.controller('MesasController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
+.controller('PerfilMesaController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', 'NgMap', function($rootScope, $scope, $http, $state, api, $stateParams, NgMap) {
+  var id = $stateParams.id;
+  console.log(id);
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $http.get(_base+'/mesa/ObtenerMesaporID/' + id).success(function (data) {
+      var mesa = data;
+      $scope.mesa = mesa;
+    });
+    $scope.crearPartida = function(){
+      $state.go('freepong.crearPartida', {
+      });
+    };
+    $scope.image = {
+      url: 'img/pala.png',
+      size: [32, 32],
+      origin: [0,0],
+      anchor: [0, 32]
+    };
+    // $scope.shape = {
+    //   coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+    //   type: 'poly'
+    // };
+    NgMap.getMap().then(function (map) {
+      $http.get(_base+'/mesa/ObtenerMesaporID/' + id).success(function (data) {
+            var mesa = data;
+            console.log("mesa: ",mesa);
+            $scope.mesa = mesa;
+            console.log(map);
+        });
+        $scope.showCustomMarker = function (event, nombre) {
+            console.log(nombre);
+            map.customMarkers[nombre].setVisible(true);
+            map.customMarkers[nombre].setPosition(this.getPosition());
+        };
+        $scope.closeCustomMarker = function (evt) {
+            this.style.display = 'none';
+        };
+    });
+  }); 
+}])
+
+.controller('MesasController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', function($rootScope, $scope, $http, $state, api, $stateParams) {
   $scope.$on('$ionicView.beforeEnter', function(){   
     api.getMesas().success(function (data) {
         $rootScope.toast2('Cargando mesas...');
         $scope.mesas = data;
       }).error(function(data){
     })
+    $scope.vistaPerfil = function(id){
+      //window.localStorage['id'] = id;
+      console.log(id);
+      $state.go('freepong.perfilmesa', {
+          id:id
+      });
+    };
   });  
+}])
+
+.controller('HomeController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
+  $scope.$on('$ionicView.beforeEnter', function(){
+    
+  }); 
+}])
+
+.controller('RankController', ['$rootScope', '$scope', '$http', '$state', 'API', function($rootScope, $scope, $http, $state, api) {
+  $scope.$on('$ionicView.beforeEnter', function(){
+    api.getUsuarios().success(function (data) {
+        $rootScope.toast2('Cargando Ranking...');
+        $scope.usuarios = data;
+      }).error(function(data){
+    })
+    $scope.vistaPerfil = function(id){
+      //window.localStorage['id'] = id;
+      console.log(id);
+      $state.go('freepong.perfil', {
+          id:id
+      });
+    };
+  });
+}])
+
+.controller('UbicacionMesasController', ['$rootScope', '$scope', '$http', '$state', 'API', '$stateParams', 'NgMap', function($rootScope, $scope, $http, $state, api, $stateParams, NgMap) {
+  $scope.$on('$ionicView.beforeEnter', function(){
+    $scope.image = {
+      url: 'img/Pala1.png',
+      size: [32, 32],
+      origin: [0,0],
+      anchor: [0, 32]
+    };
+    // $scope.shape = {
+    //   coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+    //   type: 'poly'
+    // };
+    NgMap.getMap().then(function (map) {
+        $http.get(_base+'/mesa/ObtenerMesas').success(function (data) {
+            var mesas = data;
+            console.log("mesas: ",mesas);
+            $scope.mesas = mesas;
+            console.log(map);
+        });
+        $scope.showCustomMarker = function (event, nombre) {
+            console.log(nombre);
+            map.customMarkers[nombre].setVisible(true);
+            map.customMarkers[nombre].setPosition(this.getPosition());
+        };
+        $scope.closeCustomMarker = function (evt) {
+            this.style.display = 'none';
+        };
+        $scope.vistaPerfil = function(id){
+          console.log(id);
+          $state.go('freepong.perfilmesa', {
+              id:id
+          });
+        };
+    });
+  }); 
 }])
 
 .controller('PosicionController', function ($scope, $cordovaGeolocation, $ionicLoading) {

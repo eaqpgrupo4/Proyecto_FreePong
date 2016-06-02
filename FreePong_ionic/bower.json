@@ -8,6 +8,7 @@
     "angular-google-maps": "^2.3.2",
     "ngCordova": "^0.1.26-alpha",
     "bluebird": "^3.3.5",
+    "ngmap": "^1.17.3",
     "jquery": "^2.2.3"
   }
 }

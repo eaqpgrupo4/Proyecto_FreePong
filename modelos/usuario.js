@@ -15,11 +15,12 @@ var usuarioEsquema = new Schema({
     password: {type: String},
     //rol: {type: String},
     provider_id: {type: String},
-    urlfoto: {type: String},
+    urlfoto: {type: String, default:'/images/default-profile.png'},
     saldo: {type: Number, default: 0},
     created: {type: Date, default: Date.now},
     pjugados:{type: Number, default: 0},
-    pganados:{type: Number, default: 0}
+    pganados:{type: Number, default: 0},
+    puntuacion:{type: Number, default: 0}
 });
 
 module.exports = mongoose.model('Usuario', usuarioEsquema);

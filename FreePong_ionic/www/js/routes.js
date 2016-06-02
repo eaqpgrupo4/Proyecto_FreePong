@@ -1,4 +1,4 @@
-angular.module('freepong.routes', [])
+angular.module('freepong.routes', ['ngMap'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -22,20 +22,38 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.home', {
+      url: '/home',
+      views: {
+        'menuContent': {
+         templateUrl: 'templates/home.html',
+         controller: 'HomeController'
+        }
+      }
+    })
+    .state('freepong.editarperfil', {
+      url: '/editarperfil/:id',
+      views: {
+        'menuContent': {
+         templateUrl: 'templates/editarperfil.html',
+         controller: 'EditarPerfilController'
+        }
+      }
+    })
+    .state('freepong.rank', {
+      url: '/rank',
+      views: {
+        'menuContent': {
+         templateUrl: 'templates/rank.html',
+         controller: 'RankController'
+        }
+      }
+    })
     .state('freepong.amigos', {
       url: '/amigos',
       views: {
         'menuContent': {
          templateUrl: 'templates/amigos.html'
-        }
-      }
-    })
-    .state('freepong.buscarPartida', {
-      url: "/buscarPartida",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/buscarPartida.html",
-          controller: 'BuscarPartidaController'
         }
       }
     })
@@ -75,12 +93,30 @@ angular.module('freepong.routes', [])
         }
       }
     })
+    .state('freepong.perfilmesa', {
+      url: "/perfilmesa/:id",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/perfilmesa.html",
+          controller: 'PerfilMesaController'
+        }
+      }
+    })
     .state('freepong.posicion', {
       url: '/posicion',
       views: {
          'menuContent': {
           templateUrl: 'templates/posicion.html',
           controller: 'PosicionController'
+        }
+      }
+    })
+    .state('freepong.ubicacionmesas', {
+      url: '/ubicacionmesas',
+      views: {
+         'menuContent': {
+          templateUrl: 'templates/ubicacionmesas.html',
+          controller: 'UbicacionMesasController'
         }
       }
     })

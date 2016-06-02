@@ -17,7 +17,7 @@
     </div>
     <ion-list>
       <ion-item ng-repeat="usuario in usuarios | orderBy:'nombre' | filter:searchText">
-        <img class="imgUser" src="{{usuario.urlfoto}}">
+        <img class="imgUser" src="http://localhost:3000{{usuario.urlfoto}}">
         <div class="datosPerfil">
           <p><strong>Nombre: </strong>{{usuario.nombre}}</p>
           <p><strong>Apellidos: </strong>{{usuario.apellidos}}</p>
@@ -25,6 +25,9 @@
           <p><strong>Teléfono: </strong>{{usuario.telefono}}</p>
           <p><strong>Username: </strong>{{usuario.login}}</p>
           <p><strong>Password: </strong>{{usuario.password}}</p>
+          <!-- <p><strong>Jugados: </strong>{{usuario.pjugados}}</p>
+          <p><strong>Ganados: </strong>{{usuario.pganados}}</p>
+          <p><strong>Porcentaje: </strong>{{usuario.puntuacion}}</p> -->
           <p><strong>Saldo: </strong>{{usuario.saldo | currency:'€ '}}</p>
           <p><strong>Creado: </strong>{{usuario.created | date:'mediumDate'}}</p>
         </div>

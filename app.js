@@ -2,16 +2,13 @@ var express = require("express"),// Express: Framework HTTP para Node.js
     bodyParser = require("body-parser"),
     methodOverride = require("method-override"),
     mongoose = require('mongoose'), // Mongoose: Libreria para conectar con MongoDB
-logger = require('morgan'),
-path = require('path'),
-favicon = require('serve-favicon'),
-crypto = require('crypto'),
-cookieParser = require('cookie-parser'),
-formidable = require('formidable'),
-cors = require('cors');
-require('mongoose-middleware').initialize(mongoose);
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    formidable = require('formidable'),
+    cors = require('cors');
+    require('mongoose-middleware').initialize(mongoose);
 
-// Conexión a la base de datos de MongoDB que tenemos en local
+// Conexión a la base de datos de MongoDB que tenemos en local freepong67 y freepong2
 mongoose.connect('mongodb://127.0.0.1:27017/freepong', function (err, res) {
     if (err) throw err;
     console.log('Conectado correctamente a la Base de Datos');
@@ -28,31 +25,15 @@ app.all('/*', function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-// Iniciamos la aplicación Express
 
-// Configuración (sistema de plantillas, directorio de vistas,...)
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use(logger('dev'));
-
-
-app.use(bodyParser({uploadDir:'./images'}));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(cookieParser());
-
-
 // Ruta de los archivos estáticos (HTML estáticos, JS, CSS,...)
 app.use(express.static(__dirname + '/public'));
-//app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 
-
-
-
-// Configuracion de Passport. Lo inicializamos y le indicamos que Passport maneje la Sesion
-//app.use(session({ secret: 'zasentodalaboca' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -71,19 +52,61 @@ app.use(router);
 
 
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook',
-    {
-       failureRedirect: '/'
-    }),
-    function(req,res)
-    {
+app.get('/auth/facebook', passport.authenticate('facebook',{scope: ['public_profile', 'email']}));
+app.get('/auth/facebook/callback',passport.authenticate('facebook',{failureRedirect: '/'}),function(req,res){
         console.log('3333333333333333333'+req.user);
         res.redirect('/usuarioregistradoapp/usuarioregistrado.html?' + req.user._id+ '?'+ req.user.login);
     });
-app.get('*', function(req, res) {res.sendfile('./public/index.html');});
 
+var Usuario = require('./modelos/usuario.js');
+var usuariosactivos =[];
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function(socket)
+{
+    console.log('Alguien ha abierto un socket')
+    socket.on('enviar mensaje', function (mensaje){
+        console.log('mensaje recibido');
+        io.sockets.emit('recibir mensaje', mensaje);
+        console.log('mensaje enviado');
+    });
+    socket.on('nuevo usuario', function (IDuser){
+        console.log('Nuevo usuario');
+        Usuario.findById(IDuser, function (err, usuario)
+        {
+            socket.usuario = usuario;
+            usuariosactivos.push(usuario);
+            mostrarlogin(usuariosactivos);
+            io.sockets.emit('actualizarusuariosactivos', usuariosactivos);
+            console.log('actualizarusuariosactivos 76');
+            console.log()
+        });
+    });
+
+    socket.on('damesusariosactivos', function(){
+        console.log('dame ususarios activos');
+        io.sockets.emit('actualizarusuariosactivos', usuariosactivos);
+        console.log('actualizarusuariosactivos 81');
+    });
+    socket.on('disconnect', function() {
+        console.log('eliminado usuario');
+
+        usuariosactivos.splice(usuariosactivos.indexOf(socket.usuario), 1);
+
+        io.sockets.emit('actualizarusuariosactivos',usuariosactivos);
+        console.log('actualizarusuariosactivos 89');
+    });
+
+
+});
 server.listen(3000, function () {
     console.log("Servidor escuchando en, http://localhost:3000");
 });
+mostrarlogin = function(usuariosactivos){
+    var i=0;
+    while(i<usuariosactivos.length){
+        console.log(usuariosactivos[i].login)
+        i++;
+    }
+}

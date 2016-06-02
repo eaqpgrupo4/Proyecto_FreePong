@@ -10,8 +10,17 @@ usuarioregistradoapp.controller('editarCtrl', ['$stateParams', '$state', '$http'
         $scope.loginc = data.login;
         $scope.password = data.password;
         $scope.saldo = data.saldo;
+        $scope.urlfoto = data.saldo;
+
+        console.log($scope.urlfoto)
     });
-    $scope.update = function (nombre, apellidos, email, telefono, loginc, password, saldo) {
+    $scope.update = function (nombre, apellidos, email, telefono, loginc, password, saldo, urlfoto) {
+        //variables para poder trabajar con archivos
+        var formData = new FormData();
+        var file = $scope.myFile;
+        console.log("El fichero es:", file);
+        formData.append("file", file);
+
         var usuario = {};
         usuario.nombre = nombre;
         usuario.apellidos = apellidos;
@@ -20,6 +29,28 @@ usuarioregistradoapp.controller('editarCtrl', ['$stateParams', '$state', '$http'
         usuario.login = loginc;
         usuario.password = password;
         usuario.saldo = saldo;
+
+        usuario.urlfoto = urlfoto;
+
+        console.log("la foto es:", usuario.urlfoto);
+
+        if (file != undefined){
+            $http.put('/usuario/upload/' + usuario.login, formData, {
+                    headers: {
+                        "Content-type": undefined
+                    },
+                    transformRequest: angular.identity
+                }
+                )
+                .success(function (data) {
+
+                    $state.go('login');
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+
+        }
 
         console.log(usuario);
         $http.put('/usuario/ModificarUsuarioPorID/' + id, usuario)
@@ -32,7 +63,7 @@ usuarioregistradoapp.controller('editarCtrl', ['$stateParams', '$state', '$http'
                     }
                 );
 
-                $state.go('admin');
+                $state.go('inicio');
             })
             .error(function (error) {
                 swal(
